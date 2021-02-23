@@ -1,7 +1,7 @@
 # Renesas_FreeRTOS
 Renesas RL78 and RH850 FreeRTOS Porting
 
-# Development enviroment used for porting freeRTOS on RH850.
+# Author details.
 * Author  : Dinesh Guleria
 * Author Email : din.gulu.er@gmail.com
 
