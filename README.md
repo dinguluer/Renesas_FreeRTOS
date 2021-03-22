@@ -1,4 +1,4 @@
-# <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7o6p4tZT_ORfBAOCJ0DD7CPSyOo3ZToXUVQ&usqp=CAU" width="64" height="64"> This repository is about Renesas work product
+# <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7o6p4tZT_ORfBAOCJ0DD7CPSyOo3ZToXUVQ&usqp=CAU" width="64" height="64"> This repository is about Renesas freeRTOS work product
 This sample Repository is about porting freeRTOS on RL78 & RH850.
 * 16 bit Microcontroller RL78.
 * 32 bit Microcontroller RH850.
