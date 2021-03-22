@@ -24,10 +24,10 @@ This sample Repository is about porting freeRTOS on RL78 & RH850.
 # Tutorial:  How to port freeRTOS to Renesas RH850
 - [Youtube Video Tutorial : How to port freeRTOS to Renesas RH850](https://www.youtube.com/watch?v=Wvf05a59v3M)
 
-# How to port freeRTOS to Renesas RH850 : Releases
+# Renesas RH850 : Releases
 * First release – release 1.0.0  : Date - 12-03-2020
 
-# How to port freeRTOS to Renesas RL78 : Releases
+# Renesas RL78 : Releases
 * First release – release 1.0.0  : Date - 21-03-2020
 
 
