@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<settings>
+    <Stack>
+        <FillEnabled>0</FillEnabled>
+        <OverflowWarningsEnabled>1</OverflowWarningsEnabled>
+        <WarningThreshold>90</WarningThreshold>
+        <SpWarningsEnabled>1</SpWarningsEnabled>
+        <WarnLogOnly>1</WarnLogOnly>
+        <UseTrigger>1</UseTrigger>
+        <TriggerName>main</TriggerName>
+        <LimitSize>0</LimitSize>
+        <ByteLimit>50</ByteLimit>
+    </Stack>
+    <Start_Stop>
+        <StartEnabled>0</StartEnabled>
+        <StartSymbol />
+        <StopEnabled>0</StopEnabled>
+        <StopSymbol />
+    </Start_Stop>
+    <InterruptLog>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <SumEnabled>0</SumEnabled>
+        <ShowTimeSum>1</ShowTimeSum>
+        <SumSortOrder>0</SumSortOrder>
+    </InterruptLog>
+    <DataLog>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <SumEnabled>0</SumEnabled>
+        <ShowTimeSum>1</ShowTimeSum>
+    </DataLog>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
+    <Interrupts>
+        <Enabled>1</Enabled>
+    </Interrupts>
+    <MemoryMap>
+        <Enabled>0</Enabled>
+        <Base>0</Base>
+        <UseAuto>0</UseAuto>
+        <TypeViolation>1</TypeViolation>
+        <UnspecRange>1</UnspecRange>
+        <ActionState>1</ActionState>
+    </MemoryMap>
+    <Trace1>
+        <Enabled>0</Enabled>
+        <ShowSource>1</ShowSource>
+    </Trace1>
+    <Simulator>
+        <Freq>10000000</Freq>
+        <FreqHi>0</FreqHi>
+    </Simulator>
+    <DebugChecksum>
+        <Checksum>2299638476</Checksum>
+    </DebugChecksum>
+    <E1>
+        <Map0>0,0,131071,131072</Map0>
+        <Map1>1,1040128,1048319,8192</Map1>
+        <MapEntries>2</MapEntries>
+        <HWsettings>3,0,1,2,4,0,1,0,16,17,0</HWsettings>
+        <HWsettingsCube>2,4000,2,4294967295,0,1,0,0,0</HWsettingsCube>
+        <HWsettingsRsuid>00000000000000000000</HWsettingsRsuid>
+        <EventEntries>0</EventEntries>
+        <SeqName0 />
+        <SeqData0>0,0</SeqData0>
+        <SeqEnable10>0,0,0,0,0,0,0,0,0,0</SeqEnable10>
+        <SeqEnable20>0,0,0,0,0,0,0,0,0,0</SeqEnable20>
+        <SeqEnable30>0,0,0,0,0,0,0,0,0,0</SeqEnable30>
+        <SeqEnable40>0,0,0,0,0,0,0,0,0,0</SeqEnable40>
+        <SeqDisable0>0,0,0,0,0,0,0,0,0,0</SeqDisable0>
+        <SeqData20>0,0,0,0,0,0</SeqData20>
+        <SeqName1 />
+        <SeqData1>0,0</SeqData1>
+        <SeqEnable11>0,0,0,0,0,0,0,0,0,0</SeqEnable11>
+        <SeqEnable21>0,0,0,0,0,0,0,0,0,0</SeqEnable21>
+        <SeqEnable31>0,0,0,0,0,0,0,0,0,0</SeqEnable31>
+        <SeqEnable41>0,0,0,0,0,0,0,0,0,0</SeqEnable41>
+        <SeqDisable1>0,0,0,0,0,0,0,0,0,0</SeqDisable1>
+        <SeqData21>0,0,0,0,0,0</SeqData21>
+        <SeqName2 />
+        <SeqData2>0,0</SeqData2>
+        <SeqEnable12>0,0,0,0,0,0,0,0,0,0</SeqEnable12>
+        <SeqEnable22>0,0,0,0,0,0,0,0,0,0</SeqEnable22>
+        <SeqEnable32>0,0,0,0,0,0,0,0,0,0</SeqEnable32>
+        <SeqEnable42>0,0,0,0,0,0,0,0,0,0</SeqEnable42>
+        <SeqDisable2>0,0,0,0,0,0,0,0,0,0</SeqDisable2>
+        <SeqData22>0,0,0,0,0,0</SeqData22>
+        <SeqName3 />
+        <SeqData3>0,0</SeqData3>
+        <SeqEnable13>0,0,0,0,0,0,0,0,0,0</SeqEnable13>
+        <SeqEnable23>0,0,0,0,0,0,0,0,0,0</SeqEnable23>
+        <SeqEnable33>0,0,0,0,0,0,0,0,0,0</SeqEnable33>
+        <SeqEnable43>0,0,0,0,0,0,0,0,0,0</SeqEnable43>
+        <SeqDisable3>0,0,0,0,0,0,0,0,0,0</SeqDisable3>
+        <SeqData23>0,0,0,0,0,0</SeqData23>
+        <SeqName4 />
+        <SeqData4>0,0</SeqData4>
+        <SeqEnable14>0,0,0,0,0,0,0,0,0,0</SeqEnable14>
+        <SeqEnable24>0,0,0,0,0,0,0,0,0,0</SeqEnable24>
+        <SeqEnable34>0,0,0,0,0,0,0,0,0,0</SeqEnable34>
+        <SeqEnable44>0,0,0,0,0,0,0,0,0,0</SeqEnable44>
+        <SeqDisable4>0,0,0,0,0,0,0,0,0,0</SeqDisable4>
+        <SeqData24>0,0,0,0,0,0</SeqData24>
+        <TraceSettings>128,0,0,0,0,0,8192</TraceSettings>
+        <TimerSettings>0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</TimerSettings>
+        <Version>1,trace.txt</Version>
+        <LastDevFile>DR5F10BMG.DVF</LastDevFile>
+        <EmulType>64</EmulType>
+        <BreakToggle>0</BreakToggle>
+        <EventLimits>1,2,2,0,0,0,2</EventLimits>
+        <LastSetupFailed>0</LastSetupFailed>
+    </E1>
+    <CallStack>
+        <ShowArgs>0</ShowArgs>
+    </CallStack>
+    <Disassembly>
+        <MixedMode>1</MixedMode>
+    </Disassembly>
+    <DataSample>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+    </DataSample>
+    <LogFile>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </LogFile>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
+    <TraceHelper>
+        <Enabled>0</Enabled>
+        <ShowSource>1</ShowSource>
+    </TraceHelper>
+    <Breakpoints>
+        <Bp0>_ "STD_CODE" "Memory:0x266" 0 0 0 0 "" 0 ""</Bp0>
+        <Bp1>_ "STD_CODE" "{$PROJ_DIR$\Source\applilet3_src\r_main.c}.76.5" 0 0 0 0 "" 0 ""</Bp1>
+        <Bp2>_ "STD_CODE" "Memory:0x21E" 0 0 0 0 "" 0 ""</Bp2>
+        <Count>3</Count>
+    </Breakpoints>
+    <Monitor_Execution>
+        <Leave_target_running>0</Leave_target_running>
+    </Monitor_Execution>
+    <Aliases>
+        <A0>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_cg_cgc.c" ""</A0>
+        <A1>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_cg_cgc_user.c" ""</A1>
+        <A2>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_cg_port.c" ""</A2>
+        <A3>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_cg_timer.c" ""</A3>
+        <A4>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_cg_timer_user.c" ""</A4>
+        <A5>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_cg_wdt.c" ""</A5>
+        <A6>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_cg_wdt_user.c" ""</A6>
+        <A7>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_main.c" ""</A7>
+        <A8>_ "D:\client\Motherson Mixlab\RTOS freeRTOS\RL78_F13\IAR\No bank register concept used\R5F10BMG\applilet3_src\r_systeminit.c" ""</A8>
+        <Count>9</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
+</settings>

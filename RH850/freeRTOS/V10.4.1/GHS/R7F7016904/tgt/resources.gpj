@@ -1,0 +1,16 @@
+#!gbuild
+#component target_resources
+[Project]
+dr7f701690.dvf
+dr7f701690.dvf.h
+dr7f701690.grd
+dr7f701690.ld
+dr7f701690_irq.h
+dr7f701690_startup.850
+cpu.h
+device.h
+icu_feret.h
+io_macros_v2.h
+default.con
+debug.gpc
+release.gpc

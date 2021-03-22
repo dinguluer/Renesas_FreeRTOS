@@ -1,0 +1,17 @@
+#!gbuild
+[Program]
+	-object_dir=${%option_value(-object_dir)}/src_R7F7016904
+tgt\dr7f701690.dvf
+tgt\dr7f701690.dvf.h
+tgt\dr7f701690.grd
+tgt\dr7f701690.ld
+tgt\dr7f701690_irq.h
+tgt\dr7f701690_startup.850
+tgt\cpu.h
+tgt\device.h
+tgt\icu_feret.h
+tgt\io_macros_v2.h
+clock\clock_sub_project.gpj
+main.c
+RTOS\RTOS.gpj
+Config_OSTM0\OSTM0.gpj

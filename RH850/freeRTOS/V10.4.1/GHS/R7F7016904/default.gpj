@@ -1,0 +1,50 @@
+#!gbuild
+defineConfig ("Debug" "DBG" "tgt\debug.gpc")
+defineConfig ("Release" "REL" "tgt\release.gpc")
+primaryTarget=v800_standalone.tgt
+#component top_level_project
+[Project]
+	-bsp generic
+	-cpu=rh850g3kh
+        #-Onone
+        -g
+        -dual_debug
+        -gsize
+        -inline_prologue
+        -sda=all
+        -Wundef
+        -reserve_r2
+        --short_enum
+        --prototype_errors
+        #--diag_error 193
+        -large_sda
+        --no_commons
+        -shorten_loads
+        -shorten_moves
+        -Wshadow
+        -nofloatio
+        -delete
+        -MD
+        -e _RESET
+        -passsource
+        -Mx
+        --preprocess_linker_directive_full
+        --switch_table
+        #-C99
+        -list
+	:sourceDir=.
+	-I.\tgt
+	-I.\src
+	-I.\src\can
+	-I.\src\clock
+	-I'.\\src\\external interrupt'
+	-I.\src\port
+	-I.\src\TAUB\Interval_timer
+	-I.\src\RTOS
+	-I.\src\RTOS\include
+	-I.\src\RTOS\portable
+	-I.\src\RTOS\portable\GHS
+	-I.\src\RTOS\portable\GHS\MemMang
+	-I.\src\Config_OSTM0
+src\src_R7F7016904.gpj		[Program]
+tgt\resources.gpj		[Project]

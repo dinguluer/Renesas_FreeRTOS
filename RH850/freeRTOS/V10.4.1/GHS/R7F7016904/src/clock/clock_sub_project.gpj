@@ -1,0 +1,4 @@
+#!gbuild
+[Subproject]
+clock.c
+clock.h

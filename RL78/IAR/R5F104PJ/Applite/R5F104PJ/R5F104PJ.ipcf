@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- IAR Project Connection File -->
+<iarProjectConnection version="1.0" name="cg" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="IarProjectConnection_1.0.xsd">
+	<files>
+		<group name="cg_src"><path>./applilet3_src\r_main.c</path><path>./applilet3_src\r_systeminit.c</path><path>./applilet3_src\r_cg_cgc.c</path><path>./applilet3_src\r_cg_cgc_user.c</path><path>./applilet3_src\r_cg_port.c</path><path>./applilet3_src\r_cg_port_user.c</path><path>./applilet3_src\r_cg_timer.c</path><path>./applilet3_src\r_cg_timer_user.c</path><path>./applilet3_src\r_cg_wdt.c</path><path>./applilet3_src\r_cg_wdt_user.c</path><path>./applilet3_src\r_cg_cgc.h</path><path>./applilet3_src\r_cg_port.h</path><path>./applilet3_src\r_cg_timer.h</path><path>./applilet3_src\r_cg_wdt.h</path><path>./applilet3_src\r_cg_macrodriver.h</path><path>./applilet3_src\r_cg_userdefine.h</path></group>
+		<group name="cg_user">
+
+		</group>
+	</files>
+</iarProjectConnection>
+
+

@@ -1,0 +1,158 @@
+//-------------------------------------------------------------------------
+//      ILINK command file template for RL78 microcontroller R5F104PJ.
+//
+//      This file can be used to link object files from the RL78
+//      Assembler, IASMRL78, and the C/C++ compiler ICCRL78.
+//
+//          This file is generated from the device file:
+//          DR5F104PJ.DVF
+//          Copyright(C) 2011 Renesas
+//
+//          Core type: s3
+//
+//          Format version 3.00, File version 2.10 
+//-------------------------------------------------------------------------
+
+
+define exported symbol __link_file_version_2 = 1;
+
+initialize by copy with simple ranges, packing = auto { rw, R_DATA, R_BSS, R_DATAF, R_BSSF, R_SDATA, R_SBSS };
+initialize manually { R_CONST, ro section .const, ro section .switch };
+do not initialize   { section *.noinit };
+
+define memory mem with size = 1M;
+
+
+// Set the symbol __RESERVE_OCD_ROM to 1 to reserve the OCD area for debugging.
+// IDE: Symbol can be defined within the project settings here:
+//      "Project"-->"Options..."->"Linker"-->"Config"-->"Configuration file symbol definitions"
+//      Symbol definition: __RESERVE_OCD_ROM=1
+// Command line: --config_def __RESERVE_OCD_ROM=1
+
+if (isdefinedsymbol(__RESERVE_OCD_ROM))
+{
+  if (__RESERVE_OCD_ROM == 1)
+  {
+    reserve region "OCD ROM area" = mem:[from 0x3FE00 size 0x0200];
+  }
+}
+
+// Set the symbol __RESERVE_OCD_TRACE_RAM to 1 to reserve the OCD trace ram area for debugging.
+// IDE: Symbol can be defined within the project settings here:
+//      "Project"-->"Options..."->"Linker"-->"Config"-->"Configuration file symbol definitions"
+//      Symbol definition: __RESERVE_OCD_TRACE_RAM=1
+// Command line: --config_def __RESERVE_OCD_TRACE_RAM=1
+
+if (isdefinedsymbol(__RESERVE_OCD_TRACE_RAM))
+{
+  if (__RESERVE_OCD_TRACE_RAM == 1)
+  {
+    reserve region "OCD Trace RAM" = mem:[from 0xFA300 size 0x0400];
+  }
+}
+
+define region ROM_near = mem:[from 0x000D8 to 0x0FFFF];
+define region ROM_far  = mem:[from 0x000D8 to 0x0FFFF] | mem:[from 0x10000 to 0x1FFFF] | mem:[from 0x20000 to 0x2FFFF] | mem:[from 0x30000 to 0x3FFFF];
+define region ROM_huge = mem:[from 0x000D8 to 0x3FFFF];
+define region SADDR    = mem:[from 0xFFE20 to 0xFFEDF];
+define region RAM_near = mem:[from 0xF9F00 to 0xFFE1F];
+define region RAM_far  = mem:[from 0xF9F00 to 0xFFE1F];
+define region RAM_huge = mem:[from 0xF9F00 to 0xFFE1F];
+define region VECTOR   = mem:[from 0x00000 to 0x0007F];
+define region CALLT    = mem:[from 0x00080 to 0x000BF];
+define region EEPROM   = mem:[from 0xF1000 to 0xF2FFF];
+
+define block NEAR_HEAP  with alignment = 2, size = _NEAR_HEAP_SIZE {  };
+define block FAR_HEAP   with alignment = 2, size = _FAR_HEAP_SIZE {  };
+define block HUGE_HEAP  with alignment = 2, size = _HUGE_HEAP_SIZE {  };
+define block CSTACK     with alignment = 2, size = _STACK_SIZE { rw section CSTACK };
+define block INIT_ARRAY with alignment = 2, fixed order { ro section .preinit_array,
+                                                          ro section .init_array };
+
+if ( _NEAR_CONST_LOCATION_SIZE > 0 )
+{
+  define block MIRROR_ROM with maximum size = _NEAR_CONST_LOCATION_SIZE { ro R_CONST_init,
+                                                                          ro section .const_init,
+                                                                          ro section .switch_init };
+  define block MIRROR_RAM with maximum size = _NEAR_CONST_LOCATION_SIZE { rw R_CONST,
+                                                                          rw section .const,
+                                                                          rw section .switch };
+}
+
+define block OPT_BYTE with size = 4  { R_OPT_BYTE,
+                                       ro section .option_byte,
+                                       ro section OPTBYTE };
+define block SECUR_ID with size = 10 { R_SECUR_ID,
+                                       ro section .security_id,
+                                       ro section SECUID };
+
+
+place at address mem:0x00000       { ro section .reset };
+place at address mem:0x00004       { ro section .intvec };
+place at address mem:0x000C0       { block OPT_BYTE };
+place at address mem:0x000C4       { block SECUR_ID };
+if ( _NEAR_CONST_LOCATION_SIZE > 0 )
+{
+  place at address mem:_NEAR_CONST_LOCATION_START             { block MIRROR_ROM };
+  place at address mem:(_NEAR_CONST_LOCATION_START | 0xF0000) { block MIRROR_RAM };
+}
+
+"CALLT":place in CALLT             { R_CALLT0, ro section .callt0 };
+
+"ROMNEAR":place in ROM_near        { R_TEXT, ro section .text};
+
+"ROMFAR":place in ROM_far          { block INIT_ARRAY,
+                                     R_TEXTF_UNIT64KP,
+                                     ro section .textf_unit64kp,
+                                     ro section .constf,
+                                     ro section .switchf,
+                                     ro };
+
+"ROMHUGE":place in ROM_huge        { ro section .consth,
+                                     R_TEXTF,
+                                     ro section .textf };
+
+if ( _NEAR_CONST_LOCATION_SIZE > 0 )
+{
+  "RAMNEAR":place in RAM_near        { block NEAR_HEAP,
+                                       block CSTACK,
+                                       zi section .iar.dynexit,
+                                       R_DATA,
+                                       rw section .data,
+                                       R_BSS,
+                                       rw section .bss*,
+                                       rw };
+}
+else
+{
+  "RAMNEAR":place in RAM_near        { block NEAR_HEAP,
+                                       block CSTACK,
+                                       zi section .iar.dynexit,
+                                       R_DATA,
+                                       rw section .data,
+                                       R_BSS,
+                                       rw section .bss*,
+                                       rw } except
+                                         { rw R_CONST,
+                                           rw section .const,
+                                           rw section .switch };
+}
+
+"RAMFAR":place in RAM_far          { block FAR_HEAP,
+                                     R_DATAF,
+                                     rw section .dataf,
+                                     rw section .data_unit64kp,
+                                     rw section .bss_unit64kp,
+                                     R_BSSF,
+                                     rw section .bssf* };
+
+"RAMHUGE":place in RAM_huge        { block HUGE_HEAP,
+                                     rw section .hdata,
+                                     rw section .hbss* };
+
+"SADDRMEM":place in SADDR          { rw section .sdata,
+                                     R_SDATA,
+                                     rw section .sbss*,
+                                     R_SBSS,
+                                     rw section .wrkseg };
+

@@ -1,0 +1,5 @@
+#!gbuild
+[Subproject]
+Config_OSTM0.c
+Config_OSTM0.h
+r_cg_ostm.h

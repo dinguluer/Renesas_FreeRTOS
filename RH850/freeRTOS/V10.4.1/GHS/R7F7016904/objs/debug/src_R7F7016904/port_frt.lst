@@ -1,0 +1,3249 @@
+                                                                      Page 1
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+Command Line: C:\ghs\comp_201715\ease850.exe -w -elf -b0 -I.\tgt -I.\src -I.\src\can -I.\src\clock -I.\src\external interrupt -I.\src\port -I.\src\TAUB\Interval_timer -I.\src\RTOS -I.\src\RTOS\include -I.\src\RTOS\portable -I.\src\RTOS\portable\GHS -I.\src\RTOS\portable\GHS\MemMang -I.\src\Config_OSTM0 -IC:\ghs\comp_201715\lib\rh850 -cg_underscore -cpu=rh850g3kh -nofpu_double -no_v850_simd -nomacro -patch_dbo=D:\working\My_workArea\Renesas_training\Training Material\GHS\Thomas Training\freeRTOS_IVT_placement_from_ARRAY\R7F7016904\objs\debug\src_R7F7016904\port_frt.dbo -source=port_frt.c -o objs\debug\src_R7F7016904\gh_00006i01.o -list=objs\debug\src_R7F7016904\port_frt.lst C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s 
+Original File: C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+Source File: port_frt.c
+Directory: D:\working\My_workArea\Renesas_training\Training Material\GHS\Thomas Training\freeRTOS_IVT_placement_from_ARRAY\R7F7016904
+Host OS: Windows
+EASE: Copyright (C) 1983-2016 Green Hills Software.  All Rights Reserved.
+Release: Compiler v2017.1.5
+Build Directory: [Directory] BTOWINBOX:c:/build_2017_1_bto/2017-04-10.1915-2017_1_bto/win32-comp-ecom
+Revision: [VCInfo] http://toolsvc/branches/release-branch-2017-1-bto/src@589663 (built by build)
+Revision Date: Tue Apr 11 09:18:51 2017
+
+Release Date: Tue Apr 11 11:11:44 2017
+
+                           1 --Driver Command: ccv850 -c -MD -I.\tgt -I.\src -I.\src\can -I.\src\clock
+                           2 --		-I.\src\external interrupt -I.\src\port
+                           3 --		-I.\src\TAUB\Interval_timer -I.\src\RTOS -I.\src\RTOS\include
+                           4 --		-I.\src\RTOS\portable -I.\src\RTOS\portable\GHS
+                           5 --		-I.\src\RTOS\portable\GHS\MemMang -I.\src\Config_OSTM0 -Odebug
+                           6 --		-bsp generic -cpu=rh850g3kh -g -dual_debug -inline_prologue
+                           7 --		-sda=all -Wundef -reserve_r2 --short_enum --prototype_errors
+                           8 --		-large_sda --no_commons -shorten_loads -shorten_moves -Wshadow
+                           9 --		-MD -passsource --preprocess_linker_directive_full --switch_table
+                          10 --		-list -object_dir=objs\debug\src_R7F7016904 -filetype.c
+                          11 --		src\RTOS\portable\GHS\port_frt.c -o
+                          12 --		objs\debug\src_R7F7016904\port_frt.o
+                          13 --Source File:   src\RTOS\portable\GHS\port_frt.c
+                          14 --Directory:     D:\working\My_workArea\Renesas_training\Training
+                          15 --		Material\GHS\Thomas
+                          16 --		Training\freeRTOS_IVT_placement_from_ARRAY\R7F7016904
+                          17 --Compile Date:  Fri Feb 19 17:09:26 2021
+                          18 --Host OS:       Win32
+                          19 --Version:       C-RH850 2017.1.5 RELEASE VERSION
+                          20 --Release:       Compiler v2017.1.5
+                          21 --Revision Date: Tue Apr 11 09:29:40 2017
+                          22 --Release Date:  Tue Apr 11 11:12:26 2017
+                          23 -- ecom  -g -w
+                          24 
+                          25 --1: /*
+                          26 --2:     FreeRTOS V9.0.0 - Copyright (C) 2016 Real Time Engineers Ltd.
+                          27 --3:     All rights reserved
+                          28 --5:     VISIT http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
+                          29 --7:     This file is part of the FreeRTOS distribution.
+                          30 --9:     FreeRTOS is free software; you can redistribute it and/or modify it under
+                          31 --10:     the terms of the GNU General Public License (version 2) as published by the
+                          32 --11:     Free Software Foundation >>>> AND MODIFIED BY <<<< the FreeRTOS exception.
+                          33 --13:  ***************************************************************************
+                          34 --14:     >>!   NOTE: The modification to the GPL is included to allow you to     !<<
+                          35 --15:     >>!   distribute a combined work that includes FreeRTOS without being   !<<
+                          36 --16:     >>!   obliged to provide the source code for proprietary components     !<<
+                          37 --17:     >>!   outside of the FreeRTOS kernel.                                   !<<
+                          38 --18:  ***************************************************************************
+                          39 --20:     FreeRTOS is distributed in the hope that it will be useful, but WITHOUT ANY
+                          40 --21:     WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+                          41 --22:     FOR A PARTICULAR PURPOSE.  Full license text is available on the following
+                          42 --23:     link: http://www.freertos.org/a00114.html
+                          43 --25:  ***************************************************************************
+                          44 --26:  *                                                                       *
+                          45 --27:  *    FreeRTOS provides completely free yet professionally developed,    *
+                          46 --28:  *    robust, strictly quality controlled, supported, and cross          *
+                          47 --29:  *    platform software that is more than just the market leader, it     *
+                          48 --30:  *    is the industry's de facto standard.                               *
+                          49 --31:  *                                                                       *
+                          50 --32:  *    Help yourself get started quickly while simultaneously helping     *
+
+                                                                      Page 2
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                          51 --33:  *    to support the FreeRTOS project by purchasing a FreeRTOS           *
+                          52 --34:  *    tutorial book, reference manual, or both:                          *
+                          53 --35:  *    http://www.FreeRTOS.org/Documentation                              *
+                          54 --36:  *                                                                       *
+                          55 --37:  ***************************************************************************
+                          56 --39:     http://www.FreeRTOS.org/FAQHelp.html - Having a problem?  Start by reading
+                          57 --40:     the FAQ page "My application does not run, what could be wrong?".  Have you
+                          58 --41:     defined configASSERT()?
+                          59 --43:     http://www.FreeRTOS.org/support - In return for receiving this top quality
+                          60 --44:     embedded software for free we request you assist our global community by
+                          61 --45:     participating in the support forum.
+                          62 --47:     http://www.FreeRTOS.org/training - Investing in training allows your team to
+                          63 --48:     be as productive as possible as early as possible.  Now you can receive
+                          64 --49:     FreeRTOS training directly from Richard Barry, CEO of Real Time Engineers
+                          65 --50:     Ltd, and the world's leading authority on the world's leading RTOS.
+                          66 --52:     http://www.FreeRTOS.org/plus - A selection of FreeRTOS ecosystem products,
+                          67 --53:     including FreeRTOS+Trace - an indispensable productivity tool, a DOS
+                          68 --54:     compatible FAT file system, and our tiny thread aware UDP/IP stack.
+                          69 --56:     http://www.FreeRTOS.org/labs - Where new FreeRTOS products go to incubate.
+                          70 --57:     Come and try FreeRTOS+TCP, our new open source TCP/IP stack for FreeRTOS.
+                          71 --59:     http://www.OpenRTOS.com - Real Time Engineers ltd. license FreeRTOS to High
+                          72 --60:     Integrity Systems ltd. to sell under the OpenRTOS brand.  Low cost OpenRTOS
+                          73 --61:     licenses offer ticketed support, indemnification and commercial middleware.
+                          74 --63:     http://www.SafeRTOS.com - High Integrity Systems also provide a safety
+                          75 --64:     engineered and independently SIL3 certified version for use in safety and
+                          76 --65:     mission critical applications that require provable dependability.
+                          77 --67:     1 tab == 4 spaces!
+                          78 --68:  */
+                          79 --70: /* Scheduler includes. */
+                          80 --71: #include "FreeRTOS.h"
+                          81 --72: #include "task.h"
+                          82 --73: //#include "FreeRTOS.h"
+                          83 --74: //#include "task.h"
+                          84 --75: #include "Config_OSTM0.h"
+                          85 --76: /* Critical nesting should be initialised to a non zero value so interrupts don't
+                          86 --77:    accidentally get enabled before the scheduler is started. */
+                          87 --78: #define portINITIAL_CRITICAL_NESTING    (( StackType_t )10)
+                          88 --80: /* The PSW value assigned to tasks when they start to run for the first time. */
+                          89 --81: #define portPSW                         (( StackType_t )0x00000000)
+                          90 --83: #define OSTM0CMP                        *((volatile uint32 *)0xFFDD8000ul)
+                          91 --84: #define OSTM0TS                         *((volatile uint8 *)0xFFDD8014ul)
+                          92 --85: #define OSTM0TT                         *((volatile uint8 *)0xFFDD8018ul)
+                          93 --86: #define OSTM0CTL                        *((volatile uint8 *)0xFFDD8020ul)
+                          94 --87: #define INTOSTM0_CTL                    *((volatile uint16 *)0xFFFFB094ul)
+                          95 --89: /* We require the address of the pxCurrentTCB variable, but don't want to know
+                          96 --90:    any details of its type. */
+                          97 --91: typedef void TCB_t;
+                          98 --92: extern volatile TCB_t * volatile pxCurrentTCB;
+                          99 --94: /* Keeps track of the nesting level of critical sections. */
+                         100 --95: volatile StackType_t usCriticalNesting = portINITIAL_CRITICAL_NESTING;
+                         101 --96: /*-----------------------------------------------------------*/
+                         102 --98: /* Sets up the timer to generate the tick interrupt. */
+                         103 --99: static void prvSetupTimerInterrupt(void);
+                         104 --101: /*-----------------------------------------------------------*/
+                         105 --102: StackType_t * pxPortInitialiseStack(StackType_t * pxTopOfStack, TaskFunction_t pxCode, void * pvParameters)
+                         106 	.text
+                         107 ..bof.D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt...44.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904..602FA36E..0::
+                         108 	.align	2
+                         109 	.align	2
+                         110 ..gh.f.a.2.e.0:
+                         111 	.type	..gh.f.a.2.e.0,@object
+
+                                                                      Page 3
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         112 	.size	..gh.f.a.2.e.0,0
+                         113 	.global	_pxPortInitialiseStack
+                         114 _pxPortInitialiseStack:
+00000000 06f0            115 	mov	r6,ep
+                         116 --	    .bf
+                         117 .LDW01:
+                         118 --103: {
+                         119 --104:     *pxTopOfStack = ( StackType_t )pxCode;               /* Task function start address */
+00000002 013d            120 	sst.w	r7,0[ep]
+                         121 --105:     pxTopOfStack--;
+00000004 5cf2            122 	add	-4,ep
+                         123 --106:     *pxTopOfStack = ( StackType_t )pxCode;               /* Task function start address */
+00000006 013d            124 	sst.w	r7,0[ep]
+                         125 --107:     pxTopOfStack--;
+00000008 5cf2            126 	add	-4,ep
+                         127 --108:     *pxTopOfStack = portPSW;                                /* Initial PSW value */
+0000000a 0105            128 	sst.w	zero,0[ep]
+                         129 --109:     pxTopOfStack--;
+0000000c 5cf2            130 	add	-4,ep
+                         131 --110:     *pxTopOfStack = ( StackType_t )0x20202020;           /* Initial Value of R20 */
+0000000e 210620202020    132 	mov	538976288,r1
+00000014 010d            133 	sst.w	r1,0[ep]
+                         134 --111:     pxTopOfStack--;
+                         135 --line111
+                         136 ..lin.a98f14db..ffe2a632.0_1::
+                         137 .LDWlin1:
+00000016 5cf2            138 	add	-4,ep
+                         139 --112:     *pxTopOfStack = ( StackType_t )0x21212121;           /* Initial Value of R21 */
+00000018 210621212121    140 	mov	555819297,r1
+0000001e 010d            141 	sst.w	r1,0[ep]
+                         142 --113:     pxTopOfStack--;
+                         143 --line113
+                         144 ..lin.a98f14db..ffe2a632.0_2::
+                         145 .LDWlin2:
+00000020 5cf2            146 	add	-4,ep
+                         147 --114:     *pxTopOfStack = ( StackType_t )0x22222222;           /* Initial Value of R22 */
+00000022 210622222222    148 	mov	572662306,r1
+00000028 010d            149 	sst.w	r1,0[ep]
+                         150 --115:     pxTopOfStack--;
+                         151 --line115
+                         152 ..lin.a98f14db..ffe2a632.0_3::
+                         153 .LDWlin3:
+0000002a 5cf2            154 	add	-4,ep
+                         155 --116:     *pxTopOfStack = ( StackType_t )0x23232323;           /* Initial Value of R23 */
+0000002c 210623232323    156 	mov	589505315,r1
+00000032 010d            157 	sst.w	r1,0[ep]
+                         158 --117:     pxTopOfStack--;
+                         159 --line117
+                         160 ..lin.a98f14db..ffe2a632.0_4::
+                         161 .LDWlin4:
+00000034 5cf2            162 	add	-4,ep
+                         163 --118:     *pxTopOfStack = ( StackType_t )0x24242424;           /* Initial Value of R24 */
+00000036 210624242424    164 	mov	606348324,r1
+0000003c 010d            165 	sst.w	r1,0[ep]
+                         166 --119:     pxTopOfStack--;
+                         167 --line119
+                         168 ..lin.a98f14db..ffe2a632.0_5::
+                         169 .LDWlin5:
+0000003e 5cf2            170 	add	-4,ep
+                         171 --120:     *pxTopOfStack = ( StackType_t )0x25252525;           /* Initial Value of R25 */
+00000040 210625252525    172 	mov	623191333,r1
+
+                                                                      Page 4
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000046 010d            173 	sst.w	r1,0[ep]
+                         174 --121:     pxTopOfStack--;
+                         175 --line121
+                         176 ..lin.a98f14db..ffe2a632.0_6::
+                         177 .LDWlin6:
+00000048 5cf2            178 	add	-4,ep
+                         179 --122:     *pxTopOfStack = ( StackType_t )0x26262626;           /* Initial Value of R26 */
+0000004a 210626262626    180 	mov	640034342,r1
+00000050 010d            181 	sst.w	r1,0[ep]
+                         182 --123:     pxTopOfStack--;
+                         183 --line123
+                         184 ..lin.a98f14db..ffe2a632.0_7::
+                         185 .LDWlin7:
+00000052 5cf2            186 	add	-4,ep
+                         187 --124:     *pxTopOfStack = ( StackType_t )0x27272727;           /* Initial Value of R27 */
+00000054 210627272727    188 	mov	656877351,r1
+0000005a 010d            189 	sst.w	r1,0[ep]
+                         190 --125:     pxTopOfStack--;
+                         191 --line125
+                         192 ..lin.a98f14db..ffe2a632.0_8::
+                         193 .LDWlin8:
+0000005c 5cf2            194 	add	-4,ep
+                         195 --126:     *pxTopOfStack = ( StackType_t )0x28282828;           /* Initial Value of R28 */
+0000005e 210628282828    196 	mov	673720360,r1
+00000064 010d            197 	sst.w	r1,0[ep]
+                         198 --127:     pxTopOfStack--;
+                         199 --line127
+                         200 ..lin.a98f14db..ffe2a632.0_9::
+                         201 .LDWlin9:
+00000066 5cf2            202 	add	-4,ep
+                         203 --128:     *pxTopOfStack = ( StackType_t )0x29292929;           /* Initial Value of R29 */
+00000068 210629292929    204 	mov	690563369,r1
+0000006e 010d            205 	sst.w	r1,0[ep]
+                         206 --129:     pxTopOfStack--;
+                         207 --line129
+                         208 ..lin.a98f14db..ffe2a632.0_10::
+                         209 .LDWlin10:
+00000070 5cf2            210 	add	-4,ep
+                         211 --130:     *pxTopOfStack = ( StackType_t )0x30303030;           /* Initial Value of R30 */
+00000072 210630303030    212 	mov	808464432,r1
+00000078 010d            213 	sst.w	r1,0[ep]
+                         214 --131:     pxTopOfStack--;
+                         215 --line131
+                         216 ..lin.a98f14db..ffe2a632.0_11::
+                         217 .LDWlin11:
+0000007a 5cf2            218 	add	-4,ep
+                         219 --132:     *pxTopOfStack = ( StackType_t )0x19191919;           /* Initial Value of R19 */
+0000007c 210619191919    220 	mov	421075225,r1
+00000082 010d            221 	sst.w	r1,0[ep]
+                         222 --133:     pxTopOfStack--;
+                         223 --line133
+                         224 ..lin.a98f14db..ffe2a632.0_12::
+                         225 .LDWlin12:
+00000084 5cf2            226 	add	-4,ep
+                         227 --134:     *pxTopOfStack = ( StackType_t )0x18181818;           /* Initial Value of R18 */
+00000086 210618181818    228 	mov	404232216,r1
+0000008c 010d            229 	sst.w	r1,0[ep]
+                         230 --135:     pxTopOfStack--;
+                         231 --line135
+                         232 ..lin.a98f14db..ffe2a632.0_13::
+                         233 .LDWlin13:
+
+                                                                      Page 5
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000008e 5cf2            234 	add	-4,ep
+                         235 --136:     *pxTopOfStack = ( StackType_t )0x17171717;           /* Initial Value of R17 */
+00000090 210617171717    236 	mov	387389207,r1
+00000096 010d            237 	sst.w	r1,0[ep]
+                         238 --137:     pxTopOfStack--;
+                         239 --line137
+                         240 ..lin.a98f14db..ffe2a632.0_14::
+                         241 .LDWlin14:
+00000098 5cf2            242 	add	-4,ep
+                         243 --138:     *pxTopOfStack = ( StackType_t )0x16161616;           /* Initial Value of R16 */
+0000009a 210616161616    244 	mov	370546198,r1
+000000a0 010d            245 	sst.w	r1,0[ep]
+                         246 --139:     pxTopOfStack--;
+                         247 --line139
+                         248 ..lin.a98f14db..ffe2a632.0_15::
+                         249 .LDWlin15:
+000000a2 5cf2            250 	add	-4,ep
+                         251 --140:     *pxTopOfStack = ( StackType_t )0x15151515;           /* Initial Value of R15 */
+000000a4 210615151515    252 	mov	353703189,r1
+000000aa 010d            253 	sst.w	r1,0[ep]
+                         254 --141:     pxTopOfStack--;
+                         255 --line141
+                         256 ..lin.a98f14db..ffe2a632.0_16::
+                         257 .LDWlin16:
+000000ac 5cf2            258 	add	-4,ep
+                         259 --142:     *pxTopOfStack = ( StackType_t )0x14141414;           /* Initial Value of R14 */
+000000ae 210614141414    260 	mov	336860180,r1
+000000b4 010d            261 	sst.w	r1,0[ep]
+                         262 --143:     pxTopOfStack--;
+                         263 --line143
+                         264 ..lin.a98f14db..ffe2a632.0_17::
+                         265 .LDWlin17:
+000000b6 5cf2            266 	add	-4,ep
+                         267 --144:     *pxTopOfStack = ( StackType_t )0x13131313;           /* Initial Value of R13 */
+000000b8 210613131313    268 	mov	320017171,r1
+000000be 010d            269 	sst.w	r1,0[ep]
+                         270 --145:     pxTopOfStack--;
+                         271 --line145
+                         272 ..lin.a98f14db..ffe2a632.0_18::
+                         273 .LDWlin18:
+000000c0 5cf2            274 	add	-4,ep
+                         275 --146:     *pxTopOfStack = ( StackType_t )0x12121212;           /* Initial Value of R12 */
+000000c2 210612121212    276 	mov	303174162,r1
+000000c8 010d            277 	sst.w	r1,0[ep]
+                         278 --147:     pxTopOfStack--;
+                         279 --line147
+                         280 ..lin.a98f14db..ffe2a632.0_19::
+                         281 .LDWlin19:
+000000ca 5cf2            282 	add	-4,ep
+                         283 --148:     *pxTopOfStack = ( StackType_t )0x11111111;           /* Initial Value of R11 */
+000000cc 210611111111    284 	mov	286331153,r1
+000000d2 010d            285 	sst.w	r1,0[ep]
+                         286 --149:     pxTopOfStack--;
+                         287 --line149
+                         288 ..lin.a98f14db..ffe2a632.0_20::
+                         289 .LDWlin20:
+000000d4 5cf2            290 	add	-4,ep
+                         291 --150:     *pxTopOfStack = ( StackType_t )0x10101010;           /* Initial Value of R10 */
+000000d6 210610101010    292 	mov	269488144,r1
+000000dc 010d            293 	sst.w	r1,0[ep]
+                         294 --151:     pxTopOfStack--;
+
+                                                                      Page 6
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         295 --line151
+                         296 ..lin.a98f14db..ffe2a632.0_21::
+                         297 .LDWlin21:
+000000de 5cf2            298 	add	-4,ep
+                         299 --152:     *pxTopOfStack = ( StackType_t )0x99999999;           /* Initial Value of R09 */
+000000e0 210699999999    300 	mov	-1717986919,r1
+000000e6 010d            301 	sst.w	r1,0[ep]
+                         302 --153:     pxTopOfStack--;
+                         303 --line153
+                         304 ..lin.a98f14db..ffe2a632.0_22::
+                         305 .LDWlin22:
+000000e8 5cf2            306 	add	-4,ep
+                         307 --154:     *pxTopOfStack = ( StackType_t )0x88888888;           /* Initial Value of R08 */
+000000ea 210688888888    308 	mov	-2004318072,r1
+000000f0 010d            309 	sst.w	r1,0[ep]
+                         310 --155:     pxTopOfStack--;
+                         311 --line155
+                         312 ..lin.a98f14db..ffe2a632.0_23::
+                         313 .LDWlin23:
+000000f2 5cf2            314 	add	-4,ep
+                         315 --156:     *pxTopOfStack = ( StackType_t )0x77777777;           /* Initial Value of R07 */
+000000f4 210677777777    316 	mov	2004318071,r1
+000000fa 010d            317 	sst.w	r1,0[ep]
+                         318 --157:     pxTopOfStack--;
+                         319 --line157
+                         320 ..lin.a98f14db..ffe2a632.0_24::
+                         321 .LDWlin24:
+000000fc 5cf2            322 	add	-4,ep
+                         323 --158:     *pxTopOfStack = ( StackType_t )pvParameters;           /* R6 is expected to hold the function parameter*/
+000000fe 0145            324 	sst.w	r8,0[ep]
+                         325 --159:     pxTopOfStack--;
+00000100 5cf2            326 	add	-4,ep
+                         327 --160:     *pxTopOfStack = ( StackType_t )0x22222222;           /* Initial Value of R02 */
+00000102 210622222222    328 	mov	572662306,r1
+00000108 010d            329 	sst.w	r1,0[ep]
+                         330 --161:     pxTopOfStack--;
+                         331 --line161
+                         332 ..lin.a98f14db..ffe2a632.0_25::
+                         333 .LDWlin25:
+0000010a 5cf2            334 	add	-4,ep
+                         335 --162:     *pxTopOfStack = ( StackType_t )0x11111111;          /* Initial Value of R01 */
+0000010c 210611111111    336 	mov	286331153,r1
+00000112 010d            337 	sst.w	r1,0[ep]
+                         338 --163:     pxTopOfStack--;
+                         339 --line163
+                         340 ..lin.a98f14db..ffe2a632.0_26::
+                         341 .LDWlin26:
+00000114 5cf2            342 	add	-4,ep
+                         343 --164:     *pxTopOfStack = ( StackType_t )portNO_CRITICAL_SECTION_NESTING;
+00000116 0105            344 	sst.w	zero,0[ep]
+                         345 --166:     /*
+                         346 --167:      * Return a pointer to the top of the stack we have generated so this can
+                         347 --168:      * be stored in the task control block for the task.
+                         348 --169:      */
+                         349 --170:     return pxTopOfStack;
+00000118 1e50            350 	mov	ep,r10
+                         351 --	    .ef
+                         352 .LDW11:
+                         353 	.jumptype return
+0000011a 7f00            354 	jmp	[lp]
+                         355 ..lin.a98f14db..ffe2a632.0_27::
+
+                                                                      Page 7
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         356 .LDWlin27:
+                         357 	.global	___ghs_eofn_pxPortInitialiseStack
+                         358 ___ghs_eofn_pxPortInitialiseStack:
+                         359 	.type	_pxPortInitialiseStack,@function
+                         360 	.size	_pxPortInitialiseStack,.-_pxPortInitialiseStack
+                         361 	.align	2
+                         362 
+                         363 --_pxTopOfStack	ep	param
+                         364 --_pxCode	r7	param
+                         365 --_pvParameters	r8	param
+                         366 
+                         367 	.section ".bss","awb"
+                         368 .L274:
+                         369 	.type	.L274,@object
+                         370 	.size	.L274,0
+                         371 	.data
+                         372 	.text
+                         373 
+                         374 --171: }
+                         375 
+                         376 --172: /*-----------------------------------------------------------*/
+                         377 --174: BaseType_t xPortStartScheduler(void)
+                         378 	.align	2
+                         379 	.align	2
+                         380 	.align	2
+                         381 ..gh.f.a.2.e.1:
+                         382 	.type	..gh.f.a.2.e.1,@object
+                         383 	.size	..gh.f.a.2.e.1,0
+                         384 	.global	_xPortStartScheduler
+                         385 _xPortStartScheduler:
+0000011c 5c1a            386 	add	-4,sp
+0000011e 63ff0100        387 	st.w	lp,0[sp]
+                         388 --	    .bf
+                         389 .LDW21:
+                         390 --175: {
+                         391 --176:     /* Setup the hardware to generate the tick.  Interrupts are disabled when
+                         392 --177:        this function is called. */
+                         393 --179:     prvSetupTimerInterrupt();
+                         394 	jarl	_prvSetupTimerInterrupt,lp
+                         394 <EXPANSION BEGIN>
+                         394 jarl22 _prvSetupTimerInterrupt , lp 
+00000122 80ff2400*       394 <EXPANSION END>
+                         395 --181:     /* Restore the context of the first task that is going to run. */
+                         396 --182:     vPortStart();
+                         397 --line182
+                         398 ..lin.a98f14db..19b2f98e.0_28::
+                         399 .LDWlin28:
+                         400 	jarl	_vPortStart,lp
+                         400 <EXPANSION BEGIN>
+                         400 jarl22 _vPortStart , lp 
+00000126 80ff3200*       400 <EXPANSION END>
+                         401 --184:     /* Should not get here as the tasks are now running! */
+                         402 --185:     return pdTRUE;
+                         403 --line185
+                         404 ..lin.a98f14db..19b2f98e.0_29::
+                         405 .LDWlin29:
+0000012a 0152            406 	mov	1,r10
+                         407 --	    .ef
+                         408 .LDW31:
+0000012c 23ff0100        409 	ld.w	0[sp],lp
+00000130 441a            410 	add	4,sp
+
+                                                                      Page 8
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         411 	.jumptype return
+00000132 7f00            412 	jmp	[lp]
+                         413 ..lin.a98f14db..19b2f98e.0_30::
+                         414 .LDWlin30:
+                         415 	.global	___ghs_eofn_xPortStartScheduler
+                         416 ___ghs_eofn_xPortStartScheduler:
+                         417 	.type	_xPortStartScheduler,@function
+                         418 	.size	_xPortStartScheduler,.-_xPortStartScheduler
+                         419 	.align	2
+                         420 
+                         421 	.section ".bss","awb"
+                         422 .L502:
+                         423 	.type	.L502,@object
+                         424 	.size	.L502,0
+                         425 	.data
+                         426 	.text
+                         427 
+                         428 --186: }
+                         429 
+                         430 --187: /*-----------------------------------------------------------*/
+                         431 --190: void vPortEndScheduler(void)
+                         432 	.align	2
+                         433 	.align	2
+                         434 	.align	2
+                         435 ..gh.f.a.2.e.2:
+                         436 	.type	..gh.f.a.2.e.2,@object
+                         437 	.size	..gh.f.a.2.e.2,0
+                         438 	.global	_vPortEndScheduler
+                         439 _vPortEndScheduler:
+00000134 5c1a            440 	add	-4,sp
+00000136 63ff0100        441 	st.w	lp,0[sp]
+                         442 --	    .bf
+                         443 .LDW41:
+                         444 --191: {
+                         445 --192:     /* It is unlikely that the RH850 port will get stopped.  If required simply
+                         446 --193:        disable the tick interrupt here. */
+                         447 --195:     /* returning stack/reg to state before RTOS begun not implemented */
+                         448 --196:     //INTOSTM0_CTL = 0;
+                         449 --197:     //OSTM0TT      = 1;
+                         450 --198:     R_Config_OSTM0_Stop();
+                         451 	jarl	_R_Config_OSTM0_Stop,lp
+                         451 <EXPANSION BEGIN>
+                         451 jarl22 _R_Config_OSTM0_Stop , lp 
+0000013a 80ff0000*       451 <EXPANSION END>
+                         452 --199: }
+                         453 --	    .ef
+                         454 .LDW51:
+                         455 --line199
+                         456 ..lin.a98f14db..cd7c8df5.0_31::
+                         457 .LDWlin31:
+0000013e 23ff0100        458 	ld.w	0[sp],lp
+00000142 441a            459 	add	4,sp
+                         460 	.jumptype return
+00000144 7f00            461 	jmp	[lp]
+                         462 ..lin.a98f14db..cd7c8df5.0_32::
+                         463 .LDWlin32:
+                         464 	.global	___ghs_eofn_vPortEndScheduler
+                         465 ___ghs_eofn_vPortEndScheduler:
+                         466 	.type	_vPortEndScheduler,@function
+                         467 	.size	_vPortEndScheduler,.-_vPortEndScheduler
+                         468 	.align	2
+
+                                                                      Page 9
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         469 
+                         470 	.section ".bss","awb"
+                         471 .L546:
+                         472 	.type	.L546,@object
+                         473 	.size	.L546,0
+                         474 	.data
+                         475 	.text
+                         476 
+                         477 
+                         478 --200: /*-----------------------------------------------------------*/
+                         479 --202: /*
+                         480 --203:  * Hardware initialisation to generate the RTOS tick.
+                         481 --204:  */
+                         482 --205: static void prvSetupTimerInterrupt(void)
+                         483 	.align	2
+                         484 	.align	2
+                         485 	.align	2
+                         486 ..gh.f.a.2.e.3:
+                         487 	.type	..gh.f.a.2.e.3,@object
+                         488 	.size	..gh.f.a.2.e.3,0
+                         489 	.global	_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.
+                         490 _prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.:
+                         491 _prvSetupTimerInterrupt:
+00000146 5c1a            492 	add	-4,sp
+00000148 63ff0100        493 	st.w	lp,0[sp]
+                         494 --	    .bf
+                         495 .LDW61:
+                         496 --206: {
+                         497 --207: //    OSTM0TT = 1;                /* OSTM0 operation disable */
+                         498 --209: //    OSTM0CTL = 0x00;            /* OSTM0 interrupt disable and set to interval mode */
+                         499 --211: //    OSTM0CMP = (configCPU_CLOCK_HZ / configTICK_RATE_HZ);
+                         500 --213: //    INTOSTM0_CTL = 0x4F;        /*EI OSTM0 interrupt enable */
+                         501 --215: //    OSTM0TS = 1;                /* OSTM0 operation enable*/
+                         502 --217: //    __asm("ei");
+                         503 --218:     R_Config_OSTM0_Start();
+                         504 	jarl	_R_Config_OSTM0_Start,lp
+                         504 <EXPANSION BEGIN>
+                         504 jarl22 _R_Config_OSTM0_Start , lp 
+0000014c 80ff0000*       504 <EXPANSION END>
+                         505 --219: }
+                         506 --	    .ef
+                         507 .LDW71:
+                         508 --line219
+                         509 ..lin.a98f14db..804302fb.0_33::
+                         510 .LDWlin33:
+00000150 23ff0100        511 	ld.w	0[sp],lp
+00000154 441a            512 	add	4,sp
+                         513 	.jumptype return
+00000156 7f00            514 	jmp	[lp]
+                         515 ..lin.a98f14db..804302fb.0_34::
+                         516 .LDWlin34:
+                         517 ___ghs_eofn_prvSetupTimerInterrupt:
+                         518 	.type	_prvSetupTimerInterrupt,@function
+                         519 	.size	_prvSetupTimerInterrupt,.-_prvSetupTimerInterrupt
+                         520 	.type	_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.,@function
+                         521 	.size	_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.,.-_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.
+                         522 	.align	2
+                         523 
+                         524 	.section ".bss","awb"
+                         525 .L594:
+                         526 	.type	.L594,@object
+
+                                                                      Page 10
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         527 	.size	.L594,0
+                         528 	.data
+                         529 	.text
+                         530 
+                         531 
+                         532 --220: /*-----------------------------------------------------------*/
+                         533 --222: /* Assembly MACRO */
+                         534 --223: asm void portSAVE_CONTEXT( void)
+                         535 --224: {
+                         536 --225:     prepare {r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30},17,sp;     // save general purpose registers
+                         537 --226:     sst.w   r19,64[ep];                                                   // #if Using the Small/Large data model
+                         538 --227:     sst.w   r18,60[ep];
+                         539 --228:     sst.w   r17,56[ep];
+                         540 --229:     sst.w   r16,52[ep];
+                         541 --230:     sst.w   r15,48[ep];
+                         542 --231:     sst.w   r14,44[ep];
+                         543 --232:     sst.w   r13,40[ep];
+                         544 --233:     sst.w   r12,36[ep];
+                         545 --234:     sst.w   r11,32[ep];
+                         546 --235:     sst.w   r10,28[ep];
+                         547 --236:     sst.w   r9,24[ep];
+                         548 --237:     sst.w   r8,20[ep];
+                         549 --238:     sst.w   r7,16[ep];
+                         550 --239:     sst.w   r6,12[ep];
+                         551 --240:     sst.w   r2,8[ep];
+                         552 --241:     sst.w   r1,4[ep];
+                         553 --242:     MOVHI   hi(_usCriticalNesting),r0,r1;    // save usCriticalNesting value to stack
+                         554 --243:     ld.w    lo(_usCriticalNesting)[r1],r2;
+                         555 --244:     sst.w   r2,0[ep];
+                         556 --245:     MOVHI   hi(_pxCurrentTCB),r0,r1;         // save SP to top of current TCB
+                         557 --246:     ld.w    lo(_pxCurrentTCB)[r1],r2;
+                         558 --247:     st.w    sp,0[r2];
+                         559 --248: }
+                         560 --250: /* Assembly MACRO */
+                         561 --251: asm void portRESTORE_CONTEXT( void)
+                         562 --252: {
+                         563 --253:     MOVHI   hi(_pxCurrentTCB),r0,r1;         // get Stackpointer address
+                         564 --254:     ld.w    lo(_pxCurrentTCB)[r1],sp;
+                         565 --255:     MOV     sp,r1;
+                         566 --256:     ld.w    0[r1],sp;                        // load stackpointer
+                         567 --257:     MOV     sp,ep;                           // set stack pointer to element pointer
+                         568 --258:     sld.w   0[ep],r1;                        // load usCriticalNesting value from stack
+                         569 --259:     MOVHI   hi(_usCriticalNesting),r0,r2;
+                         570 --260:     st.w    r1,lo(_usCriticalNesting)[r2];
+                         571 --261:     sld.w   4[ep],r1;                        // restore general purpose registers
+                         572 --262:     sld.w   8[ep],r2;
+                         573 --263:     sld.w   12[ep],r6;
+                         574 --264:     sld.w   16[ep],r7;
+                         575 --265:     sld.w   20[ep],r8;
+                         576 --266:     sld.w   24[ep],r9;
+                         577 --267:     sld.w   28[ep],r10;
+                         578 --268:     sld.w   32[ep],r11;
+                         579 --269:     sld.w   36[ep],r12;
+                         580 --270:     sld.w   40[ep],r13;
+                         581 --271:     sld.w   44[ep],r14;
+                         582 --272:     sld.w   48[ep],r15;
+                         583 --273:     sld.w   52[ep],r16;
+                         584 --274:     sld.w   56[ep],r17;
+                         585 --275:     sld.w   60[ep],r18;
+                         586 --276:     sld.w   64[ep],r19;
+                         587 --277:     dispose 17,{r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30};
+
+                                                                      Page 11
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         588 --278: }
+                         589 --281: /* Load context of the first task */
+                         590 --282: #pragma ghs noprologue
+                         591 --283: void vPortStart(void)
+                         592 	.align	2
+                         593 	.align	2
+                         594 	.align	2
+                         595 ..gh.f.a.2.e.4:
+                         596 	.type	..gh.f.a.2.e.4,@object
+                         597 	.size	..gh.f.a.2.e.4,0
+                         598 	.global	_vPortStart
+                         599 _vPortStart:
+                         600 --	    .bf
+                         601 .LDW81:
+                         602 --284: {
+                         603 --285:     portRESTORE_CONTEXT();                              // restore the context of whichever task the ...
+                         604 ..gh.beginasm.5:
+                         605 	.type	..gh.beginasm.5,@object
+                         606 	.size	..gh.beginasm.5,0
+                         607 --ASM MACRO: Start
+                         608 
+00000158 400e0000*       609     MOVHI   hi(_pxCurrentTCB),r0,r1;         
+0000015c 211f0100*       610     ld.w    lo(_pxCurrentTCB)[r1],sp;
+00000160 0308            611     MOV     sp,r1;
+00000162 211f0100        612     ld.w    0[r1],sp;                        
+00000166 03f0            613     MOV     sp,ep;                           
+00000168 000d            614     sld.w   0[ep],r1;                        
+0000016a 40160000*       615     MOVHI   hi(_usCriticalNesting),r0,r2;
+0000016e 620f0100*       616     st.w    r1,lo(_usCriticalNesting)[r2];
+00000172 020d            617     sld.w   4[ep],r1;                        
+00000174 0415            618     sld.w   8[ep],r2;
+00000176 0635            619     sld.w   12[ep],r6;
+00000178 083d            620     sld.w   16[ep],r7;
+0000017a 0a45            621     sld.w   20[ep],r8;
+0000017c 0c4d            622     sld.w   24[ep],r9;
+0000017e 0e55            623     sld.w   28[ep],r10;
+00000180 105d            624     sld.w   32[ep],r11;
+00000182 1265            625     sld.w   36[ep],r12;
+00000184 146d            626     sld.w   40[ep],r13;
+00000186 1675            627     sld.w   44[ep],r14;
+00000188 187d            628     sld.w   48[ep],r15;
+0000018a 1a85            629     sld.w   52[ep],r16;
+0000018c 1c8d            630     sld.w   56[ep],r17;
+0000018e 1e95            631     sld.w   60[ep],r18;
+00000190 209d            632     sld.w   64[ep],r19;
+00000192 6306c0ff        633     dispose 17,{r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30};
+                         634 --ASM MACRO: End
+                         635 ..gh.endasm.6:
+                         636 	.type	..gh.endasm.6,@object
+                         637 	.size	..gh.endasm.6,0
+                         638 --286:     __asm__ __volatile__("ld.w    0[sp],lp  \n\t"
+                         639 --line286
+                         640 ..lin.a98f14db..79433e8d.0_35::
+                         641 .LDWlin35:
+                         642 ..gh.beginasm.7:
+                         643 	.type	..gh.beginasm.7,@object
+                         644 	.size	..gh.beginasm.7,0
+00000196 23ff0100        645 ld.w    0[sp],lp  
+                         646 	ldsr    lp,5  
+                         646 <EXPANSION BEGIN>
+                         646 ldsr lp , 5 , 0
+
+                                                                      Page 12
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000019a ff2f2000        646 <EXPANSION END>
+0000019e e0076001        647 	DI  
+000001a2 23ff0500        648 	ld.w    4[sp],lp  
+000001a6 23ff0900        649 	ld.w    8[sp],lp  
+000001aa 4c1a            650 	ADD     0x0C,sp  
+000001ac e0876001        651 	EI  
+000001b0 7f00            652 	jmp             [lp] 
+                         653 	
+                         654 
+                         655 ..gh.endasm.8:
+                         656 	.type	..gh.endasm.8,@object
+                         657 	.size	..gh.endasm.8,0
+                         658 --287:                          "ldsr    lp,5  \n\t"           //restore PSW
+                         659 --288:                          "DI  \n\t"
+                         660 --289:                          "ld.w    4[sp],lp  \n\t"       //restore LP
+                         661 --290:                          "ld.w    8[sp],lp  \n\t"       //restore LP
+                         662 --291:                          "ADD     0x0C,sp  \n\t"        //set SP to right position
+                         663 --292:                          "EI  \n\t"
+                         664 --293:                          "jmp             [lp] \n\t"
+                         665 --294:                          );
+                         666 --296: }
+                         667 --	    .ef
+                         668 .LDW91:
+                         669 ..lin.a98f14db..79433e8d.0_36::
+                         670 .LDWlin36:
+                         671 	.global	___ghs_eofn_vPortStart
+                         672 ___ghs_eofn_vPortStart:
+                         673 	.type	_vPortStart,@function
+                         674 	.size	_vPortStart,.-_vPortStart
+                         675 	.align	2
+                         676 
+                         677 	.section ".bss","awb"
+                         678 .L646:
+                         679 	.type	.L646,@object
+                         680 	.size	.L646,0
+                         681 	.data
+                         682 	.text
+                         683 
+                         684 
+                         685 --299: /* Switch between task of diffrent priority : using TRAP interrupt */
+                         686 --300: #pragma ghs noprologue
+                         687 --301: void vPortYield(void)
+                         688 	.align	2
+                         689 	.align	2
+                         690 	.align	2
+                         691 ..gh.f.a.2.e.9:
+                         692 	.type	..gh.f.a.2.e.9,@object
+                         693 	.size	..gh.f.a.2.e.9,0
+                         694 	.global	_vPortYield
+                         695 _vPortYield:
+                         696 --	    .bf
+                         697 .LDW02:
+                         698 --302: {
+                         699 --303:     __asm__ __volatile__("add     -0x0C,sp  \n\t"                        // prepare stack to save necessary values
+                         700 ..gh.beginasm.10:
+                         701 	.type	..gh.beginasm.10,@object
+                         702 	.size	..gh.beginasm.10,0
+000001b2 541a            703 add     -0x0C,sp  
+000001b4 63ff0900        704 	st.w    lp,8[sp]  
+                         705 	stsr    0,r31  
+                         705 <EXPANSION BEGIN>
+
+                                                                      Page 13
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         705 stsr 0 , r31 , 0
+000001b8 e0ff4000        705 <EXPANSION END>
+000001bc 63ff0500        706 	st.w    lp,4[sp]  
+                         707 	stsr    1,lp  
+                         707 <EXPANSION BEGIN>
+                         707 stsr 1 , lp , 0
+000001c0 e1ff4000        707 <EXPANSION END>
+000001c4 63ff0100        708 	st.w    lp,0[sp]  
+                         709 	
+                         710 
+                         711 ..gh.endasm.11:
+                         712 	.type	..gh.endasm.11,@object
+                         713 	.size	..gh.endasm.11,0
+                         714 --304:                          "st.w    lp,8[sp]  \n\t"                       // store LP to stack
+                         715 --305:                          "stsr    0,r31  \n\t"
+                         716 --306:                          "st.w    lp,4[sp]  \n\t"                       // store EIPC to stack
+                         717 --307:                          "stsr    1,lp  \n\t"
+                         718 --308:                          "st.w    lp,0[sp]  \n\t"                       // store EIPSW to stack
+                         719 --309:                          );
+                         720 --310:                          portSAVE_CONTEXT();                        // save the context of the current task.
+                         721 --line310
+                         722 ..lin.a98f14db..79a9d996.0_37::
+                         723 .LDWlin37:
+                         724 ..gh.beginasm.12:
+                         725 	.type	..gh.beginasm.12,@object
+                         726 	.size	..gh.beginasm.12,0
+                         727 --ASM MACRO: Start
+                         728 
+000001c8 a307c3ff        729     prepare {r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30},17,sp;     
+000001cc 219d            730     sst.w   r19,64[ep];                                                   
+000001ce 1f95            731     sst.w   r18,60[ep];
+000001d0 1d8d            732     sst.w   r17,56[ep];
+000001d2 1b85            733     sst.w   r16,52[ep];
+000001d4 197d            734     sst.w   r15,48[ep];
+000001d6 1775            735     sst.w   r14,44[ep];
+000001d8 156d            736     sst.w   r13,40[ep];
+000001da 1365            737     sst.w   r12,36[ep];
+000001dc 115d            738     sst.w   r11,32[ep];
+000001de 0f55            739     sst.w   r10,28[ep];
+000001e0 0d4d            740     sst.w   r9,24[ep];
+000001e2 0b45            741     sst.w   r8,20[ep];
+000001e4 093d            742     sst.w   r7,16[ep];
+000001e6 0735            743     sst.w   r6,12[ep];
+000001e8 0515            744     sst.w   r2,8[ep];
+000001ea 030d            745     sst.w   r1,4[ep];
+000001ec 400e0000*       746     MOVHI   hi(_usCriticalNesting),r0,r1;    
+000001f0 21170100*       747     ld.w    lo(_usCriticalNesting)[r1],r2;
+000001f4 0115            748     sst.w   r2,0[ep];
+000001f6 400e0000*       749     MOVHI   hi(_pxCurrentTCB),r0,r1;         
+000001fa 21170100*       750     ld.w    lo(_pxCurrentTCB)[r1],r2;
+000001fe 621f0100        751     st.w    sp,0[r2];
+                         752 --ASM MACRO: End
+                         753 ..gh.endasm.13:
+                         754 	.type	..gh.endasm.13,@object
+                         755 	.size	..gh.endasm.13,0
+                         756 --311:     __asm__ __volatile__("jarl    _vTaskSwitchContext,lp  \n\t"         // call the scheduler.
+                         757 --line311
+                         758 ..lin.a98f14db..79a9d996.0_38::
+                         759 .LDWlin38:
+                         760 ..gh.beginasm.14:
+                         761 	.type	..gh.beginasm.14,@object
+
+                                                                      Page 14
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         762 	.size	..gh.beginasm.14,0
+                         763 jarl    _vTaskSwitchContext,lp  
+                         763 <EXPANSION BEGIN>
+                         763 jarl22 _vTaskSwitchContext , lp 
+00000202 80ff0000*       763 <EXPANSION END>
+                         764 	
+                         765 
+                         766 ..gh.endasm.15:
+                         767 	.type	..gh.endasm.15,@object
+                         768 	.size	..gh.endasm.15,0
+                         769 --312:                          );
+                         770 --313:                          portRESTORE_CONTEXT();                     // Restore the context of whichever task the ...                                                                 // ... scheduler decided should run.
+                         771 --line313
+                         772 ..lin.a98f14db..79a9d996.0_39::
+                         773 .LDWlin39:
+                         774 ..gh.beginasm.16:
+                         775 	.type	..gh.beginasm.16,@object
+                         776 	.size	..gh.beginasm.16,0
+                         777 --ASM MACRO: Start
+                         778 
+00000206 400e0000*       779     MOVHI   hi(_pxCurrentTCB),r0,r1;         
+0000020a 211f0100*       780     ld.w    lo(_pxCurrentTCB)[r1],sp;
+0000020e 0308            781     MOV     sp,r1;
+00000210 211f0100        782     ld.w    0[r1],sp;                        
+00000214 03f0            783     MOV     sp,ep;                           
+00000216 000d            784     sld.w   0[ep],r1;                        
+00000218 40160000*       785     MOVHI   hi(_usCriticalNesting),r0,r2;
+0000021c 620f0100*       786     st.w    r1,lo(_usCriticalNesting)[r2];
+00000220 020d            787     sld.w   4[ep],r1;                        
+00000222 0415            788     sld.w   8[ep],r2;
+00000224 0635            789     sld.w   12[ep],r6;
+00000226 083d            790     sld.w   16[ep],r7;
+00000228 0a45            791     sld.w   20[ep],r8;
+0000022a 0c4d            792     sld.w   24[ep],r9;
+0000022c 0e55            793     sld.w   28[ep],r10;
+0000022e 105d            794     sld.w   32[ep],r11;
+00000230 1265            795     sld.w   36[ep],r12;
+00000232 146d            796     sld.w   40[ep],r13;
+00000234 1675            797     sld.w   44[ep],r14;
+00000236 187d            798     sld.w   48[ep],r15;
+00000238 1a85            799     sld.w   52[ep],r16;
+0000023a 1c8d            800     sld.w   56[ep],r17;
+0000023c 1e95            801     sld.w   60[ep],r18;
+0000023e 209d            802     sld.w   64[ep],r19;
+00000240 6306c0ff        803     dispose 17,{r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30};
+                         804 --ASM MACRO: End
+                         805 ..gh.endasm.17:
+                         806 	.type	..gh.endasm.17,@object
+                         807 	.size	..gh.endasm.17,0
+                         808 --314:     __asm__ __volatile__("ld.w    0[sp],lp  \n\t"                       // restore EIPSW from stack
+                         809 --line314
+                         810 ..lin.a98f14db..79a9d996.0_40::
+                         811 .LDWlin40:
+                         812 ..gh.beginasm.18:
+                         813 	.type	..gh.beginasm.18,@object
+                         814 	.size	..gh.beginasm.18,0
+00000244 23ff0100        815 ld.w    0[sp],lp  
+                         816 	ldsr    lp,1  
+                         816 <EXPANSION BEGIN>
+                         816 ldsr lp , 1 , 0
+00000248 ff0f2000        816 <EXPANSION END>
+
+                                                                      Page 15
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000024c 23ff0500        817 	ld.w    4[sp],lp  
+                         818 	ldsr    lp,0  
+                         818 <EXPANSION BEGIN>
+                         818 ldsr lp , 0 , 0
+00000250 ff072000        818 <EXPANSION END>
+00000254 23ff0900        819 	ld.w    8[sp],lp  
+00000258 4c1a            820 	add     0x0C,sp  
+0000025a e0074801        821 	EIRET 
+                         822 	
+                         823 
+                         824 ..gh.endasm.19:
+                         825 	.type	..gh.endasm.19,@object
+                         826 	.size	..gh.endasm.19,0
+                         827 --315:                          "ldsr    lp,1  \n\t"
+                         828 --316:                          "ld.w    4[sp],lp  \n\t"                       // restore EIPC from stack
+                         829 --317:                          "ldsr    lp,0  \n\t"
+                         830 --318:                          "ld.w    8[sp],lp  \n\t"                       // restore LP from stack
+                         831 --319:                          "add     0x0C,sp  \n\t"                        // set SP to right position
+                         832 --320:                          "EIRET \n\t"
+                         833 --321:                          );
+                         834 --323: }
+                         835 --	    .ef
+                         836 .LDW12:
+                         837 ..lin.a98f14db..79a9d996.0_41::
+                         838 .LDWlin41:
+                         839 	.global	___ghs_eofn_vPortYield
+                         840 ___ghs_eofn_vPortYield:
+                         841 	.type	_vPortYield,@function
+                         842 	.size	_vPortYield,.-_vPortYield
+                         843 	.align	2
+                         844 
+                         845 	.section ".bss","awb"
+                         846 .L706:
+                         847 	.type	.L706,@object
+                         848 	.size	.L706,0
+                         849 	.data
+                         850 	.text
+                         851 
+                         852 
+                         853 --325: #pragma ghs noprologue
+                         854 --326: void r_Config_OSTM0_interrupt(void)
+                         855 	.align	2
+                         856 	.align	2
+                         857 	.align	2
+                         858 ..gh.f.a.2.e.20:
+                         859 	.type	..gh.f.a.2.e.20,@object
+                         860 	.size	..gh.f.a.2.e.20,0
+                         861 	.global	_r_Config_OSTM0_interrupt
+                         862 _r_Config_OSTM0_interrupt:
+                         863 --	    .bf
+                         864 .LDW22:
+                         865 --327: {
+                         866 --328:     __asm__ __volatile__("add     -0x0C,sp  \n\t"                       // prepare stack to save necessary values
+                         867 ..gh.beginasm.21:
+                         868 	.type	..gh.beginasm.21,@object
+                         869 	.size	..gh.beginasm.21,0
+0000025e 541a            870 add     -0x0C,sp  
+00000260 63ff0900        871 	st.w    lp,8[sp]  
+                         872 	stsr    0,r31  
+                         872 <EXPANSION BEGIN>
+                         872 stsr 0 , r31 , 0
+
+                                                                      Page 16
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000264 e0ff4000        872 <EXPANSION END>
+00000268 63ff0500        873 	st.w    lp,4[sp]  
+                         874 	stsr    1,lp  
+                         874 <EXPANSION BEGIN>
+                         874 stsr 1 , lp , 0
+0000026c e1ff4000        874 <EXPANSION END>
+00000270 63ff0100        875 	st.w    lp,0[sp]  
+                         876 	
+                         877 
+                         878 ..gh.endasm.22:
+                         879 	.type	..gh.endasm.22,@object
+                         880 	.size	..gh.endasm.22,0
+                         881 --329:                          "st.w    lp,8[sp]  \n\t"                       // store LP to stack
+                         882 --330:                          "stsr    0,r31  \n\t"
+                         883 --331:                          "st.w    lp,4[sp]  \n\t"                       // store EIPC to stack (SR2,0)
+                         884 --332:                          "stsr    1,lp  \n\t"
+                         885 --333:                          "st.w    lp,0[sp]  \n\t"                       // store EIPSW to stack (SR3,0)
+                         886 --334:                          );
+                         887 --335:                          portSAVE_CONTEXT();                        // save the context of the current task.
+                         888 --line335
+                         889 ..lin.a98f14db..ac7a11e9.0_42::
+                         890 .LDWlin42:
+                         891 ..gh.beginasm.23:
+                         892 	.type	..gh.beginasm.23,@object
+                         893 	.size	..gh.beginasm.23,0
+                         894 --ASM MACRO: Start
+                         895 
+00000274 a307c3ff        896     prepare {r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30},17,sp;     
+00000278 219d            897     sst.w   r19,64[ep];                                                   
+0000027a 1f95            898     sst.w   r18,60[ep];
+0000027c 1d8d            899     sst.w   r17,56[ep];
+0000027e 1b85            900     sst.w   r16,52[ep];
+00000280 197d            901     sst.w   r15,48[ep];
+00000282 1775            902     sst.w   r14,44[ep];
+00000284 156d            903     sst.w   r13,40[ep];
+00000286 1365            904     sst.w   r12,36[ep];
+00000288 115d            905     sst.w   r11,32[ep];
+0000028a 0f55            906     sst.w   r10,28[ep];
+0000028c 0d4d            907     sst.w   r9,24[ep];
+0000028e 0b45            908     sst.w   r8,20[ep];
+00000290 093d            909     sst.w   r7,16[ep];
+00000292 0735            910     sst.w   r6,12[ep];
+00000294 0515            911     sst.w   r2,8[ep];
+00000296 030d            912     sst.w   r1,4[ep];
+00000298 400e0000*       913     MOVHI   hi(_usCriticalNesting),r0,r1;    
+0000029c 21170100*       914     ld.w    lo(_usCriticalNesting)[r1],r2;
+000002a0 0115            915     sst.w   r2,0[ep];
+000002a2 400e0000*       916     MOVHI   hi(_pxCurrentTCB),r0,r1;         
+000002a6 21170100*       917     ld.w    lo(_pxCurrentTCB)[r1],r2;
+000002aa 621f0100        918     st.w    sp,0[r2];
+                         919 --ASM MACRO: End
+                         920 ..gh.endasm.24:
+                         921 	.type	..gh.endasm.24,@object
+                         922 	.size	..gh.endasm.24,0
+                         923 --337:     __asm__ __volatile__("jarl    _xTaskIncrementTick,lp  \n\t"         // call the timer tick function.
+                         924 --line337
+                         925 ..lin.a98f14db..ac7a11e9.0_43::
+                         926 .LDWlin43:
+                         927 ..gh.beginasm.25:
+                         928 	.type	..gh.beginasm.25,@object
+                         929 	.size	..gh.beginasm.25,0
+
+                                                                      Page 17
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                         930 jarl    _xTaskIncrementTick,lp  
+                         930 <EXPANSION BEGIN>
+                         930 jarl22 _xTaskIncrementTick , lp 
+000002ae 80ff0000*       930 <EXPANSION END>
+                         931 	jarl    _vTaskSwitchContext,lp  
+                         931 <EXPANSION BEGIN>
+                         931 jarl22 _vTaskSwitchContext , lp 
+000002b2 80ff0000*       931 <EXPANSION END>
+                         932 	
+                         933 
+                         934 ..gh.endasm.26:
+                         935 	.type	..gh.endasm.26,@object
+                         936 	.size	..gh.endasm.26,0
+                         937 --338:                          "jarl    _vTaskSwitchContext,lp  \n\t"         // call the scheduler.
+                         938 --339:                          );
+                         939 --341:                          portRESTORE_CONTEXT();                     // Restore the context of whichever task the ...
+                         940 --line341
+                         941 ..lin.a98f14db..ac7a11e9.0_44::
+                         942 .LDWlin44:
+                         943 ..gh.beginasm.27:
+                         944 	.type	..gh.beginasm.27,@object
+                         945 	.size	..gh.beginasm.27,0
+                         946 --ASM MACRO: Start
+                         947 
+000002b6 400e0000*       948     MOVHI   hi(_pxCurrentTCB),r0,r1;         
+000002ba 211f0100*       949     ld.w    lo(_pxCurrentTCB)[r1],sp;
+000002be 0308            950     MOV     sp,r1;
+000002c0 211f0100        951     ld.w    0[r1],sp;                        
+000002c4 03f0            952     MOV     sp,ep;                           
+000002c6 000d            953     sld.w   0[ep],r1;                        
+000002c8 40160000*       954     MOVHI   hi(_usCriticalNesting),r0,r2;
+000002cc 620f0100*       955     st.w    r1,lo(_usCriticalNesting)[r2];
+000002d0 020d            956     sld.w   4[ep],r1;                        
+000002d2 0415            957     sld.w   8[ep],r2;
+000002d4 0635            958     sld.w   12[ep],r6;
+000002d6 083d            959     sld.w   16[ep],r7;
+000002d8 0a45            960     sld.w   20[ep],r8;
+000002da 0c4d            961     sld.w   24[ep],r9;
+000002dc 0e55            962     sld.w   28[ep],r10;
+000002de 105d            963     sld.w   32[ep],r11;
+000002e0 1265            964     sld.w   36[ep],r12;
+000002e2 146d            965     sld.w   40[ep],r13;
+000002e4 1675            966     sld.w   44[ep],r14;
+000002e6 187d            967     sld.w   48[ep],r15;
+000002e8 1a85            968     sld.w   52[ep],r16;
+000002ea 1c8d            969     sld.w   56[ep],r17;
+000002ec 1e95            970     sld.w   60[ep],r18;
+000002ee 209d            971     sld.w   64[ep],r19;
+000002f0 6306c0ff        972     dispose 17,{r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30};
+                         973 --ASM MACRO: End
+                         974 ..gh.endasm.28:
+                         975 	.type	..gh.endasm.28,@object
+                         976 	.size	..gh.endasm.28,0
+                         977 --342:                                                                  // ... scheduler decided should run.
+                         978 --343:     __asm__ __volatile__("ld.w    0[sp],lp  \n\t"                       // restore EIPSW from stack(SR3,0)
+                         979 --line343
+                         980 ..lin.a98f14db..ac7a11e9.0_45::
+                         981 .LDWlin45:
+                         982 ..gh.beginasm.29:
+                         983 	.type	..gh.beginasm.29,@object
+                         984 	.size	..gh.beginasm.29,0
+
+                                                                      Page 18
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+000002f4 23ff0100        985 ld.w    0[sp],lp  
+                         986 	ldsr    lp,1  
+                         986 <EXPANSION BEGIN>
+                         986 ldsr lp , 1 , 0
+000002f8 ff0f2000        986 <EXPANSION END>
+000002fc 23ff0500        987 	ld.w    4[sp],lp  
+                         988 	ldsr    lp,0  
+                         988 <EXPANSION BEGIN>
+                         988 ldsr lp , 0 , 0
+00000300 ff072000        988 <EXPANSION END>
+00000304 23ff0900        989 	ld.w    8[sp],lp  
+00000308 4c1a            990 	add     0x0C,sp  
+0000030a e0074801        991 	EIRET 
+                         992 	
+                         993 
+                         994 ..gh.endasm.30:
+                         995 	.type	..gh.endasm.30,@object
+                         996 	.size	..gh.endasm.30,0
+                         997 --344:                          "ldsr    lp,1  \n\t"
+                         998 --345:                          "ld.w    4[sp],lp  \n\t"                       // restore EIPC from stack(SR2,0)
+                         999 --346:                          "ldsr    lp,0  \n\t"
+                        1000 --347:                          "ld.w    8[sp],lp  \n\t"                       // restore LP from stack
+                        1001 --348:                          "add     0x0C,sp  \n\t"                        // set SP to right position
+                        1002 --349:                          "EIRET \n\t"
+                        1003 --350:                          );
+                        1004 --351: }
+                        1005 --	    .ef
+                        1006 .LDW32:
+                        1007 ..lin.a98f14db..ac7a11e9.0_46::
+                        1008 .LDWlin46:
+                        1009 	.global	___ghs_eofn_r_Config_OSTM0_interrupt
+                        1010 ___ghs_eofn_r_Config_OSTM0_interrupt:
+                        1011 	.type	_r_Config_OSTM0_interrupt,@function
+                        1012 	.size	_r_Config_OSTM0_interrupt,.-_r_Config_OSTM0_interrupt
+                        1013 	.align	2
+                        1014 
+                        1015 	.section ".bss","awb"
+                        1016 .L770:
+                        1017 	.type	.L770,@object
+                        1018 	.size	.L770,0
+                        1019 	.data
+                        1020 	.text
+                        1021 
+                        1022 	.align	2
+                        1023 
+                        1024 	.section ".sdata","aw"
+                        1025 	.align	4
+                        1026 	.global	_usCriticalNesting
+00000000 0a000000       1027 _usCriticalNesting:	.byte	10,0,0,0
+                        1028 	.type	_usCriticalNesting,@object
+                        1029 	.size	_usCriticalNesting,4
+                        1030 	.data
+                        1031 	.ghsnote version,19
+                        1032 	.ghsnote tools,8195
+                        1033 	.ghsnote options,656
+                        1034 	.text
+                        1035 	.align	2
+                        1036 ..eof.D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt...44.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904..602FA36E..0::
+                        1037 	.section	.debug_info
+                        1038 .Ldw_begin:
+00000000 e8030000       1039 	.word	.Ldw_end-.Ldw_begin-4
+
+                                                                      Page 19
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000004 0200           1040 	.byte	2,0
+00000006 00000000*      1041 	.word	.Ldw_abbr_begin
+0000000a 04             1042 	.byte	4
+                        1043 	.section	.debug_abbrev
+                        1044 .Ldw_abbr_begin:
+                        1045 	.section	.debug_info
+0000000b 01             1046 	.byte	1
+0000000c 00000000*      1047 	.word	..bof.D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt...44.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904..602FA36E..0
+00000010 00000000*      1048 	.word	..eof.D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt...44.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904..602FA36E..0
+00000014 7372635c5254   1049 	.strz	"src\\RTOS\\portable\\GHS\\port_frt.c"
+0000001a 4f535c706f72 
+00000020 7461626c655c 
+00000026 4748535c706f 
+0000002c 72745f667274 
+00000032 2e6300 
+00000035 443a5c776f72   1050 	.strz	"D:\\working\\My_workArea\\Renesas_training\\Training Material\\GHS\\Thomas Training\\freeRTOS_IVT_placement_from_ARRAY\\R7F7016904"
+0000003b 6b696e675c4d 
+00000041 795f776f726b 
+00000047 417265615c52 
+0000004d 656e65736173 
+00000053 5f747261696e 
+00000059 696e675c5472 
+0000005f 61696e696e67 
+00000065 204d61746572 
+0000006b 69616c5c4748 
+00000071 535c54686f6d 
+00000077 617320547261 
+0000007d 696e696e675c 
+00000083 667265655254 
+00000089 4f535f495654 
+0000008f 5f706c616365 
+00000095 6d656e745f66 
+0000009b 726f6d5f4152 
+000000a1 5241595c5237 
+000000a7 463730313639 
+000000ad 303400 
+000000b0 474853204320   1051 	.strz	"GHS C 2017.1.5 [dual]"
+000000b6 323031372e31 
+000000bc 2e35205b6475 
+000000c2 616c5d00 
+000000c6 0100           1052 	.byte	1,0
+000000c8 00000000*      1053 	.word	.Ldw_line_begin
+000000cc 00000000*      1054 	.word	.Ldw_macinfo_begin
+000000d0 00             1055 	.byte	0
+                        1056 
+                        1057 	.section	.debug_abbrev
+00000000 01             1058 	.byte	1
+00000001 11             1059 	.byte	17
+00000002 01             1060 	.byte	1
+00000003 1101           1061 	.byte	17,1
+00000005 1201           1062 	.byte	18,1
+00000007 0308           1063 	.byte	3,8
+00000009 1b08           1064 	.byte	27,8
+0000000b 2508           1065 	.byte	37,8
+0000000d 1305           1066 	.byte	19,5
+0000000f 1006           1067 	.byte	16,6
+00000011 4306           1068 	.byte	67,6
+00000013 420b           1069 	.byte	66,11
+00000015 0000           1070 	.byte	0,0
+                        1071 
+                        1072 	.section	.debug_line
+
+                                                                      Page 20
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                        1073 .Ldw_line_begin:
+00000000 95040000       1074 	.word	.Ldw_line_end-.Ldw_line_begin-4
+00000004 0200           1075 	.byte	2,0
+00000006 00000000*      1076 	.word	.Ldw_lpro_end-.Ldw_lpro_begin
+                        1077 .Ldw_lpro_begin:
+0000000a 01             1078 	.byte	1
+0000000b 00             1079 	.byte	0
+0000000c 00             1080 	.byte	0
+0000000d 04             1081 	.byte	4
+0000000e 0a             1082 	.byte	10
+0000000f 000101         1083 	.byte	0,1,1
+00000012 010100         1084 	.byte	1,1,0
+00000015 000001         1085 	.byte	0,0,1
+00000018 00             1086 	.byte	0
+00000019 7372635c5254   1087 	.strz	"src\\RTOS\\portable\\GHS\\port_frt.c"
+0000001f 4f535c706f72 
+00000025 7461626c655c 
+0000002b 4748535c706f 
+00000031 72745f667274 
+00000037 2e6300 
+0000003a 000000         1088 	.byte	0,0,0
+0000003d 2e5c7372635c   1089 	.strz	".\\src\\RTOS\\include\\FreeRTOS.h"
+00000043 52544f535c69 
+00000049 6e636c756465 
+0000004f 5c4672656552 
+00000055 544f532e6800 
+0000005b 000000         1090 	.byte	0,0,0
+0000005e 433a5c676873   1091 	.strz	"C:\\ghs\\comp_201715\\ansi\\stddef.h"
+00000064 5c636f6d705f 
+0000006a 323031373135 
+00000070 5c616e73695c 
+00000076 737464646566 
+0000007c 2e6800 
+0000007f 000000         1092 	.byte	0,0,0
+00000082 433a5c676873   1093 	.strz	"C:\\ghs\\comp_201715\\ansi\\ghs_null.h"
+00000088 5c636f6d705f 
+0000008e 323031373135 
+00000094 5c616e73695c 
+0000009a 6768735f6e75 
+000000a0 6c6c2e6800 
+000000a5 000000         1094 	.byte	0,0,0
+000000a8 433a5c676873   1095 	.strz	"C:\\ghs\\comp_201715\\ansi\\ghs_wchar.h"
+000000ae 5c636f6d705f 
+000000b4 323031373135 
+000000ba 5c616e73695c 
+000000c0 6768735f7763 
+000000c6 6861722e6800 
+000000cc 000000         1096 	.byte	0,0,0
+000000cf 433a5c676873   1097 	.strz	"C:\\ghs\\comp_201715\\ansi\\stdint.h"
+000000d5 5c636f6d705f 
+000000db 323031373135 
+000000e1 5c616e73695c 
+000000e7 737464696e74 
+000000ed 2e6800 
+000000f0 000000         1098 	.byte	0,0,0
+000000f3 2e5c7372635c   1099 	.strz	".\\src\\RTOS\\include\\FreeRTOSConfig.h"
+000000f9 52544f535c69 
+000000ff 6e636c756465 
+00000105 5c4672656552 
+0000010b 544f53436f6e 
+00000111 6669672e6800 
+
+                                                                      Page 21
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000117 000000         1100 	.byte	0,0,0
+0000011a 2e5c7372635c   1101 	.strz	".\\src\\RTOS\\include\\projdefs.h"
+00000120 52544f535c69 
+00000126 6e636c756465 
+0000012c 5c70726f6a64 
+00000132 6566732e6800 
+00000138 000000         1102 	.byte	0,0,0
+0000013b 2e5c7372635c   1103 	.strz	".\\src\\RTOS\\include\\portable.h"
+00000141 52544f535c69 
+00000147 6e636c756465 
+0000014d 5c706f727461 
+00000153 626c652e6800 
+00000159 000000         1104 	.byte	0,0,0
+0000015c 2e5c7372635c   1105 	.strz	".\\src\\RTOS\\include\\deprecated_definitions.h"
+00000162 52544f535c69 
+00000168 6e636c756465 
+0000016e 5c6465707265 
+00000174 63617465645f 
+0000017a 646566696e69 
+00000180 74696f6e732e 
+00000186 6800 
+00000188 000000         1106 	.byte	0,0,0
+0000018b 2e5c7372635c   1107 	.strz	".\\src\\RTOS\\portable\\GHS\\portmacro.h"
+00000191 52544f535c70 
+00000197 6f727461626c 
+0000019d 655c4748535c 
+000001a3 706f72746d61 
+000001a9 63726f2e6800 
+000001af 000000         1108 	.byte	0,0,0
+000001b2 2e5c7372635c   1109 	.strz	".\\src\\RTOS\\include\\mpu_wrappers.h"
+000001b8 52544f535c69 
+000001be 6e636c756465 
+000001c4 5c6d70755f77 
+000001ca 726170706572 
+000001d0 732e6800 
+000001d4 000000         1110 	.byte	0,0,0
+000001d7 2e5c7372635c   1111 	.strz	".\\src\\RTOS\\include\\task.h"
+000001dd 52544f535c69 
+000001e3 6e636c756465 
+000001e9 5c7461736b2e 
+000001ef 6800 
+000001f1 000000         1112 	.byte	0,0,0
+000001f4 2e5c7372635c   1113 	.strz	".\\src\\RTOS\\include\\list.h"
+000001fa 52544f535c69 
+00000200 6e636c756465 
+00000206 5c6c6973742e 
+0000020c 6800 
+0000020e 000000         1114 	.byte	0,0,0
+00000211 2e5c7372635c   1115 	.strz	".\\src\\Config_OSTM0\\Config_OSTM0.h"
+00000217 436f6e666967 
+0000021d 5f4f53544d30 
+00000223 5c436f6e6669 
+00000229 675f4f53544d 
+0000022f 302e6800 
+00000233 000000         1116 	.byte	0,0,0
+00000236 2e5c7372635c   1117 	.strz	".\\src\\Config_OSTM0\\r_cg_ostm.h"
+0000023c 436f6e666967 
+00000242 5f4f53544d30 
+00000248 5c725f63675f 
+0000024e 6f73746d2e68 
+00000254 00 
+
+                                                                      Page 22
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000255 000000         1118 	.byte	0,0,0
+00000258 00             1119 	.byte	0
+                        1120 .Ldw_lpro_end:
+                        1121 	.section	.debug_macinfo
+                        1122 .Ldw_macinfo_begin:
+                        1123 	.section	.debug_frame
+                        1124 .LDW_4fde9b0:
+00000000 00000000*      1125 	.word	.LDW_unq_2-.LDW_unq_1
+                        1126 .LDW_unq_1:
+00000004 ffffffff       1127 	.byte	255,255,255,255
+00000008 01             1128 	.byte	1
+00000009 00             1129 	.byte	0
+0000000a 01             1130 	.byte	1
+0000000b 01             1131 	.byte	1
+0000000c 1f             1132 	.byte	31
+0000000d 0c             1133 	.byte	12
+0000000e 03             1134 	.byte	3
+0000000f 00             1135 	.byte	0
+00000010 07             1136 	.byte	7
+00000011 00             1137 	.byte	0
+00000012 07             1138 	.byte	7
+00000013 01             1139 	.byte	1
+00000014 07             1140 	.byte	7
+00000015 02             1141 	.byte	2
+00000016 07             1142 	.byte	7
+00000017 03             1143 	.byte	3
+00000018 07             1144 	.byte	7
+00000019 04             1145 	.byte	4
+0000001a 07             1146 	.byte	7
+0000001b 05             1147 	.byte	5
+0000001c 07             1148 	.byte	7
+0000001d 06             1149 	.byte	6
+0000001e 07             1150 	.byte	7
+0000001f 07             1151 	.byte	7
+00000020 07             1152 	.byte	7
+00000021 08             1153 	.byte	8
+00000022 07             1154 	.byte	7
+00000023 09             1155 	.byte	9
+00000024 07             1156 	.byte	7
+00000025 0a             1157 	.byte	10
+00000026 07             1158 	.byte	7
+00000027 0b             1159 	.byte	11
+00000028 07             1160 	.byte	7
+00000029 0c             1161 	.byte	12
+0000002a 07             1162 	.byte	7
+0000002b 0d             1163 	.byte	13
+0000002c 07             1164 	.byte	7
+0000002d 0e             1165 	.byte	14
+0000002e 07             1166 	.byte	7
+0000002f 0f             1167 	.byte	15
+00000030 07             1168 	.byte	7
+00000031 10             1169 	.byte	16
+00000032 07             1170 	.byte	7
+00000033 11             1171 	.byte	17
+00000034 07             1172 	.byte	7
+00000035 12             1173 	.byte	18
+00000036 07             1174 	.byte	7
+00000037 13             1175 	.byte	19
+00000038 08             1176 	.byte	8
+00000039 14             1177 	.byte	20
+0000003a 08             1178 	.byte	8
+
+                                                                      Page 23
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000003b 15             1179 	.byte	21
+0000003c 08             1180 	.byte	8
+0000003d 16             1181 	.byte	22
+0000003e 08             1182 	.byte	8
+0000003f 17             1183 	.byte	23
+00000040 08             1184 	.byte	8
+00000041 18             1185 	.byte	24
+00000042 08             1186 	.byte	8
+00000043 19             1187 	.byte	25
+00000044 08             1188 	.byte	8
+00000045 1a             1189 	.byte	26
+00000046 08             1190 	.byte	8
+00000047 1b             1191 	.byte	27
+00000048 08             1192 	.byte	8
+00000049 1c             1193 	.byte	28
+0000004a 08             1194 	.byte	8
+0000004b 1d             1195 	.byte	29
+0000004c 07             1196 	.byte	7
+0000004d 1e             1197 	.byte	30
+0000004e 08             1198 	.byte	8
+0000004f 1f             1199 	.byte	31
+00000050 07             1200 	.byte	7
+00000051 20             1201 	.byte	32
+00000052 07             1202 	.byte	7
+00000053 21             1203 	.byte	33
+00000054 07             1204 	.byte	7
+00000055 22             1205 	.byte	34
+00000056 07             1206 	.byte	7
+00000057 23             1207 	.byte	35
+00000058 07             1208 	.byte	7
+00000059 24             1209 	.byte	36
+0000005a 07             1210 	.byte	7
+0000005b 25             1211 	.byte	37
+0000005c 07             1212 	.byte	7
+0000005d 26             1213 	.byte	38
+0000005e 07             1214 	.byte	7
+0000005f 27             1215 	.byte	39
+00000060 07             1216 	.byte	7
+00000061 28             1217 	.byte	40
+00000062 07             1218 	.byte	7
+00000063 29             1219 	.byte	41
+00000064 07             1220 	.byte	7
+00000065 2a             1221 	.byte	42
+00000066 07             1222 	.byte	7
+00000067 2b             1223 	.byte	43
+00000068 07             1224 	.byte	7
+00000069 2c             1225 	.byte	44
+0000006a 07             1226 	.byte	7
+0000006b 2d             1227 	.byte	45
+0000006c 07             1228 	.byte	7
+0000006d 2e             1229 	.byte	46
+0000006e 07             1230 	.byte	7
+0000006f 2f             1231 	.byte	47
+00000070 07             1232 	.byte	7
+00000071 30             1233 	.byte	48
+00000072 07             1234 	.byte	7
+00000073 31             1235 	.byte	49
+00000074 07             1236 	.byte	7
+00000075 32             1237 	.byte	50
+00000076 07             1238 	.byte	7
+00000077 33             1239 	.byte	51
+
+                                                                      Page 24
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000078 07             1240 	.byte	7
+00000079 34             1241 	.byte	52
+0000007a 07             1242 	.byte	7
+0000007b 35             1243 	.byte	53
+0000007c 07             1244 	.byte	7
+0000007d 36             1245 	.byte	54
+0000007e 07             1246 	.byte	7
+0000007f 37             1247 	.byte	55
+00000080 07             1248 	.byte	7
+00000081 38             1249 	.byte	56
+00000082 07             1250 	.byte	7
+00000083 39             1251 	.byte	57
+00000084 07             1252 	.byte	7
+00000085 3a             1253 	.byte	58
+00000086 07             1254 	.byte	7
+00000087 3b             1255 	.byte	59
+00000088 07             1256 	.byte	7
+00000089 3c             1257 	.byte	60
+0000008a 07             1258 	.byte	7
+0000008b 3d             1259 	.byte	61
+0000008c 07             1260 	.byte	7
+0000008d 3e             1261 	.byte	62
+0000008e 07             1262 	.byte	7
+0000008f 3f             1263 	.byte	63
+                        1264 .LDW_unq_2:
+                        1265 	.section	.debug_info
+                        1266 .LDW_3a94860:
+000000d1 27             1267 	.byte	39
+000000d2 756e7369676e   1268 	.strz	"unsigned int"
+000000d8 656420696e74 
+000000de 00 
+000000df 07             1269 	.byte	7
+000000e0 04             1270 	.byte	4
+                        1271 
+                        1272 	.section	.debug_abbrev
+00000017 27             1273 	.byte	39
+00000018 24             1274 	.byte	36
+00000019 00             1275 	.byte	0
+0000001a 0308           1276 	.byte	3,8
+0000001c 3e0b           1277 	.byte	62,11
+0000001e 0b0b           1278 	.byte	11,11
+00000020 0000           1279 	.byte	0,0
+                        1280 
+                        1281 	.section	.debug_info
+                        1282 .LDW_3a94780:
+000000e1 31             1283 	.byte	49
+000000e2 00000000*      1284 	.word	.LDW_3ad6b48
+                        1285 
+                        1286 	.section	.debug_abbrev
+00000022 31             1287 	.byte	49
+00000023 0f             1288 	.byte	15
+00000024 00             1289 	.byte	0
+00000025 4910           1290 	.byte	73,16
+00000027 0000           1291 	.byte	0,0
+                        1292 
+                        1293 	.section	.debug_info
+                        1294 .LDW_3a94898:
+000000e6 27             1295 	.byte	39
+000000e7 766f69642a00   1296 	.strz	"void*"
+000000ed 01             1297 	.byte	1
+000000ee 04             1298 	.byte	4
+
+                                                                      Page 25
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                        1299 
+                        1300 .LDW_3a94a58:
+000000ef 47             1301 	.byte	71
+000000f0 01             1302 	.byte	1
+                        1303 
+                        1304 	.section	.debug_abbrev
+00000029 47             1305 	.byte	71
+0000002a 15             1306 	.byte	21
+0000002b 01             1307 	.byte	1
+0000002c 270c           1308 	.byte	39,12
+0000002e 0000           1309 	.byte	0,0
+                        1310 
+                        1311 	.section	.debug_info
+                        1312 .LDW_3aa63d8:
+000000f1 14             1313 	.byte	20
+000000f2 00000000*      1314 	.word	.LDW_3a94898
+000000f6 00             1315 	.byte	0
+                        1316 
+                        1317 	.section	.debug_abbrev
+00000030 14             1318 	.byte	20
+00000031 05             1319 	.byte	5
+00000032 00             1320 	.byte	0
+00000033 4910           1321 	.byte	73,16
+00000035 4b0c           1322 	.byte	75,12
+00000037 0000           1323 	.byte	0,0
+                        1324 
+                        1325 	.section	.debug_info
+000000f7 00             1326 	.byte	0
+                        1327 
+                        1328 .LDW_3a94b00:
+000000f8 31             1329 	.byte	49
+000000f9 00000000*      1330 	.word	.LDW_3a94a58
+                        1331 
+                        1332 .LDW_3a94668:
+000000fd 46             1333 	.byte	70
+000000fe 00000000*      1334 	.word	.LDW_3a94780
+00000102 01             1335 	.byte	1
+                        1336 
+                        1337 	.section	.debug_abbrev
+00000039 46             1338 	.byte	70
+0000003a 15             1339 	.byte	21
+0000003b 01             1340 	.byte	1
+0000003c 4910           1341 	.byte	73,16
+0000003e 270c           1342 	.byte	39,12
+00000040 0000           1343 	.byte	0,0
+                        1344 
+                        1345 	.section	.debug_info
+                        1346 .LDW_3aa6258:
+00000103 14             1347 	.byte	20
+00000104 00000000*      1348 	.word	.LDW_3a94780
+00000108 00             1349 	.byte	0
+                        1350 
+                        1351 .LDW_3aa6348:
+00000109 14             1352 	.byte	20
+0000010a 00000000*      1353 	.word	.LDW_3ad6ba0
+0000010e 00             1354 	.byte	0
+                        1355 
+                        1356 .LDW_3aa5f58:
+0000010f 14             1357 	.byte	20
+00000110 00000000*      1358 	.word	.LDW_3a94898
+00000114 00             1359 	.byte	0
+
+                                                                      Page 26
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                        1360 
+00000115 00             1361 	.byte	0
+                        1362 
+                        1363 .LDW_3a946d8:
+00000116 27             1364 	.byte	39
+00000117 6c6f6e6700     1365 	.strz	"long"
+0000011c 05             1366 	.byte	5
+0000011d 04             1367 	.byte	4
+                        1368 
+                        1369 .LDW_3a94588:
+0000011e 46             1370 	.byte	70
+0000011f 00000000*      1371 	.word	.LDW_3ad6d98
+00000123 01             1372 	.byte	1
+                        1373 
+00000124 00             1374 	.byte	0
+                        1375 
+                        1376 .LDW_3a947b8:
+00000125 47             1377 	.byte	71
+00000126 01             1378 	.byte	1
+                        1379 
+00000127 00             1380 	.byte	0
+                        1381 
+                        1382 .LDW_3a947f0:
+00000128 47             1383 	.byte	71
+00000129 01             1384 	.byte	1
+                        1385 
+0000012a 00             1386 	.byte	0
+                        1387 
+                        1388 .LDW_3a94828:
+0000012b 47             1389 	.byte	71
+0000012c 01             1390 	.byte	1
+                        1391 
+0000012d 00             1392 	.byte	0
+                        1393 
+                        1394 .LDW_3a94908:
+0000012e 47             1395 	.byte	71
+0000012f 01             1396 	.byte	1
+                        1397 
+00000130 00             1398 	.byte	0
+                        1399 
+                        1400 .LDW_3a94b70:
+00000131 47             1401 	.byte	71
+00000132 01             1402 	.byte	1
+                        1403 
+00000133 00             1404 	.byte	0
+                        1405 
+                        1406 .LDW_3a94c18:
+00000134 27             1407 	.byte	39
+00000135 756e7369676e   1408 	.strz	"unsigned long"
+0000013b 6564206c6f6e 
+00000141 6700 
+00000143 07             1409 	.byte	7
+00000144 04             1410 	.byte	4
+                        1411 
+                        1412 .LDW_5007f50:
+00000145 2d             1413 	.byte	45
+00000146 00000000*      1414 	.word	.LDW_3ad6b48
+                        1415 
+                        1416 	.section	.debug_abbrev
+00000042 2d             1417 	.byte	45
+00000043 35             1418 	.byte	53
+
+                                                                      Page 27
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000044 00             1419 	.byte	0
+00000045 4910           1420 	.byte	73,16
+00000047 0000           1421 	.byte	0,0
+                        1422 
+                        1423 	.section	.debug_info
+                        1424 .LDW_500e200:
+0000014a 47             1425 	.byte	71
+0000014b 01             1426 	.byte	1
+                        1427 
+0000014c 00             1428 	.byte	0
+                        1429 
+                        1430 .LDW_500e040:
+0000014d 47             1431 	.byte	71
+0000014e 01             1432 	.byte	1
+                        1433 
+0000014f 00             1434 	.byte	0
+                        1435 
+                        1436 .LDW_3ad6ba0:
+00000150 2a             1437 	.byte	42
+00000151 5461736b4675   1438 	.strz	"TaskFunction_t"
+00000157 6e6374696f6e 
+0000015d 5f7400 
+00000160 4d             1439 	.byte	77
+00000161 10             1440 	.byte	16
+00000162 08             1441 	.byte	8
+00000163 00000000*      1442 	.word	.LDW_3a94b00
+                        1443 
+                        1444 	.section	.debug_abbrev
+00000049 2a             1445 	.byte	42
+0000004a 16             1446 	.byte	22
+0000004b 00             1447 	.byte	0
+0000004c 0308           1448 	.byte	3,8
+0000004e 3b0f           1449 	.byte	59,15
+00000050 390f           1450 	.byte	57,15
+00000052 3a0f           1451 	.byte	58,15
+00000054 4910           1452 	.byte	73,16
+00000056 0000           1453 	.byte	0,0
+                        1454 
+                        1455 	.section	.debug_info
+                        1456 .LDW_3ad6b48:
+00000167 2a             1457 	.byte	42
+00000168 537461636b54   1458 	.strz	"StackType_t"
+0000016e 7970655f7400 
+00000174 36             1459 	.byte	54
+00000175 18             1460 	.byte	24
+00000176 0b             1461 	.byte	11
+00000177 00000000*      1462 	.word	.LDW_3a94860
+                        1463 
+                        1464 .LDW_3ad6d98:
+0000017b 2a             1465 	.byte	42
+0000017c 426173655479   1466 	.strz	"BaseType_t"
+00000182 70655f7400 
+00000187 37             1467 	.byte	55
+00000188 0e             1468 	.byte	14
+00000189 0b             1469 	.byte	11
+0000018a 00000000*      1470 	.word	.LDW_3a946d8
+                        1471 
+                        1472 .LDW_4f753e0:
+0000018e 2a             1473 	.byte	42
+0000018f 554261736554   1474 	.strz	"UBaseType_t"
+00000195 7970655f7400 
+
+                                                                      Page 28
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000019b 38             1475 	.byte	56
+0000019c 17             1476 	.byte	23
+0000019d 0b             1477 	.byte	11
+0000019e 00000000*      1478 	.word	.LDW_3a94c18
+                        1479 
+                        1480 .LDW_5007fa8:
+000001a2 06             1481 	.byte	6
+000001a3 757343726974   1482 	.strz	"usCriticalNesting"
+000001a9 6963616c4e65 
+000001af 7374696e6700 
+000001b5 5f             1483 	.byte	95
+000001b6 16             1484 	.byte	22
+000001b7 01             1485 	.byte	1
+000001b8 00000000*      1486 	.word	.LDW_5007f50
+000001bc 01             1487 	.byte	1
+000001bd 00             1488 	.byte	0
+000001be 0503           1489 	.byte	5,3
+000001c0 00000000*      1490 	.word	_usCriticalNesting
+                        1491 
+                        1492 	.section	.debug_abbrev
+00000058 06             1493 	.byte	6
+00000059 34             1494 	.byte	52
+0000005a 00             1495 	.byte	0
+0000005b 0308           1496 	.byte	3,8
+0000005d 3b0f           1497 	.byte	59,15
+0000005f 390f           1498 	.byte	57,15
+00000061 3a0f           1499 	.byte	58,15
+00000063 4910           1500 	.byte	73,16
+00000065 3f0c           1501 	.byte	63,12
+00000067 3c0c           1502 	.byte	60,12
+00000069 020a           1503 	.byte	2,10
+0000006b 0000           1504 	.byte	0,0
+                        1505 
+                        1506 	.section	.debug_info
+                        1507 .LDW_500c180:
+000001c4 17             1508 	.byte	23
+000001c5 525f436f6e66   1509 	.strz	"R_Config_OSTM0_Start"
+000001cb 69675f4f5354 
+000001d1 4d305f537461 
+000001d7 727400 
+000001da 37             1510 	.byte	55
+000001db 06             1511 	.byte	6
+000001dc 0f             1512 	.byte	15
+000001dd 01             1513 	.byte	1
+000001de 00             1514 	.byte	0
+000001df 01             1515 	.byte	1
+000001e0 01             1516 	.byte	1
+000001e1 00             1517 	.byte	0
+000001e2 01             1518 	.byte	1
+                        1519 
+                        1520 	.section	.debug_abbrev
+0000006d 17             1521 	.byte	23
+0000006e 2e             1522 	.byte	46
+0000006f 01             1523 	.byte	1
+00000070 0308           1524 	.byte	3,8
+00000072 3b0f           1525 	.byte	59,15
+00000074 390f           1526 	.byte	57,15
+00000076 3a0f           1527 	.byte	58,15
+00000078 3c0c           1528 	.byte	60,12
+0000007a 200b           1529 	.byte	32,11
+0000007c 3f0c           1530 	.byte	63,12
+
+                                                                      Page 29
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000007e 320b           1531 	.byte	50,11
+00000080 4c0b           1532 	.byte	76,11
+00000082 270c           1533 	.byte	39,12
+00000084 0000           1534 	.byte	0,0
+                        1535 
+                        1536 	.section	.debug_info
+000001e3 00             1537 	.byte	0
+                        1538 
+                        1539 .LDW_500d058:
+000001e4 17             1540 	.byte	23
+000001e5 525f436f6e66   1541 	.strz	"R_Config_OSTM0_Stop"
+000001eb 69675f4f5354 
+000001f1 4d305f53746f 
+000001f7 7000 
+000001f9 38             1542 	.byte	56
+000001fa 06             1543 	.byte	6
+000001fb 0f             1544 	.byte	15
+000001fc 01             1545 	.byte	1
+000001fd 00             1546 	.byte	0
+000001fe 01             1547 	.byte	1
+000001ff 01             1548 	.byte	1
+00000200 00             1549 	.byte	0
+00000201 01             1550 	.byte	1
+                        1551 
+00000202 00             1552 	.byte	0
+                        1553 
+                        1554 .LDW_3ad6bf8:
+00000203 16             1555 	.byte	22
+00000204 7078506f7274   1556 	.strz	"pxPortInitialiseStack"
+0000020a 496e69746961 
+00000210 6c6973655374 
+00000216 61636b00 
+0000021a 66             1557 	.byte	102
+0000021b 0f             1558 	.byte	15
+0000021c 01             1559 	.byte	1
+0000021d 00000000*      1560 	.word	.LDW_3a94780
+00000221 00000000*      1561 	.word	_pxPortInitialiseStack
+00000225 00000000*      1562 	.word	___ghs_eofn_pxPortInitialiseStack
+00000229 0153           1563 	.byte	1,83
+0000022b 02             1564 	.byte	2
+0000022c 00             1565 	.byte	0
+0000022d 828004         1566 	.byte	130,128,4
+00000230 00             1567 	.byte	0
+00000231 00             1568 	.byte	0
+00000232 00             1569 	.byte	0
+00000233 00             1570 	.byte	0
+00000234 01             1571 	.byte	1
+00000235 01             1572 	.byte	1
+00000236 00             1573 	.byte	0
+00000237 01             1574 	.byte	1
+                        1575 
+                        1576 	.section	.debug_abbrev
+00000086 16             1577 	.byte	22
+00000087 2e             1578 	.byte	46
+00000088 01             1579 	.byte	1
+00000089 0308           1580 	.byte	3,8
+0000008b 3b0f           1581 	.byte	59,15
+0000008d 390f           1582 	.byte	57,15
+0000008f 3a0f           1583 	.byte	58,15
+00000091 4910           1584 	.byte	73,16
+00000093 1101           1585 	.byte	17,1
+
+                                                                      Page 30
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000095 1201           1586 	.byte	18,1
+00000097 400a           1587 	.byte	64,10
+00000099 8341           1588 	.byte	131,65
+0000009b 0f             1589 	.byte	15
+0000009c 8741           1590 	.byte	135,65
+0000009e 0d             1591 	.byte	13
+0000009f 8541           1592 	.byte	133,65
+000000a1 0f             1593 	.byte	15
+000000a2 8641           1594 	.byte	134,65
+000000a4 0d             1595 	.byte	13
+000000a5 9241           1596 	.byte	146,65
+000000a7 0f             1597 	.byte	15
+000000a8 3c0c           1598 	.byte	60,12
+000000aa 200b           1599 	.byte	32,11
+000000ac 3f0c           1600 	.byte	63,12
+000000ae 320b           1601 	.byte	50,11
+000000b0 4c0b           1602 	.byte	76,11
+000000b2 270c           1603 	.byte	39,12
+000000b4 0000           1604 	.byte	0,0
+                        1605 
+                        1606 	.section	.debug_frame
+                        1607 .LDW_5006c50:
+00000090 00000000*      1608 	.word	.LDW_unq_4-.LDW_unq_3
+                        1609 .LDW_unq_3:
+00000094 00000000*      1610 	.word	.LDW_4fde9b0
+00000098 00000000*      1611 	.word	_pxPortInitialiseStack
+0000009c 00000000*      1612 	.word	___ghs_eofn_pxPortInitialiseStack-_pxPortInitialiseStack
+000000a0 01             1613 	.byte	1
+000000a1 00000000*      1614 	.word	.LDW11
+000000a5 00             1615 	.byte	0
+000000a6 00             1616 	.byte	0
+000000a7 00             1617 	.byte	0
+                        1618 .LDW_unq_4:
+                        1619 	.section	.debug_line
+00000259 000502         1620 	.byte	0,5,2
+0000025c 00000000*      1621 	.word	_pxPortInitialiseStack
+00000260 06             1622 	.byte	6
+00000261 03             1623 	.byte	3
+00000262 e600           1624 	.byte	230,0
+00000264 02             1625 	.byte	2
+00000265 00             1626 	.byte	0
+00000266 01             1627 	.byte	1
+00000267 13             1628 	.byte	19
+00000268 13             1629 	.byte	19
+00000269 13             1630 	.byte	19
+0000026a 13             1631 	.byte	19
+0000026b 13             1632 	.byte	19
+0000026c 13             1633 	.byte	19
+0000026d 13             1634 	.byte	19
+0000026e 000502         1635 	.byte	0,5,2
+00000271 00000000*      1636 	.word	.LDWlin1
+00000275 0b             1637 	.byte	11
+00000276 13             1638 	.byte	19
+00000277 000502         1639 	.byte	0,5,2
+0000027a 00000000*      1640 	.word	.LDWlin2
+0000027e 0b             1641 	.byte	11
+0000027f 13             1642 	.byte	19
+00000280 000502         1643 	.byte	0,5,2
+00000283 00000000*      1644 	.word	.LDWlin3
+00000287 0b             1645 	.byte	11
+00000288 13             1646 	.byte	19
+
+                                                                      Page 31
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000289 000502         1647 	.byte	0,5,2
+0000028c 00000000*      1648 	.word	.LDWlin4
+00000290 0b             1649 	.byte	11
+00000291 13             1650 	.byte	19
+00000292 000502         1651 	.byte	0,5,2
+00000295 00000000*      1652 	.word	.LDWlin5
+00000299 0b             1653 	.byte	11
+0000029a 13             1654 	.byte	19
+0000029b 000502         1655 	.byte	0,5,2
+0000029e 00000000*      1656 	.word	.LDWlin6
+000002a2 0b             1657 	.byte	11
+000002a3 13             1658 	.byte	19
+000002a4 000502         1659 	.byte	0,5,2
+000002a7 00000000*      1660 	.word	.LDWlin7
+000002ab 0b             1661 	.byte	11
+000002ac 13             1662 	.byte	19
+000002ad 000502         1663 	.byte	0,5,2
+000002b0 00000000*      1664 	.word	.LDWlin8
+000002b4 0b             1665 	.byte	11
+000002b5 13             1666 	.byte	19
+000002b6 000502         1667 	.byte	0,5,2
+000002b9 00000000*      1668 	.word	.LDWlin9
+000002bd 0b             1669 	.byte	11
+000002be 13             1670 	.byte	19
+000002bf 000502         1671 	.byte	0,5,2
+000002c2 00000000*      1672 	.word	.LDWlin10
+000002c6 0b             1673 	.byte	11
+000002c7 13             1674 	.byte	19
+000002c8 000502         1675 	.byte	0,5,2
+000002cb 00000000*      1676 	.word	.LDWlin11
+000002cf 0b             1677 	.byte	11
+000002d0 13             1678 	.byte	19
+000002d1 000502         1679 	.byte	0,5,2
+000002d4 00000000*      1680 	.word	.LDWlin12
+000002d8 0b             1681 	.byte	11
+000002d9 13             1682 	.byte	19
+000002da 000502         1683 	.byte	0,5,2
+000002dd 00000000*      1684 	.word	.LDWlin13
+000002e1 0b             1685 	.byte	11
+000002e2 13             1686 	.byte	19
+000002e3 000502         1687 	.byte	0,5,2
+000002e6 00000000*      1688 	.word	.LDWlin14
+000002ea 0b             1689 	.byte	11
+000002eb 13             1690 	.byte	19
+000002ec 000502         1691 	.byte	0,5,2
+000002ef 00000000*      1692 	.word	.LDWlin15
+000002f3 0b             1693 	.byte	11
+000002f4 13             1694 	.byte	19
+000002f5 000502         1695 	.byte	0,5,2
+000002f8 00000000*      1696 	.word	.LDWlin16
+000002fc 0b             1697 	.byte	11
+000002fd 13             1698 	.byte	19
+000002fe 000502         1699 	.byte	0,5,2
+00000301 00000000*      1700 	.word	.LDWlin17
+00000305 0b             1701 	.byte	11
+00000306 13             1702 	.byte	19
+00000307 000502         1703 	.byte	0,5,2
+0000030a 00000000*      1704 	.word	.LDWlin18
+0000030e 0b             1705 	.byte	11
+0000030f 13             1706 	.byte	19
+00000310 000502         1707 	.byte	0,5,2
+
+                                                                      Page 32
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000313 00000000*      1708 	.word	.LDWlin19
+00000317 0b             1709 	.byte	11
+00000318 13             1710 	.byte	19
+00000319 000502         1711 	.byte	0,5,2
+0000031c 00000000*      1712 	.word	.LDWlin20
+00000320 0b             1713 	.byte	11
+00000321 13             1714 	.byte	19
+00000322 000502         1715 	.byte	0,5,2
+00000325 00000000*      1716 	.word	.LDWlin21
+00000329 0b             1717 	.byte	11
+0000032a 13             1718 	.byte	19
+0000032b 000502         1719 	.byte	0,5,2
+0000032e 00000000*      1720 	.word	.LDWlin22
+00000332 0b             1721 	.byte	11
+00000333 13             1722 	.byte	19
+00000334 000502         1723 	.byte	0,5,2
+00000337 00000000*      1724 	.word	.LDWlin23
+0000033b 0b             1725 	.byte	11
+0000033c 13             1726 	.byte	19
+0000033d 000502         1727 	.byte	0,5,2
+00000340 00000000*      1728 	.word	.LDWlin24
+00000344 0b             1729 	.byte	11
+00000345 13             1730 	.byte	19
+00000346 13             1731 	.byte	19
+00000347 13             1732 	.byte	19
+00000348 000502         1733 	.byte	0,5,2
+0000034b 00000000*      1734 	.word	.LDWlin25
+0000034f 0b             1735 	.byte	11
+00000350 13             1736 	.byte	19
+00000351 000502         1737 	.byte	0,5,2
+00000354 00000000*      1738 	.word	.LDWlin26
+00000358 0b             1739 	.byte	11
+00000359 13             1740 	.byte	19
+0000035a 03             1741 	.byte	3
+0000035b 06             1742 	.byte	6
+0000035c 02             1743 	.byte	2
+0000035d 02             1744 	.byte	2
+0000035e 01             1745 	.byte	1
+0000035f 13             1746 	.byte	19
+00000360 06             1747 	.byte	6
+00000361 000502         1748 	.byte	0,5,2
+00000364 00000000*      1749 	.word	___ghs_eofn_pxPortInitialiseStack
+00000368 02             1750 	.byte	2
+00000369 00             1751 	.byte	0
+0000036a 000101         1752 	.byte	0,1,1
+                        1753 	.section	.debug_info
+                        1754 .LDW_3ad6c90:
+00000238 11             1755 	.byte	17
+00000239 7078546f704f   1756 	.strz	"pxTopOfStack"
+0000023f 66537461636b 
+00000245 00 
+00000246 66             1757 	.byte	102
+00000247 33             1758 	.byte	51
+00000248 01             1759 	.byte	1
+00000249 00000000*      1760 	.word	.LDW_3a94780
+0000024d 00             1761 	.byte	0
+0000024e 016e           1762 	.byte	1,110
+                        1763 
+                        1764 	.section	.debug_abbrev
+000000b6 11             1765 	.byte	17
+000000b7 05             1766 	.byte	5
+
+                                                                      Page 33
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+000000b8 00             1767 	.byte	0
+000000b9 0308           1768 	.byte	3,8
+000000bb 3b0f           1769 	.byte	59,15
+000000bd 390f           1770 	.byte	57,15
+000000bf 3a0f           1771 	.byte	58,15
+000000c1 4910           1772 	.byte	73,16
+000000c3 4b0c           1773 	.byte	75,12
+000000c5 020a           1774 	.byte	2,10
+000000c7 0000           1775 	.byte	0,0
+                        1776 
+                        1777 	.section	.debug_info
+                        1778 .LDW_3ad6ce8:
+00000250 11             1779 	.byte	17
+00000251 7078436f6465   1780 	.strz	"pxCode"
+00000257 00 
+00000258 66             1781 	.byte	102
+00000259 50             1782 	.byte	80
+0000025a 01             1783 	.byte	1
+0000025b 00000000*      1784 	.word	.LDW_3ad6ba0
+0000025f 00             1785 	.byte	0
+00000260 0157           1786 	.byte	1,87
+                        1787 
+                        1788 .LDW_3ad6d40:
+00000262 11             1789 	.byte	17
+00000263 707650617261   1790 	.strz	"pvParameters"
+00000269 6d6574657273 
+0000026f 00 
+00000270 66             1791 	.byte	102
+00000271 5f             1792 	.byte	95
+00000272 01             1793 	.byte	1
+00000273 00000000*      1794 	.word	.LDW_3a94898
+00000277 00             1795 	.byte	0
+00000278 0158           1796 	.byte	1,88
+                        1797 
+                        1798 .LDW_3aa6408:
+0000027a 1f             1799 	.byte	31
+0000027b 00000000*      1800 	.word	.LDW01
+0000027f 00000000*      1801 	.word	.LDW11
+                        1802 
+                        1803 	.section	.debug_abbrev
+000000c9 1f             1804 	.byte	31
+000000ca 0b             1805 	.byte	11
+000000cb 01             1806 	.byte	1
+000000cc 1101           1807 	.byte	17,1
+000000ce 1201           1808 	.byte	18,1
+000000d0 0000           1809 	.byte	0,0
+                        1810 
+                        1811 	.section	.debug_info
+00000283 00             1812 	.byte	0
+                        1813 
+00000284 00             1814 	.byte	0
+                        1815 
+                        1816 .LDW_3ad6df0:
+00000285 16             1817 	.byte	22
+00000286 78506f727453   1818 	.strz	"xPortStartScheduler"
+0000028c 746172745363 
+00000292 686564756c65 
+00000298 7200 
+0000029a ae01           1819 	.byte	174,1
+0000029c 0c             1820 	.byte	12
+0000029d 01             1821 	.byte	1
+
+                                                                      Page 34
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000029e 00000000*      1822 	.word	.LDW_3ad6d98
+000002a2 00000000*      1823 	.word	_xPortStartScheduler
+000002a6 00000000*      1824 	.word	___ghs_eofn_xPortStartScheduler
+000002aa 0153           1825 	.byte	1,83
+000002ac 8280808008     1826 	.byte	130,128,128,128,8
+000002b1 04             1827 	.byte	4
+000002b2 828004         1828 	.byte	130,128,4
+000002b5 04             1829 	.byte	4
+000002b6 00             1830 	.byte	0
+000002b7 00             1831 	.byte	0
+000002b8 00             1832 	.byte	0
+000002b9 01             1833 	.byte	1
+000002ba 01             1834 	.byte	1
+000002bb 00             1835 	.byte	0
+000002bc 01             1836 	.byte	1
+                        1837 
+                        1838 	.section	.debug_frame
+                        1839 .LDW_50068d0:
+000000a8 00000000*      1840 	.word	.LDW_unq_6-.LDW_unq_5
+                        1841 .LDW_unq_5:
+000000ac 00000000*      1842 	.word	.LDW_4fde9b0
+000000b0 00000000*      1843 	.word	_xPortStartScheduler
+000000b4 00000000*      1844 	.word	___ghs_eofn_xPortStartScheduler-_xPortStartScheduler
+000000b8 46             1845 	.byte	70
+000000b9 9f             1846 	.byte	159
+000000ba 00             1847 	.byte	0
+000000bb 01             1848 	.byte	1
+000000bc 00000000*      1849 	.word	.LDW31
+000000c0 44             1850 	.byte	68
+000000c1 df             1851 	.byte	223
+000000c2 00             1852 	.byte	0
+000000c3 00             1853 	.byte	0
+                        1854 .LDW_unq_6:
+                        1855 	.section	.debug_line
+0000036d 000502         1856 	.byte	0,5,2
+00000370 00000000*      1857 	.word	_xPortStartScheduler
+00000374 06             1858 	.byte	6
+00000375 03             1859 	.byte	3
+00000376 ae01           1860 	.byte	174,1
+00000378 02             1861 	.byte	2
+00000379 00             1862 	.byte	0
+0000037a 01             1863 	.byte	1
+0000037b 03             1864 	.byte	3
+0000037c 04             1865 	.byte	4
+0000037d 02             1866 	.byte	2
+0000037e 06             1867 	.byte	6
+0000037f 01             1868 	.byte	1
+00000380 000502         1869 	.byte	0,5,2
+00000383 00000000*      1870 	.word	.LDWlin28
+00000387 0d             1871 	.byte	13
+00000388 000502         1872 	.byte	0,5,2
+0000038b 00000000*      1873 	.word	.LDWlin29
+0000038f 0d             1874 	.byte	13
+00000390 13             1875 	.byte	19
+00000391 06             1876 	.byte	6
+00000392 000502         1877 	.byte	0,5,2
+00000395 00000000*      1878 	.word	___ghs_eofn_xPortStartScheduler
+00000399 02             1879 	.byte	2
+0000039a 00             1880 	.byte	0
+0000039b 000101         1881 	.byte	0,1,1
+                        1882 	.section	.debug_info
+
+                                                                      Page 35
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                        1883 .LDW_3aa6288:
+000002bd 1f             1884 	.byte	31
+000002be 00000000*      1885 	.word	.LDW21
+000002c2 00000000*      1886 	.word	.LDW31
+                        1887 
+000002c6 00             1888 	.byte	0
+                        1889 
+000002c7 00             1890 	.byte	0
+                        1891 
+                        1892 .LDW_3ad38e0:
+000002c8 15             1893 	.byte	21
+000002c9 76506f727445   1894 	.strz	"vPortEndScheduler"
+000002cf 6e6453636865 
+000002d5 64756c657200 
+000002db be01           1895 	.byte	190,1
+000002dd 06             1896 	.byte	6
+000002de 01             1897 	.byte	1
+000002df 00000000*      1898 	.word	_vPortEndScheduler
+000002e3 00000000*      1899 	.word	___ghs_eofn_vPortEndScheduler
+000002e7 0153           1900 	.byte	1,83
+000002e9 8280808008     1901 	.byte	130,128,128,128,8
+000002ee 04             1902 	.byte	4
+000002ef 828004         1903 	.byte	130,128,4
+000002f2 04             1904 	.byte	4
+000002f3 00             1905 	.byte	0
+000002f4 00             1906 	.byte	0
+000002f5 00             1907 	.byte	0
+000002f6 01             1908 	.byte	1
+000002f7 01             1909 	.byte	1
+000002f8 00             1910 	.byte	0
+000002f9 01             1911 	.byte	1
+                        1912 
+                        1913 	.section	.debug_abbrev
+000000d2 15             1914 	.byte	21
+000000d3 2e             1915 	.byte	46
+000000d4 01             1916 	.byte	1
+000000d5 0308           1917 	.byte	3,8
+000000d7 3b0f           1918 	.byte	59,15
+000000d9 390f           1919 	.byte	57,15
+000000db 3a0f           1920 	.byte	58,15
+000000dd 1101           1921 	.byte	17,1
+000000df 1201           1922 	.byte	18,1
+000000e1 400a           1923 	.byte	64,10
+000000e3 8341           1924 	.byte	131,65
+000000e5 0f             1925 	.byte	15
+000000e6 8741           1926 	.byte	135,65
+000000e8 0d             1927 	.byte	13
+000000e9 8541           1928 	.byte	133,65
+000000eb 0f             1929 	.byte	15
+000000ec 8641           1930 	.byte	134,65
+000000ee 0d             1931 	.byte	13
+000000ef 9241           1932 	.byte	146,65
+000000f1 0f             1933 	.byte	15
+000000f2 3c0c           1934 	.byte	60,12
+000000f4 200b           1935 	.byte	32,11
+000000f6 3f0c           1936 	.byte	63,12
+000000f8 320b           1937 	.byte	50,11
+000000fa 4c0b           1938 	.byte	76,11
+000000fc 270c           1939 	.byte	39,12
+000000fe 0000           1940 	.byte	0,0
+                        1941 
+
+                                                                      Page 36
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                        1942 	.section	.debug_frame
+                        1943 .LDW_5006c10:
+000000c4 00000000*      1944 	.word	.LDW_unq_8-.LDW_unq_7
+                        1945 .LDW_unq_7:
+000000c8 00000000*      1946 	.word	.LDW_4fde9b0
+000000cc 00000000*      1947 	.word	_vPortEndScheduler
+000000d0 00000000*      1948 	.word	___ghs_eofn_vPortEndScheduler-_vPortEndScheduler
+000000d4 46             1949 	.byte	70
+000000d5 9f             1950 	.byte	159
+000000d6 00             1951 	.byte	0
+000000d7 01             1952 	.byte	1
+000000d8 00000000*      1953 	.word	.LDW51
+000000dc 44             1954 	.byte	68
+000000dd df             1955 	.byte	223
+000000de 00             1956 	.byte	0
+000000df 00             1957 	.byte	0
+                        1958 .LDW_unq_8:
+                        1959 	.section	.debug_line
+0000039e 000502         1960 	.byte	0,5,2
+000003a1 00000000*      1961 	.word	_vPortEndScheduler
+000003a5 06             1962 	.byte	6
+000003a6 03             1963 	.byte	3
+000003a7 be01           1964 	.byte	190,1
+000003a9 02             1965 	.byte	2
+000003aa 00             1966 	.byte	0
+000003ab 01             1967 	.byte	1
+000003ac 03             1968 	.byte	3
+000003ad 07             1969 	.byte	7
+000003ae 02             1970 	.byte	2
+000003af 06             1971 	.byte	6
+000003b0 01             1972 	.byte	1
+000003b1 000502         1973 	.byte	0,5,2
+000003b4 00000000*      1974 	.word	.LDWlin31
+000003b8 0b             1975 	.byte	11
+000003b9 06             1976 	.byte	6
+000003ba 000502         1977 	.byte	0,5,2
+000003bd 00000000*      1978 	.word	___ghs_eofn_vPortEndScheduler
+000003c1 02             1979 	.byte	2
+000003c2 00             1980 	.byte	0
+000003c3 000101         1981 	.byte	0,1,1
+                        1982 	.section	.debug_info
+                        1983 .LDW_3aa6228:
+000002fa 1f             1984 	.byte	31
+000002fb 00000000*      1985 	.word	.LDW41
+000002ff 00000000*      1986 	.word	.LDW51
+                        1987 
+00000303 00             1988 	.byte	0
+                        1989 
+00000304 00             1990 	.byte	0
+                        1991 
+                        1992 .LDW_3ad3978:
+00000305 15             1993 	.byte	21
+00000306 707276536574   1994 	.strz	"prvSetupTimerInterrupt"
+0000030c 757054696d65 
+00000312 72496e746572 
+00000318 7275707400 
+0000031d cd01           1995 	.byte	205,1
+0000031f 0d             1996 	.byte	13
+00000320 01             1997 	.byte	1
+00000321 00000000*      1998 	.word	_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.
+00000325 00000000*      1999 	.word	___ghs_eofn_prvSetupTimerInterrupt
+
+                                                                      Page 37
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000329 0153           2000 	.byte	1,83
+0000032b 8280808008     2001 	.byte	130,128,128,128,8
+00000330 04             2002 	.byte	4
+00000331 828004         2003 	.byte	130,128,4
+00000334 04             2004 	.byte	4
+00000335 00             2005 	.byte	0
+00000336 00             2006 	.byte	0
+00000337 00             2007 	.byte	0
+00000338 00             2008 	.byte	0
+00000339 01             2009 	.byte	1
+0000033a 00             2010 	.byte	0
+0000033b 01             2011 	.byte	1
+                        2012 
+                        2013 	.section	.debug_frame
+                        2014 .LDW_5006f90:
+000000e0 00000000*      2015 	.word	.LDW_unq_a-.LDW_unq_9
+                        2016 .LDW_unq_9:
+000000e4 00000000*      2017 	.word	.LDW_4fde9b0
+000000e8 00000000*      2018 	.word	_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.
+000000ec 00000000*      2019 	.word	___ghs_eofn_prvSetupTimerInterrupt-_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.
+000000f0 46             2020 	.byte	70
+000000f1 9f             2021 	.byte	159
+000000f2 00             2022 	.byte	0
+000000f3 01             2023 	.byte	1
+000000f4 00000000*      2024 	.word	.LDW71
+000000f8 44             2025 	.byte	68
+000000f9 df             2026 	.byte	223
+000000fa 00             2027 	.byte	0
+000000fb 00             2028 	.byte	0
+                        2029 .LDW_unq_a:
+                        2030 	.section	.debug_line
+000003c6 000502         2031 	.byte	0,5,2
+000003c9 00000000*      2032 	.word	_prvSetupTimerInterrupt..D.3A.5Cworking.5CMy_workArea.5CRenesas_training.5CTraining.20Material.5CGHS.5CThomas.20Training.5CfreeRTOS_IVT_placement_from_ARRAY.5CR7F7016904.5Cobjs.5Cdebug.5Csrc_R7F7016904.5Cport_frt.
+000003cd 06             2033 	.byte	6
+000003ce 03             2034 	.byte	3
+000003cf cd01           2035 	.byte	205,1
+000003d1 02             2036 	.byte	2
+000003d2 00             2037 	.byte	0
+000003d3 01             2038 	.byte	1
+000003d4 03             2039 	.byte	3
+000003d5 0c             2040 	.byte	12
+000003d6 02             2041 	.byte	2
+000003d7 06             2042 	.byte	6
+000003d8 01             2043 	.byte	1
+000003d9 000502         2044 	.byte	0,5,2
+000003dc 00000000*      2045 	.word	.LDWlin33
+000003e0 0b             2046 	.byte	11
+000003e1 06             2047 	.byte	6
+000003e2 000502         2048 	.byte	0,5,2
+000003e5 00000000*      2049 	.word	___ghs_eofn_prvSetupTimerInterrupt
+000003e9 02             2050 	.byte	2
+000003ea 00             2051 	.byte	0
+000003eb 000101         2052 	.byte	0,1,1
+                        2053 	.section	.debug_info
+                        2054 .LDW_3aa6108:
+0000033c 1f             2055 	.byte	31
+0000033d 00000000*      2056 	.word	.LDW61
+00000341 00000000*      2057 	.word	.LDW71
+                        2058 
+00000345 00             2059 	.byte	0
+                        2060 
+
+                                                                      Page 38
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000346 00             2061 	.byte	0
+                        2062 
+                        2063 .LDW_3ad3a98:
+00000347 15             2064 	.byte	21
+00000348 76506f727453   2065 	.strz	"vPortStart"
+0000034e 7461727400 
+00000353 9b02           2066 	.byte	155,2
+00000355 06             2067 	.byte	6
+00000356 01             2068 	.byte	1
+00000357 00000000*      2069 	.word	_vPortStart
+0000035b 00000000*      2070 	.word	___ghs_eofn_vPortStart
+0000035f 0153           2071 	.byte	1,83
+00000361 02             2072 	.byte	2
+00000362 00             2073 	.byte	0
+00000363 808004         2074 	.byte	128,128,4
+00000366 00             2075 	.byte	0
+00000367 00             2076 	.byte	0
+00000368 00             2077 	.byte	0
+00000369 00             2078 	.byte	0
+0000036a 01             2079 	.byte	1
+0000036b 01             2080 	.byte	1
+0000036c 00             2081 	.byte	0
+0000036d 01             2082 	.byte	1
+                        2083 
+                        2084 	.section	.debug_frame
+                        2085 .LDW_5006a90:
+000000fc 00000000*      2086 	.word	.LDW_unq_c-.LDW_unq_b
+                        2087 .LDW_unq_b:
+00000100 00000000*      2088 	.word	.LDW_4fde9b0
+00000104 00000000*      2089 	.word	_vPortStart
+00000108 00000000*      2090 	.word	___ghs_eofn_vPortStart-_vPortStart
+0000010c 01             2091 	.byte	1
+0000010d 00000000*      2092 	.word	.LDW91
+00000111 00             2093 	.byte	0
+00000112 00             2094 	.byte	0
+00000113 00             2095 	.byte	0
+                        2096 .LDW_unq_c:
+                        2097 	.section	.debug_line
+000003ee 000502         2098 	.byte	0,5,2
+000003f1 00000000*      2099 	.word	_vPortStart
+000003f5 06             2100 	.byte	6
+000003f6 03             2101 	.byte	3
+000003f7 9c02           2102 	.byte	156,2
+000003f9 02             2103 	.byte	2
+000003fa 00             2104 	.byte	0
+000003fb 01             2105 	.byte	1
+000003fc 000502         2106 	.byte	0,5,2
+000003ff 00000000*      2107 	.word	.LDWlin35
+00000403 0b             2108 	.byte	11
+00000404 000502         2109 	.byte	0,5,2
+00000407 00000000*      2110 	.word	___ghs_eofn_vPortStart
+0000040b 03             2111 	.byte	3
+0000040c 0a             2112 	.byte	10
+0000040d 02             2113 	.byte	2
+0000040e 00             2114 	.byte	0
+0000040f 01             2115 	.byte	1
+00000410 000101         2116 	.byte	0,1,1
+                        2117 	.section	.debug_info
+                        2118 .LDW_3aa6138:
+0000036e 1f             2119 	.byte	31
+0000036f 00000000*      2120 	.word	.LDW81
+
+                                                                      Page 39
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000373 00000000*      2121 	.word	.LDW91
+                        2122 
+00000377 00             2123 	.byte	0
+                        2124 
+00000378 00             2125 	.byte	0
+                        2126 
+                        2127 .LDW_3ad3b30:
+00000379 15             2128 	.byte	21
+0000037a 76506f727459   2129 	.strz	"vPortYield"
+00000380 69656c6400 
+00000385 ad02           2130 	.byte	173,2
+00000387 06             2131 	.byte	6
+00000388 01             2132 	.byte	1
+00000389 00000000*      2133 	.word	_vPortYield
+0000038d 00000000*      2134 	.word	___ghs_eofn_vPortYield
+00000391 0153           2135 	.byte	1,83
+00000393 02             2136 	.byte	2
+00000394 00             2137 	.byte	0
+00000395 808004         2138 	.byte	128,128,4
+00000398 00             2139 	.byte	0
+00000399 00             2140 	.byte	0
+0000039a 00             2141 	.byte	0
+0000039b 00             2142 	.byte	0
+0000039c 01             2143 	.byte	1
+0000039d 01             2144 	.byte	1
+0000039e 00             2145 	.byte	0
+0000039f 01             2146 	.byte	1
+                        2147 
+                        2148 	.section	.debug_frame
+                        2149 .LDW_5006950:
+00000114 00000000*      2150 	.word	.LDW_unq_e-.LDW_unq_d
+                        2151 .LDW_unq_d:
+00000118 00000000*      2152 	.word	.LDW_4fde9b0
+0000011c 00000000*      2153 	.word	_vPortYield
+00000120 00000000*      2154 	.word	___ghs_eofn_vPortYield-_vPortYield
+00000124 01             2155 	.byte	1
+00000125 00000000*      2156 	.word	.LDW12
+00000129 00             2157 	.byte	0
+0000012a 00             2158 	.byte	0
+0000012b 00             2159 	.byte	0
+                        2160 .LDW_unq_e:
+                        2161 	.section	.debug_line
+00000413 000502         2162 	.byte	0,5,2
+00000416 00000000*      2163 	.word	_vPortYield
+0000041a 06             2164 	.byte	6
+0000041b 03             2165 	.byte	3
+0000041c ae02           2166 	.byte	174,2
+0000041e 02             2167 	.byte	2
+0000041f 00             2168 	.byte	0
+00000420 01             2169 	.byte	1
+00000421 000502         2170 	.byte	0,5,2
+00000424 00000000*      2171 	.word	.LDWlin37
+00000428 03             2172 	.byte	3
+00000429 07             2173 	.byte	7
+0000042a 02             2174 	.byte	2
+0000042b 00             2175 	.byte	0
+0000042c 01             2176 	.byte	1
+0000042d 000502         2177 	.byte	0,5,2
+00000430 00000000*      2178 	.word	.LDWlin38
+00000434 0b             2179 	.byte	11
+00000435 000502         2180 	.byte	0,5,2
+
+                                                                      Page 40
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000438 00000000*      2181 	.word	.LDWlin39
+0000043c 0c             2182 	.byte	12
+0000043d 000502         2183 	.byte	0,5,2
+00000440 00000000*      2184 	.word	.LDWlin40
+00000444 0b             2185 	.byte	11
+00000445 000502         2186 	.byte	0,5,2
+00000448 00000000*      2187 	.word	___ghs_eofn_vPortYield
+0000044c 03             2188 	.byte	3
+0000044d 09             2189 	.byte	9
+0000044e 02             2190 	.byte	2
+0000044f 00             2191 	.byte	0
+00000450 01             2192 	.byte	1
+00000451 000101         2193 	.byte	0,1,1
+                        2194 	.section	.debug_info
+                        2195 .LDW_3aa6168:
+000003a0 1f             2196 	.byte	31
+000003a1 00000000*      2197 	.word	.LDW02
+000003a5 00000000*      2198 	.word	.LDW12
+                        2199 
+000003a9 00             2200 	.byte	0
+                        2201 
+000003aa 00             2202 	.byte	0
+                        2203 
+                        2204 .LDW_3ad3bc8:
+000003ab 15             2205 	.byte	21
+000003ac 725f436f6e66   2206 	.strz	"r_Config_OSTM0_interrupt"
+000003b2 69675f4f5354 
+000003b8 4d305f696e74 
+000003be 657272757074 
+000003c4 00 
+000003c5 c602           2207 	.byte	198,2
+000003c7 06             2208 	.byte	6
+000003c8 01             2209 	.byte	1
+000003c9 00000000*      2210 	.word	_r_Config_OSTM0_interrupt
+000003cd 00000000*      2211 	.word	___ghs_eofn_r_Config_OSTM0_interrupt
+000003d1 0153           2212 	.byte	1,83
+000003d3 02             2213 	.byte	2
+000003d4 00             2214 	.byte	0
+000003d5 808004         2215 	.byte	128,128,4
+000003d8 00             2216 	.byte	0
+000003d9 00             2217 	.byte	0
+000003da 00             2218 	.byte	0
+000003db 00             2219 	.byte	0
+000003dc 01             2220 	.byte	1
+000003dd 01             2221 	.byte	1
+000003de 00             2222 	.byte	0
+000003df 01             2223 	.byte	1
+                        2224 
+                        2225 	.section	.debug_frame
+                        2226 .LDW_5071e50:
+0000012c 00000000*      2227 	.word	.LDW_unq_10-.LDW_unq_f
+                        2228 .LDW_unq_f:
+00000130 00000000*      2229 	.word	.LDW_4fde9b0
+00000134 00000000*      2230 	.word	_r_Config_OSTM0_interrupt
+00000138 00000000*      2231 	.word	___ghs_eofn_r_Config_OSTM0_interrupt-_r_Config_OSTM0_interrupt
+0000013c 01             2232 	.byte	1
+0000013d 00000000*      2233 	.word	.LDW32
+00000141 00             2234 	.byte	0
+00000142 00             2235 	.byte	0
+00000143 00             2236 	.byte	0
+                        2237 .LDW_unq_10:
+
+                                                                      Page 41
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+                        2238 	.section	.debug_line
+00000454 000502         2239 	.byte	0,5,2
+00000457 00000000*      2240 	.word	_r_Config_OSTM0_interrupt
+0000045b 06             2241 	.byte	6
+0000045c 03             2242 	.byte	3
+0000045d c702           2243 	.byte	199,2
+0000045f 02             2244 	.byte	2
+00000460 00             2245 	.byte	0
+00000461 01             2246 	.byte	1
+00000462 000502         2247 	.byte	0,5,2
+00000465 00000000*      2248 	.word	.LDWlin42
+00000469 03             2249 	.byte	3
+0000046a 07             2250 	.byte	7
+0000046b 02             2251 	.byte	2
+0000046c 00             2252 	.byte	0
+0000046d 01             2253 	.byte	1
+0000046e 000502         2254 	.byte	0,5,2
+00000471 00000000*      2255 	.word	.LDWlin43
+00000475 0c             2256 	.byte	12
+00000476 000502         2257 	.byte	0,5,2
+00000479 00000000*      2258 	.word	.LDWlin44
+0000047d 03             2259 	.byte	3
+0000047e 04             2260 	.byte	4
+0000047f 02             2261 	.byte	2
+00000480 00             2262 	.byte	0
+00000481 01             2263 	.byte	1
+00000482 000502         2264 	.byte	0,5,2
+00000485 00000000*      2265 	.word	.LDWlin45
+00000489 0c             2266 	.byte	12
+0000048a 000502         2267 	.byte	0,5,2
+0000048d 00000000*      2268 	.word	___ghs_eofn_r_Config_OSTM0_interrupt
+00000491 03             2269 	.byte	3
+00000492 08             2270 	.byte	8
+00000493 02             2271 	.byte	2
+00000494 00             2272 	.byte	0
+00000495 01             2273 	.byte	1
+00000496 000101         2274 	.byte	0,1,1
+                        2275 	.section	.debug_info
+                        2276 .LDW_3aa6198:
+000003e0 1f             2277 	.byte	31
+000003e1 00000000*      2278 	.word	.LDW22
+000003e5 00000000*      2279 	.word	.LDW32
+                        2280 
+000003e9 00             2281 	.byte	0
+                        2282 
+000003ea 00             2283 	.byte	0
+                        2284 
+000003eb 00             2285 	.byte	0
+                        2286 
+                        2287 	.section	.debug_line
+                        2288 .Ldw_line_end:
+                        2289 	.section	.debug_macinfo
+00000000 01             2290 	.byte	1
+00000001 00             2291 	.byte	0
+00000002 5f5f6768735f   2292 	.strz	"__ghs__ 1"
+00000008 5f203100 
+0000000c 01             2293 	.byte	1
+0000000d 00             2294 	.byte	0
+0000000e 5f5f53544443   2295 	.strz	"__STDC__ 1"
+00000014 5f5f203100 
+00000019 01             2296 	.byte	1
+
+                                                                      Page 42
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000001a 00             2297 	.byte	0
+0000001b 5f5f4544475f   2298 	.strz	"__EDG__ 1"
+00000021 5f203100 
+00000025 01             2299 	.byte	1
+00000026 00             2300 	.byte	0
+00000027 5f5f6768735f   2301 	.strz	"__ghs_max_pack_value 8"
+0000002d 6d61785f7061 
+00000033 636b5f76616c 
+00000039 7565203800 
+0000003e 01             2302 	.byte	1
+0000003f 00             2303 	.byte	0
+00000040 5f5f43484152   2304 	.strz	"__CHAR_BIT 8"
+00000046 5f4249542038 
+0000004c 00 
+0000004d 01             2305 	.byte	1
+0000004e 00             2306 	.byte	0
+0000004f 5f5f53485254   2307 	.strz	"__SHRT_BIT 16"
+00000055 5f4249542031 
+0000005b 3600 
+0000005d 01             2308 	.byte	1
+0000005e 00             2309 	.byte	0
+0000005f 5f5f494e545f   2310 	.strz	"__INT_BIT 32"
+00000065 424954203332 
+0000006b 00 
+0000006c 01             2311 	.byte	1
+0000006d 00             2312 	.byte	0
+0000006e 5f5f4c4f4e47   2313 	.strz	"__LONG_BIT 32"
+00000074 5f4249542033 
+0000007a 3200 
+0000007c 01             2314 	.byte	1
+0000007d 00             2315 	.byte	0
+0000007e 5f5f57434841   2316 	.strz	"__WCHAR_BIT 32"
+00000084 525f42495420 
+0000008a 333200 
+0000008d 01             2317 	.byte	1
+0000008e 00             2318 	.byte	0
+0000008f 5f5f5054525f   2319 	.strz	"__PTR_BIT 32"
+00000095 424954203332 
+0000009b 00 
+0000009c 01             2320 	.byte	1
+0000009d 00             2321 	.byte	0
+0000009e 5f5f4c4c4f4e   2322 	.strz	"__LLONG_BIT 64"
+000000a4 475f42495420 
+000000aa 363400 
+000000ad 01             2323 	.byte	1
+000000ae 00             2324 	.byte	0
+000000af 5f5f5245475f   2325 	.strz	"__REG_BIT 32"
+000000b5 424954203332 
+000000bb 00 
+000000bc 03             2326 	.byte	3
+000000bd 00             2327 	.byte	0
+000000be 01             2328 	.byte	1
+000000bf 03             2329 	.byte	3
+000000c0 47             2330 	.byte	71
+000000c1 02             2331 	.byte	2
+000000c2 01             2332 	.byte	1
+000000c3 47             2333 	.byte	71
+000000c4 494e435f4652   2334 	.strz	"INC_FREERTOS_H "
+000000ca 454552544f53 
+000000d0 5f482000 
+000000d4 03             2335 	.byte	3
+
+                                                                      Page 43
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+000000d5 4e             2336 	.byte	78
+000000d6 03             2337 	.byte	3
+000000d7 01             2338 	.byte	1
+000000d8 11             2339 	.byte	17
+000000d9 5f5354444445   2340 	.strz	"_STDDEF_H "
+000000df 465f482000 
+000000e4 03             2341 	.byte	3
+000000e5 13             2342 	.byte	19
+000000e6 04             2343 	.byte	4
+000000e7 04             2344 	.byte	4
+000000e8 03             2345 	.byte	3
+000000e9 14             2346 	.byte	20
+000000ea 05             2347 	.byte	5
+000000eb 01             2348 	.byte	1
+000000ec 26             2349 	.byte	38
+000000ed 5f5f57434841   2350 	.strz	"__WCHAR_TYPE__ long"
+000000f3 525f54595045 
+000000f9 5f5f206c6f6e 
+000000ff 6700 
+00000101 04             2351 	.byte	4
+00000102 04             2352 	.byte	4
+00000103 03             2353 	.byte	3
+00000104 5d             2354 	.byte	93
+00000105 06             2355 	.byte	6
+00000106 01             2356 	.byte	1
+00000107 9901           2357 	.byte	153,1
+00000109 5f5f5f464153   2358 	.strz	"___FAST32 int"
+0000010f 54333220696e 
+00000115 7400 
+00000117 01             2359 	.byte	1
+00000118 9a01           2360 	.byte	154,1
+0000011a 5f5f5f464153   2361 	.strz	"___FAST32_BIT __REG_BIT"
+00000120 5433325f4249 
+00000126 54205f5f5245 
+0000012c 475f42495400 
+00000132 01             2362 	.byte	1
+00000133 8502           2363 	.byte	133,2
+00000135 5f5f5f494c34   2364 	.strz	"___IL48BIT __LLONG_BIT"
+0000013b 38424954205f 
+00000141 5f4c4c4f4e47 
+00000147 5f42495400 
+0000014c 01             2365 	.byte	1
+0000014d a502           2366 	.byte	165,2
+0000014f 5f5f5f494c36   2367 	.strz	"___IL64BIT __LLONG_BIT"
+00000155 34424954205f 
+0000015b 5f4c4c4f4e47 
+00000161 5f42495400 
+00000166 01             2368 	.byte	1
+00000167 9003           2369 	.byte	144,3
+00000169 5f5f5f494d42   2370 	.strz	"___IMBIT __LLONG_BIT"
+0000016f 4954205f5f4c 
+00000175 4c4f4e475f42 
+0000017b 495400 
+0000017e 04             2371 	.byte	4
+0000017f 03             2372 	.byte	3
+00000180 64             2373 	.byte	100
+00000181 07             2374 	.byte	7
+00000182 01             2375 	.byte	1
+00000183 53             2376 	.byte	83
+00000184 636f6e666967   2377 	.strz	"configUSE_PREEMPTION 1"
+0000018a 5553455f5052 
+
+                                                                      Page 44
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000190 45454d505449 
+00000196 4f4e203100 
+0000019b 01             2378 	.byte	1
+0000019c 54             2379 	.byte	84
+0000019d 636f6e666967   2380 	.strz	"configUSE_IDLE_HOOK 1"
+000001a3 5553455f4944 
+000001a9 4c455f484f4f 
+000001af 4b203100 
+000001b3 01             2381 	.byte	1
+000001b4 55             2382 	.byte	85
+000001b5 636f6e666967   2383 	.strz	"configUSE_TICK_HOOK 0"
+000001bb 5553455f5449 
+000001c1 434b5f484f4f 
+000001c7 4b203000 
+000001cb 01             2384 	.byte	1
+000001cc 57             2385 	.byte	87
+000001cd 636f6e666967   2386 	.strz	"configMAX_PRIORITIES ( 4 )"
+000001d3 4d41585f5052 
+000001d9 494f52495449 
+000001df 455320282034 
+000001e5 202900 
+000001e8 01             2387 	.byte	1
+000001e9 58             2388 	.byte	88
+000001ea 636f6e666967   2389 	.strz	"configMINIMAL_STACK_SIZE ( ( unsigned short ) 1000 )"
+000001f0 4d494e494d41 
+000001f6 4c5f53544143 
+000001fc 4b5f53495a45 
+00000202 202820282075 
+00000208 6e7369676e65 
+0000020e 642073686f72 
+00000214 742029203130 
+0000021a 3030202900 
+0000021f 01             2390 	.byte	1
+00000220 5e             2391 	.byte	94
+00000221 636f6e666967   2392 	.strz	"configMAX_TASK_NAME_LEN ( 10 )"
+00000227 4d41585f5441 
+0000022d 534b5f4e414d 
+00000233 455f4c454e20 
+00000239 282031302029 
+0000023f 00 
+00000240 01             2393 	.byte	1
+00000241 5f             2394 	.byte	95
+00000242 636f6e666967   2395 	.strz	"configUSE_TRACE_FACILITY 1"
+00000248 5553455f5452 
+0000024e 4143455f4641 
+00000254 43494c495459 
+0000025a 203100 
+0000025d 01             2396 	.byte	1
+0000025e 61             2397 	.byte	97
+0000025f 636f6e666967   2398 	.strz	"configUSE_STATS_FORMATTING_FUNCTIONS 1"
+00000265 5553455f5354 
+0000026b 4154535f464f 
+00000271 524d41545449 
+00000277 4e475f46554e 
+0000027d 4354494f4e53 
+00000283 203100 
+00000286 01             2399 	.byte	1
+00000287 63             2400 	.byte	99
+00000288 636f6e666967   2401 	.strz	"configUSE_16_BIT_TICKS 0"
+0000028e 5553455f3136 
+00000294 5f4249545f54 
+
+                                                                      Page 45
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000029a 49434b532030 
+000002a0 00 
+000002a1 01             2402 	.byte	1
+000002a2 64             2403 	.byte	100
+000002a3 636f6e666967   2404 	.strz	"configIDLE_SHOULD_YIELD 0"
+000002a9 49444c455f53 
+000002af 484f554c445f 
+000002b5 5949454c4420 
+000002bb 3000 
+000002bd 01             2405 	.byte	1
+000002be 66             2406 	.byte	102
+000002bf 636f6e666967   2407 	.strz	"configUSE_MUTEXES 1"
+000002c5 5553455f4d55 
+000002cb 544558455320 
+000002d1 3100 
+000002d3 01             2408 	.byte	1
+000002d4 67             2409 	.byte	103
+000002d5 636f6e666967   2410 	.strz	"configCHECK_FOR_STACK_OVERFLOW 2"
+000002db 434845434b5f 
+000002e1 464f525f5354 
+000002e7 41434b5f4f56 
+000002ed 4552464c4f57 
+000002f3 203200 
+000002f6 01             2411 	.byte	1
+000002f7 68             2412 	.byte	104
+000002f8 636f6e666967   2413 	.strz	"configUSE_RECURSIVE_MUTEXES 1"
+000002fe 5553455f5245 
+00000304 435552534956 
+0000030a 455f4d555445 
+00000310 584553203100 
+00000316 01             2414 	.byte	1
+00000317 69             2415 	.byte	105
+00000318 636f6e666967   2416 	.strz	"configQUEUE_REGISTRY_SIZE 0"
+0000031e 51554555455f 
+00000324 524547495354 
+0000032a 52595f53495a 
+00000330 45203000 
+00000334 01             2417 	.byte	1
+00000335 6a             2418 	.byte	106
+00000336 636f6e666967   2419 	.strz	"configUSE_COUNTING_SEMAPHORES 0"
+0000033c 5553455f434f 
+00000342 554e54494e47 
+00000348 5f53454d4150 
+0000034e 484f52455320 
+00000354 3000 
+00000356 01             2420 	.byte	1
+00000357 6c             2421 	.byte	108
+00000358 636f6e666967   2422 	.strz	"configUSE_MALLOC_FAILED_HOOK 1"
+0000035e 5553455f4d41 
+00000364 4c4c4f435f46 
+0000036a 41494c45445f 
+00000370 484f4f4b2031 
+00000376 00 
+00000377 01             2423 	.byte	1
+00000378 6f             2424 	.byte	111
+00000379 636f6e666967   2425 	.strz	"configUSE_CO_ROUTINES 0"
+0000037f 5553455f434f 
+00000385 5f524f555449 
+0000038b 4e4553203000 
+00000391 01             2426 	.byte	1
+00000392 72             2427 	.byte	114
+
+                                                                      Page 46
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000393 636f6e666967   2428 	.strz	"configENABLE_BACKWARD_COMPATIBILITY 1"
+00000399 454e41424c45 
+0000039f 5f4241434b57 
+000003a5 4152445f434f 
+000003ab 4d5041544942 
+000003b1 494c49545920 
+000003b7 3100 
+000003b9 01             2429 	.byte	1
+000003ba 7b             2430 	.byte	123
+000003bb 636f6e666967   2431 	.strz	"configASSERT(x) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }"
+000003c1 415353455254 
+000003c7 287829206966 
+000003cd 282028207820 
+000003d3 29203d3d2030 
+000003d9 2029207b2074 
+000003df 61736b444953 
+000003e5 41424c455f49 
+000003eb 4e5445525255 
+000003f1 50545328293b 
+000003f7 20666f722820 
+000003fd 3b3b20293b20 
+00000403 7d00 
+00000405 01             2432 	.byte	1
+00000406 8001           2433 	.byte	128,1
+00000408 494e434c5544   2434 	.strz	"INCLUDE_vTaskPrioritySet 1"
+0000040e 455f76546173 
+00000414 6b5072696f72 
+0000041a 697479536574 
+00000420 203100 
+00000423 01             2435 	.byte	1
+00000424 8101           2436 	.byte	129,1
+00000426 494e434c5544   2437 	.strz	"INCLUDE_uxTaskPriorityGet 1"
+0000042c 455f75785461 
+00000432 736b5072696f 
+00000438 726974794765 
+0000043e 74203100 
+00000442 01             2438 	.byte	1
+00000443 8201           2439 	.byte	130,1
+00000445 494e434c5544   2440 	.strz	"INCLUDE_vTaskDelete 1"
+0000044b 455f76546173 
+00000451 6b44656c6574 
+00000457 65203100 
+0000045b 01             2441 	.byte	1
+0000045c 8401           2442 	.byte	132,1
+0000045e 494e434c5544   2443 	.strz	"INCLUDE_vTaskSuspend 1"
+00000464 455f76546173 
+0000046a 6b5375737065 
+00000470 6e64203100 
+00000475 01             2444 	.byte	1
+00000476 8501           2445 	.byte	133,1
+00000478 494e434c5544   2446 	.strz	"INCLUDE_vTaskDelayUntil 1"
+0000047e 455f76546173 
+00000484 6b44656c6179 
+0000048a 556e74696c20 
+00000490 3100 
+00000492 01             2447 	.byte	1
+00000493 8601           2448 	.byte	134,1
+00000495 494e434c5544   2449 	.strz	"INCLUDE_vTaskDelay 1"
+0000049b 455f76546173 
+000004a1 6b44656c6179 
+000004a7 203100 
+
+                                                                      Page 47
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+000004aa 04             2450 	.byte	4
+000004ab 03             2451 	.byte	3
+000004ac 67             2452 	.byte	103
+000004ad 08             2453 	.byte	8
+000004ae 01             2454 	.byte	1
+000004af 57             2455 	.byte	87
+000004b0 706454525545   2456 	.strz	"pdTRUE ( ( BaseType_t ) 1 )"
+000004b6 202820282042 
+000004bc 617365547970 
+000004c2 655f74202920 
+000004c8 31202900 
+000004cc 01             2457 	.byte	1
+000004cd 65             2458 	.byte	101
+000004ce 636f6e666967   2459 	.strz	"configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES 0"
+000004d4 5553455f4c49 
+000004da 53545f444154 
+000004e0 415f494e5445 
+000004e6 47524954595f 
+000004ec 434845434b5f 
+000004f2 425954455320 
+000004f8 3000 
+000004fa 04             2460 	.byte	4
+000004fb 03             2461 	.byte	3
+000004fc 6a             2462 	.byte	106
+000004fd 09             2463 	.byte	9
+000004fe 03             2464 	.byte	3
+000004ff 57             2465 	.byte	87
+00000500 0a             2466 	.byte	10
+00000501 04             2467 	.byte	4
+00000502 03             2468 	.byte	3
+00000503 5e             2469 	.byte	94
+00000504 0b             2470 	.byte	11
+00000505 01             2471 	.byte	1
+00000506 33             2472 	.byte	51
+00000507 706f72745354   2473 	.strz	"portSTACK_TYPE unsigned int"
+0000050d 41434b5f5459 
+00000513 504520756e73 
+00000519 69676e656420 
+0000051f 696e7400 
+00000523 01             2474 	.byte	1
+00000524 4e             2475 	.byte	78
+00000525 706f72744e4f   2476 	.strz	"portNO_CRITICAL_SECTION_NESTING ( ( UBaseType_t ) 0 )"
+0000052b 5f4352495449 
+00000531 43414c5f5345 
+00000537 4354494f4e5f 
+0000053d 4e455354494e 
+00000543 472028202820 
+00000549 554261736554 
+0000054f 7970655f7420 
+00000555 292030202900 
+0000055b 01             2477 	.byte	1
+0000055c 7f             2478 	.byte	127
+0000055d 706f72744259   2479 	.strz	"portBYTE_ALIGNMENT 4"
+00000563 54455f414c49 
+00000569 474e4d454e54 
+0000056f 203400 
+00000572 01             2480 	.byte	1
+00000573 8001           2481 	.byte	128,1
+00000575 706f72745354   2482 	.strz	"portSTACK_GROWTH ( -1 )"
+0000057b 41434b5f4752 
+00000581 4f5754482028 
+
+                                                                      Page 48
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000587 202d31202900 
+0000058d 04             2483 	.byte	4
+0000058e 01             2484 	.byte	1
+0000058f 6e             2485 	.byte	110
+00000590 706f72744259   2486 	.strz	"portBYTE_ALIGNMENT_MASK ( 0x0003 )"
+00000596 54455f414c49 
+0000059c 474e4d454e54 
+000005a2 5f4d41534b20 
+000005a8 282030783030 
+000005ae 3033202900 
+000005b3 01             2487 	.byte	1
+000005b4 7e             2488 	.byte	126
+000005b5 706f72744e55   2489 	.strz	"portNUM_CONFIGURABLE_REGIONS 1"
+000005bb 4d5f434f4e46 
+000005c1 494755524142 
+000005c7 4c455f524547 
+000005cd 494f4e532031 
+000005d3 00 
+000005d4 03             2490 	.byte	3
+000005d5 8501           2491 	.byte	133,1
+000005d7 0c             2492 	.byte	12
+000005d8 01             2493 	.byte	1
+000005d9 c101           2494 	.byte	193,1
+000005db 50524956494c   2495 	.strz	"PRIVILEGED_FUNCTION "
+000005e1 454745445f46 
+000005e7 554e4354494f 
+000005ed 4e2000 
+000005f0 01             2496 	.byte	1
+000005f1 c301           2497 	.byte	195,1
+000005f3 706f72745553   2498 	.strz	"portUSING_MPU_WRAPPERS 0"
+000005f9 494e475f4d50 
+000005ff 555f57524150 
+00000605 504552532030 
+0000060b 00 
+0000060c 04             2499 	.byte	4
+0000060d 04             2500 	.byte	4
+0000060e 01             2501 	.byte	1
+0000060f 6e             2502 	.byte	110
+00000610 636f6e666967   2503 	.strz	"configUSE_NEWLIB_REENTRANT 0"
+00000616 5553455f4e45 
+0000061c 574c49425f52 
+00000622 45454e545241 
+00000628 4e54203000 
+0000062d 01             2504 	.byte	1
+0000062e ea01           2505 	.byte	234,1
+00000630 636f6e666967   2506 	.strz	"configUSE_APPLICATION_TASK_TAG 0"
+00000636 5553455f4150 
+0000063c 504c49434154 
+00000642 494f4e5f5441 
+00000648 534b5f544147 
+0000064e 203000 
+00000651 01             2507 	.byte	1
+00000652 ee01           2508 	.byte	238,1
+00000654 636f6e666967   2509 	.strz	"configNUM_THREAD_LOCAL_STORAGE_POINTERS 0"
+0000065a 4e554d5f5448 
+00000660 524541445f4c 
+00000666 4f43414c5f53 
+0000066c 544f52414745 
+00000672 5f504f494e54 
+00000678 455253203000 
+0000067e 01             2510 	.byte	1
+
+                                                                      Page 49
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000067f fa01           2511 	.byte	250,1
+00000681 636f6e666967   2512 	.strz	"configUSE_TIMERS 0"
+00000687 5553455f5449 
+0000068d 4d4552532030 
+00000693 00 
+00000694 01             2513 	.byte	1
+00000695 8202           2514 	.byte	130,2
+00000697 636f6e666967   2515 	.strz	"configUSE_ALTERNATIVE_API 0"
+0000069d 5553455f414c 
+000006a3 5445524e4154 
+000006a9 4956455f4150 
+000006af 49203000 
+000006b3 01             2516 	.byte	1
+000006b4 8602           2517 	.byte	134,2
+000006b6 706f72744352   2518 	.strz	"portCRITICAL_NESTING_IN_TCB 0"
+000006bc 49544943414c 
+000006c2 5f4e45535449 
+000006c8 4e475f494e5f 
+000006ce 544342203000 
+000006d4 01             2519 	.byte	1
+000006d5 9805           2520 	.byte	152,5
+000006d7 636f6e666967   2521 	.strz	"configGENERATE_RUN_TIME_STATS 0"
+000006dd 47454e455241 
+000006e3 54455f52554e 
+000006e9 5f54494d455f 
+000006ef 535441545320 
+000006f5 3000 
+000006f7 01             2522 	.byte	1
+000006f8 be05           2523 	.byte	190,5
+000006fa 636f6e666967   2524 	.strz	"configEXPECTED_IDLE_TIME_BEFORE_SLEEP 2"
+00000700 455850454354 
+00000706 45445f49444c 
+0000070c 455f54494d45 
+00000712 5f4245464f52 
+00000718 455f534c4545 
+0000071e 50203200 
+00000722 01             2525 	.byte	1
+00000723 c605           2526 	.byte	198,5
+00000725 636f6e666967   2527 	.strz	"configUSE_TICKLESS_IDLE 0"
+0000072b 5553455f5449 
+00000731 434b4c455353 
+00000737 5f49444c4520 
+0000073d 3000 
+0000073f 01             2528 	.byte	1
+00000740 d205           2529 	.byte	210,5
+00000742 636f6e666967   2530 	.strz	"configUSE_QUEUE_SETS 0"
+00000748 5553455f5155 
+0000074e 4555455f5345 
+00000754 5453203000 
+00000759 01             2531 	.byte	1
+0000075a 8206           2532 	.byte	130,6
+0000075c 636f6e666967   2533 	.strz	"configUSE_TASK_NOTIFICATIONS 1"
+00000762 5553455f5441 
+00000768 534b5f4e4f54 
+0000076e 494649434154 
+00000774 494f4e532031 
+0000077a 00 
+0000077b 01             2534 	.byte	1
+0000077c 8606           2535 	.byte	134,6
+0000077e 706f72745449   2536 	.strz	"portTICK_TYPE_IS_ATOMIC 0"
+00000784 434b5f545950 
+
+                                                                      Page 50
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+0000078a 455f49535f41 
+00000790 544f4d494320 
+00000796 3000 
+00000798 01             2537 	.byte	1
+00000799 8b06           2538 	.byte	139,6
+0000079b 636f6e666967   2539 	.strz	"configSUPPORT_STATIC_ALLOCATION 0"
+000007a1 535550504f52 
+000007a7 545f53544154 
+000007ad 49435f414c4c 
+000007b3 4f434154494f 
+000007b9 4e203000 
+000007bd 01             2540 	.byte	1
+000007be 9006           2541 	.byte	144,6
+000007c0 636f6e666967   2542 	.strz	"configSUPPORT_DYNAMIC_ALLOCATION 1"
+000007c6 535550504f52 
+000007cc 545f44594e41 
+000007d2 4d49435f414c 
+000007d8 4c4f43415449 
+000007de 4f4e203100 
+000007e3 04             2543 	.byte	4
+000007e4 03             2544 	.byte	3
+000007e5 48             2545 	.byte	72
+000007e6 0d             2546 	.byte	13
+000007e7 03             2547 	.byte	3
+000007e8 4e             2548 	.byte	78
+000007e9 0e             2549 	.byte	14
+000007ea 01             2550 	.byte	1
+000007eb 8601           2551 	.byte	134,1
+000007ed 636f6e666967   2552 	.strz	"configLIST_VOLATILE "
+000007f3 4c4953545f56 
+000007f9 4f4c4154494c 
+000007ff 452000 
+00000802 01             2553 	.byte	1
+00000803 9401           2554 	.byte	148,1
+00000805 6c6973744649   2555 	.strz	"listFIRST_LIST_ITEM_INTEGRITY_CHECK_VALUE "
+0000080b 5253545f4c49 
+00000811 53545f495445 
+00000817 4d5f494e5445 
+0000081d 47524954595f 
+00000823 434845434b5f 
+00000829 56414c554520 
+0000082f 00 
+00000830 01             2556 	.byte	1
+00000831 9501           2557 	.byte	149,1
+00000833 6c6973745345   2558 	.strz	"listSECOND_LIST_ITEM_INTEGRITY_CHECK_VALUE "
+00000839 434f4e445f4c 
+0000083f 4953545f4954 
+00000845 454d5f494e54 
+0000084b 454752495459 
+00000851 5f434845434b 
+00000857 5f56414c5545 
+0000085d 2000 
+0000085f 01             2559 	.byte	1
+00000860 9601           2560 	.byte	150,1
+00000862 6c6973744649   2561 	.strz	"listFIRST_LIST_INTEGRITY_CHECK_VALUE "
+00000868 5253545f4c49 
+0000086e 53545f494e54 
+00000874 454752495459 
+0000087a 5f434845434b 
+00000880 5f56414c5545 
+00000886 2000 
+
+                                                                      Page 51
+                                                              C:\Users\a5085281\AppData\Local\Temp\gh_00006i01.s
+00000888 01             2562 	.byte	1
+00000889 9701           2563 	.byte	151,1
+0000088b 6c6973745345   2564 	.strz	"listSECOND_LIST_INTEGRITY_CHECK_VALUE "
+00000891 434f4e445f4c 
+00000897 4953545f494e 
+0000089d 544547524954 
+000008a3 595f43484543 
+000008a9 4b5f56414c55 
+000008af 452000 
+000008b2 04             2565 	.byte	4
+000008b3 04             2566 	.byte	4
+000008b4 03             2567 	.byte	3
+000008b5 4b             2568 	.byte	75
+000008b6 0f             2569 	.byte	15
+000008b7 03             2570 	.byte	3
+000008b8 21             2571 	.byte	33
+000008b9 10             2572 	.byte	16
+000008ba 04             2573 	.byte	4
+000008bb 04             2574 	.byte	4
+000008bc 01             2575 	.byte	1
+000008bd 4e             2576 	.byte	78
+000008be 706f7274494e   2577 	.strz	"portINITIAL_CRITICAL_NESTING (( StackType_t )10)"
+000008c4 495449414c5f 
+000008ca 435249544943 
+000008d0 414c5f4e4553 
+000008d6 54494e472028 
+000008dc 282053746163 
+000008e2 6b547970655f 
+000008e8 742029313029 
+000008ee 00 
+000008ef 01             2578 	.byte	1
+000008f0 51             2579 	.byte	81
+000008f1 706f72745053   2580 	.strz	"portPSW (( StackType_t )0x00000000)"
+000008f7 572028282053 
+000008fd 7461636b5479 
+00000903 70655f742029 
+00000909 307830303030 
+0000090f 303030302900 
+00000915 04             2581 	.byte	4
+00000916 00             2582 	.byte	0
+                        2583 	.section	.debug_abbrev
+00000100 00             2584 	.byte	0
+                        2585 	.section	.debug_info
+                        2586 .Ldw_end:
+                        2587 .rh850_flags REGMODE32,DATA_ALIGN8,GP_FIX,EP_NONFIX,TP_FIX,REG2_RESERVE,G3KH,SDA_EXTRA_REGS_0

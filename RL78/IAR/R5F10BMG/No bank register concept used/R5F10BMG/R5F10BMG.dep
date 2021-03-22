@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>2</fileVersion>
+    <fileChecksum>3154684670</fileChecksum>
+    <configuration>
+        <name>Debug</name>
+        <outputs>
+            <file>$PROJ_DIR$\Source\RTOS\include\task.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\deprecated_definitions.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_port.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\list.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\mpu_wrappers.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_cgc.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\portable.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\projdefs.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\queue.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_macrodriver.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_timer_user.c</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\semphr.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\FreeRTOS.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\stack_macros.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_cgc.c</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_userdefine.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_wdt_user.c</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\event_groups.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\FreeRTOSConfig.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_port_user.c</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_timer.c</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_cgc_user.c</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_timer.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_wdt.h</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_main.c</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_wdt.c</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_cg_port.c</file>
+            <file>$PROJ_DIR$\Source\applilet3_src\r_systeminit.c</file>
+            <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\portable\IAR\port.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_timer.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_port_user.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\heap_1.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\portable\IAR\Core.c</file>
+            <file>$PROJ_DIR$\Source\RTOS\event_groups.c</file>
+            <file>$PROJ_DIR$\Source\RTOS\queue.c</file>
+            <file>$PROJ_DIR$\Source\RTOS\include\timers.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\tasks.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_wdt.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\port.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_timer_user.pbi</file>
+            <file>$PROJ_DIR$\Debug\Exe\R5F10BMG.out</file>
+            <file>$TOOLKIT_DIR$\inc\DLib_Product.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\heap_1.pbi</file>
+            <file>$PROJ_DIR$\Source\RTOS\portable\MemMang\heap_1.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_wdt_user.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_main.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\portable\IAR\portmacro.h</file>
+            <file>$PROJ_DIR$\Source\RTOS\portable\IAR\interrupt.asm</file>
+            <file>$PROJ_DIR$\Source\RTOS\tasks.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_systeminit.pbi</file>
+            <file>$PROJ_DIR$\Source\RTOS\list.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_port.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_systeminit.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_port.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_main.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\port.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\Core.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\list.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_cgc.o</file>
+            <file>$TOOLKIT_DIR$\inc\ior5f10bmg.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\tasks.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\queue.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_wdt_user.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+            <file>$TOOLKIT_DIR$\lib\dlrl78fnf23n.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\list.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\Core.o</file>
+            <file>$TOOLKIT_DIR$\inc\ior5f10bmg_ext.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_timer.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\event_groups.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_wdt.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_timer_user.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_port_user.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\R5F10BMG.pbd</file>
+            <file>$PROJ_DIR$\Debug\Obj\interrupt.o</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_cgc_user.o</file>
+            <file>$PROJ_DIR$\Debug\Exe\R5F10BMG.srec</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_cgc_user.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\event_groups.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\queue.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\r_cg_cgc.pbi</file>
+            <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
+        </outputs>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 42</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_timer_user.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 77</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 41</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 28 73 68 43 33 22 64 69 49 70 9 15 48 57</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_cgc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 63</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 86</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 70 73 5 64 69 49 28 68 43 33 9 15 48 57</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_wdt_user.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 67</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 46</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 28 69 64 49 70 73 68 43 33 9 48 57 23 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_port_user.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 31</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 78</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 73 43 33 28 68 2 64 69 49 70 9 15 48 57</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_timer.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 30</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 74</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_cgc_user.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 81</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 83</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 70 73 5 64 69 49 28 68 43 33 9 15 48 57</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 47</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 59</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 11 23 73 18 3 2 0 28 48 57 7 37 5 22 12 8 17 64 69 49 33 50 4 9 15 68 70 43 88 6 87 1</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_wdt.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 76</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 39</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 28 69 64 49 70 73 68 43 33 9 48 57 23 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_cg_port.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 58</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 55</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 73 43 33 28 68 2 64 69 49 70 9 15 48 57</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\applilet3_src\r_systeminit.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 56</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 53</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 43 33 2 73 28 68 5 22 64 69 49 70 9 23 48 57 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\portable\IAR\port.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 40</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 60</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 68 48 33 0 49 73 3 12 22 28 87 57 18 7 50 4 89 70 43 9 88 6 64 69 1</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\portable\IAR\Core.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 72</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 61</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\event_groups.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 75</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 84</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 33 37 28 49 1 12 87 48 57 18 7 69 0 17 68 70 43 9 88 6 64 89 73 50 4 3</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\queue.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 66</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 85</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 33 0 49 73 3 28 90 12 8 87 48 57 18 7 50 4 89 68 70 43 9 88 6 64 69 1</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\R5F10BMG.out</name>
+            <outputs>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 82</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\portable\MemMang\heap_1.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 32</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 44</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 1 68 48 28 6 43 33 88 64 49 12 70 9 18 69 87 0 57 7 73 89 50 4 3</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\portable\IAR\interrupt.asm</name>
+            <outputs>
+                <tool>
+                    <name>ARL78</name>
+                    <file> 80</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\tasks.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 38</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 65</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 70 91 28 18 69 87 0 33 9 1 13 48 68 43 88 6 64 49 90 12 37 57 7 73 50 4 3 89 92</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Source\RTOS\list.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCRL78</name>
+                    <file> 71</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 62</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 68 48 28 6 43 33 88 64 49 12 70 9 18 69 3 87 57 7 73 50 4 89 1</file>
+                </tool>
+            </inputs>
+        </file>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs>
+            <file>$PROJ_DIR$\Release\Exe\R5F10BMG.srec</file>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\Release\Exe\R5F10BMG.out</file>
+            <file>$PROJ_DIR$\Release\Obj\main.pbi</file>
+        </outputs>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 2</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 3</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Release\Exe\R5F10BMG.out</name>
+            <outputs>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 0</file>
+                </tool>
+            </outputs>
+        </file>
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>ILINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>

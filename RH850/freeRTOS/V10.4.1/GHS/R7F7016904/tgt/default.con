@@ -1,0 +1,8 @@
+target_connection.0.type="Multi-core Simulator for V850 and RH850 (simrh850)"
+target_connection.0.short_type="simrh850"
+target_connection.0.args="   "
+target_connection.0.title="Generic-V850/RH850 RH850G3KH with Multi-core Simulator for V850 and RH850 (simrh850)"
+target_connection.0.command="simrh850    "
+target_connection.0.logfile="simrh850"
+target_connection.0.log=""
+target_connection.0.sane="no"

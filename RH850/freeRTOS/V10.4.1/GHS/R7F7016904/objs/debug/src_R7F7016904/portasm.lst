@@ -1,0 +1,518 @@
+                                                                      Page 1
+                                                              src\RTOS\portable\GHS\portasm.asm
+Command Line: C:\ghs\comp_201715\ease850.exe -w -elf -b0 -I.\tgt -I.\src -I.\src\can -I.\src\clock -I.\src\external interrupt -I.\src\port -I.\src\TAUB\Interval_timer -I.\src\RTOS -I.\src\RTOS\include -I.\src\RTOS\portable -I.\src\RTOS\portable\GHS -I.\src\RTOS\portable\GHS\MemMang -I.\src\Config_OSTM0 -IC:\ghs\comp_201715\lib\rh850 -cg_underscore -cpu=rh850g3kh -nofpu_double -no_v850_simd -dbo=D:\working\My_workArea\Renesas_training\Training Material\GHS\Thomas Training\freeRTOS_IVT_placement_from_ARRAY\R7F7016904\objs\debug\src_R7F7016904\portasm.dbo -dwarf2 --gh_oname=objs\debug\src_R7F7016904\portasm.o --gh_md=objs\debug\src_R7F7016904\portasm.d -o objs\debug\src_R7F7016904\portasm.o -list=objs\debug\src_R7F7016904\portasm.lst src\RTOS\portable\GHS\portasm.asm 
+Original File: src\RTOS\portable\GHS\portasm.asm
+Source File: src\RTOS\portable\GHS\portasm.asm
+Directory: D:\working\My_workArea\Renesas_training\Training Material\GHS\Thomas Training\freeRTOS_IVT_placement_from_ARRAY\R7F7016904
+Host OS: Windows
+EASE: Copyright (C) 1983-2016 Green Hills Software.  All Rights Reserved.
+Release: Compiler v2017.1.5
+Build Directory: [Directory] BTOWINBOX:c:/build_2017_1_bto/2017-04-10.1915-2017_1_bto/win32-comp-ecom
+Revision: [VCInfo] http://toolsvc/branches/release-branch-2017-1-bto/src@589663 (built by build)
+Revision Date: Tue Apr 11 09:18:51 2017
+
+Release Date: Tue Apr 11 11:11:44 2017
+
+                           1 -- Functions used by scheduler (GHS does not need external definition)
+                           2 --------------------------------------------------------------------------------
+                           3 --    EXTERN    vTaskSwitchContext
+                           4 --    EXTERN    vTaskSwitchContext
+                           5 --    EXTERN    xTaskIncrementTick
+                           6 
+                           7 -- Variables used by scheduler (GHS does not need external definition)
+                           8 --------------------------------------------------------------------------------
+                           9 --    EXTERN    pxCurrentTCB
+                          10 --    EXTERN    usCriticalNesting
+                          11 
+                          12 -- Functions implemented in this file (GHS does not need public definition)
+                          13 ------------------------------------------------------------------------------
+                          14 --    PUBLIC    vPortYield
+                          15 --    PUBLIC    vPortStart
+                          16 
+                          17 -- Security ID definition
+                          18 -------------------------------------------------------------------------------
+                          19 #define CG_SECURITY0    0FFH
+                          20 #define CG_SECURITY1    0FFH
+                          21 #define CG_SECURITY2    0FFH
+                          22 #define CG_SECURITY3    0FFH
+                          23 #define CG_SECURITY4    0FFH
+                          24 #define CG_SECURITY5    0FFH
+                          25 #define CG_SECURITY6    0FFH
+                          26 #define CG_SECURITY7    0FFH
+                          27 #define CG_SECURITY8    0FFH
+                          28 #define CG_SECURITY9    0FFH
+                          29 
+                          30 ------------------------------------------------------------------------------
+                          31 #include <FreeRTOSConfig.h>
+                          32 
+                          33 
+                          34 ------------------------------------------------------------------------------
+                          35 --  portSAVE_CONTEXT MACRO
+                          36 --  Saves the context of the remaining general purpose registers
+                          37 --  and the usCriticalNesting Value of the active Task onto the task stack
+                          38 --  saves stack pointer to the TCB
+                          39 ------------------------------------------------------------------------------
+                          40 .macro portSAVE_CONTEXT                                            
+                          41     prepare {r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30},0b10001,sp     -- save general purpose registers
+                          42     sst.w   r19,64[ep]                                                   -- #if Using the Small/Large data model
+                          43     sst.w   r18,60[ep]
+                          44     sst.w   r17,56[ep]
+                          45     sst.w   r16,52[ep]
+                          46     sst.w   r15,48[ep]
+                          47     sst.w   r14,44[ep]
+                          48     sst.w   r13,40[ep]
+                          49     sst.w   r12,36[ep]
+                          50     sst.w   r11,32[ep]
+
+                                                                      Page 2
+                                                              src\RTOS\portable\GHS\portasm.asm
+                          51     sst.w   r10,28[ep]
+                          52     sst.w   r9,24[ep]
+                          53     sst.w   r8,20[ep]
+                          54     sst.w   r7,16[ep]
+                          55     sst.w   r6,12[ep]
+                          56     sst.w   r2,8[ep]
+                          57     sst.w   r1,4[ep]
+                          58     MOVHI   hi(_usCriticalNesting),r0,r1    -- save usCriticalNesting value to stack
+                          59     ld.w    lo(_usCriticalNesting)[r1],r2
+                          60     sst.w   r2,0[ep]
+                          61     MOVHI   hi(_pxCurrentTCB),r0,r1         -- save SP to top of current TCB
+                          62     ld.w    lo(_pxCurrentTCB)[r1],r2
+                          63     st.w    sp,0[r2]
+                          64     .endm
+                          65 ------------------------------------------------------------------------------
+                          66 
+                          67 
+                          68 ------------------------------------------------------------------------------
+                          69 --   portRESTORE_CONTEXT MACRO
+                          70 --   Gets stack pointer from the current TCB
+                          71 --   Restores the context of the usCriticalNesting value and general purpose
+                          72 --   registers of the selected task from the task stack
+                          73 ------------------------------------------------------------------------------
+                          74 .macro portRESTORE_CONTEXT
+                          75     MOVHI   hi(_pxCurrentTCB),r0,r1         -- get Stackpointer address
+                          76     ld.w    lo(_pxCurrentTCB)[r1],sp
+                          77     MOV     sp,r1
+                          78     ld.w    0[r1],sp                        -- load stackpointer
+                          79     MOV     sp,ep                           -- set stack pointer to element pointer
+                          80     sld.w   0[ep],r1                        -- load usCriticalNesting value from stack
+                          81     MOVHI   hi(_usCriticalNesting),r0,r2
+                          82     st.w    r1,lo(_usCriticalNesting)[r2]
+                          83     sld.w   4[ep],r1                        -- restore general purpose registers
+                          84     sld.w   8[ep],r2                                      
+                          85     sld.w   12[ep],r6
+                          86     sld.w   16[ep],r7
+                          87     sld.w   20[ep],r8
+                          88     sld.w   24[ep],r9
+                          89     sld.w   28[ep],r10
+                          90     sld.w   32[ep],r11
+                          91     sld.w   36[ep],r12
+                          92     sld.w   40[ep],r13
+                          93     sld.w   44[ep],r14
+                          94     sld.w   48[ep],r15
+                          95     sld.w   52[ep],r16
+                          96     sld.w   56[ep],r17
+                          97     sld.w   60[ep],r18
+                          98     sld.w   64[ep],r19
+                          99     dispose 0b10001,{r20,r21,r22,r23,r24,r25,r26,r27,r28,r29,r30}
+                         100     .endm
+                         101 ------------------------------------------------------------------------------
+                         102 
+                         103 
+                         104 
+                         105 ------------------------------------------------------------------------------
+                         106 --   Restore the context of the first task that is going to run.
+                         107 --
+                         108 --  Input:  NONE
+                         109 --
+                         110 --  Call:   CALL    vPortStart
+                         111 --
+
+                                                                      Page 3
+                                                              src\RTOS\portable\GHS\portasm.asm
+                         112 --  Output: NONE
+                         113 ------------------------------------------------------------------------------- 
+                         114   .text
+                         115   .align 2
+                         116   .globl _vPortStart
+                         117 _vPortStart:
+                         118     portRESTORE_CONTEXT                     -- restore the context of whichever task the ...
+                         118 <MACRO BEGIN>
+                         118 MOVHI hi ( _pxCurrentTCB ) , r0 , r1 
+                         118 ld.w lo ( _pxCurrentTCB ) [ r1 ] , sp 
+                         118 MOV sp , r1 
+                         118 ld.w 0 [ r1 ] , sp 
+                         118 MOV sp , ep 
+                         118 sld.w 0 [ ep ] , r1 
+                         118 MOVHI hi ( _usCriticalNesting ) , r0 , r2 
+                         118 st.w r1 , lo ( _usCriticalNesting ) [ r2 ] 
+                         118 sld.w 4 [ ep ] , r1 
+                         118 sld.w 8 [ ep ] , r2 
+                         118 sld.w 12 [ ep ] , r6 
+                         118 sld.w 16 [ ep ] , r7 
+                         118 sld.w 20 [ ep ] , r8 
+                         118 sld.w 24 [ ep ] , r9 
+                         118 sld.w 28 [ ep ] , r10 
+                         118 sld.w 32 [ ep ] , r11 
+                         118 sld.w 36 [ ep ] , r12 
+                         118 sld.w 40 [ ep ] , r13 
+                         118 sld.w 44 [ ep ] , r14 
+                         118 sld.w 48 [ ep ] , r15 
+                         118 sld.w 52 [ ep ] , r16 
+                         118 sld.w 56 [ ep ] , r17 
+                         118 sld.w 60 [ ep ] , r18 
+                         118 sld.w 64 [ ep ] , r19 
+                         118 dispose 0b10001 , { r20 , r21 , r22 , r23 , r24 , r25 , r26 , r27 , r28 , r29 , r30 } 
+00000000 400e0000*       118 <MACRO END>
+00000004 211f0100*
+00000008 0308 
+0000000a 211f0100 
+0000000e 03f0 
+00000010 000d 
+00000012 40160000*
+00000016 620f0100*
+0000001a 020d 
+0000001c 0415 
+0000001e 0635 
+00000020 083d 
+00000022 0a45 
+00000024 0c4d 
+00000026 0e55 
+00000028 105d 
+0000002a 1265 
+0000002c 146d 
+0000002e 1675 
+00000030 187d 
+00000032 1a85 
+00000034 1c8d 
+00000036 1e95 
+00000038 209d 
+0000003a 6306c0ff 
+0000003e 23ff0100        119     ld.w    0[sp],lp
+                         120     ldsr    lp,5                            -- restore PSW
+                         120 <EXPANSION BEGIN>
+
+                                                                      Page 4
+                                                              src\RTOS\portable\GHS\portasm.asm
+                         120 ldsr lp , 5 , 0
+00000042 ff2f2000        120 <EXPANSION END>
+00000046 e0076001        121     DI
+0000004a 23ff0500        122     ld.w    4[sp],lp                        -- restore LP
+0000004e 23ff0900        123     ld.w    8[sp],lp                        -- restore LP
+00000052 4c1a            124     ADD     0x0C,sp                         -- set SP to right position
+00000054 e0876001        125     EI
+00000058 7f00            126     jmp     [lp]
+                         127     
+                         128 -------------------------------------------------------------------------------
+                         129 
+                         130 
+                         131 ------------------------------------------------------------------------------
+                         132 --  Port Yield function to check for a Task switch in the cooperative and
+                         133 --  preemptive mode
+                         134 --
+                         135 --  Input:  NONE
+                         136 --
+                         137 --  Call:   CALL    vPortYield
+                         138 --
+                         139 --  Output: NONE
+                         140 ------------------------------------------------------------------------------
+                         141 
+                         142   .text
+                         143   .align 2
+                         144   .globl _vPortYield
+                         145  _vPortYield:
+0000005a 541a            146     add     -0x0C,sp                        -- prepare stack to save necessary values
+0000005c 63ff0900        147     st.w    lp,8[sp]                        -- store LP to stack
+                         148     stsr    0,r31
+                         148 <EXPANSION BEGIN>
+                         148 stsr 0 , r31 , 0
+00000060 e0ff4000        148 <EXPANSION END>
+00000064 63ff0500        149     st.w    lp,4[sp]                        -- store EIPC to stack
+                         150     stsr    1,lp
+                         150 <EXPANSION BEGIN>
+                         150 stsr 1 , lp , 0
+00000068 e1ff4000        150 <EXPANSION END>
+0000006c 63ff0100        151     st.w    lp,0[sp]                        -- store EIPSW to stack
+                         152     portSAVE_CONTEXT                        -- save the context of the current task.
+                         152 <MACRO BEGIN>
+                         152 prepare { r20 , r21 , r22 , r23 , r24 , r25 , r26 , r27 , r28 , r29 , r30 } , 0b10001 , sp 
+                         152 sst.w r19 , 64 [ ep ] 
+                         152 sst.w r18 , 60 [ ep ] 
+                         152 sst.w r17 , 56 [ ep ] 
+                         152 sst.w r16 , 52 [ ep ] 
+                         152 sst.w r15 , 48 [ ep ] 
+                         152 sst.w r14 , 44 [ ep ] 
+                         152 sst.w r13 , 40 [ ep ] 
+                         152 sst.w r12 , 36 [ ep ] 
+                         152 sst.w r11 , 32 [ ep ] 
+                         152 sst.w r10 , 28 [ ep ] 
+                         152 sst.w r9 , 24 [ ep ] 
+                         152 sst.w r8 , 20 [ ep ] 
+                         152 sst.w r7 , 16 [ ep ] 
+                         152 sst.w r6 , 12 [ ep ] 
+                         152 sst.w r2 , 8 [ ep ] 
+                         152 sst.w r1 , 4 [ ep ] 
+                         152 MOVHI hi ( _usCriticalNesting ) , r0 , r1 
+                         152 ld.w lo ( _usCriticalNesting ) [ r1 ] , r2 
+                         152 sst.w r2 , 0 [ ep ] 
+
+                                                                      Page 5
+                                                              src\RTOS\portable\GHS\portasm.asm
+                         152 MOVHI hi ( _pxCurrentTCB ) , r0 , r1 
+                         152 ld.w lo ( _pxCurrentTCB ) [ r1 ] , r2 
+                         152 st.w sp , 0 [ r2 ] 
+00000070 a307c3ff        152 <MACRO END>
+00000074 219d 
+00000076 1f95 
+00000078 1d8d 
+0000007a 1b85 
+0000007c 197d 
+0000007e 1775 
+00000080 156d 
+00000082 1365 
+00000084 115d 
+00000086 0f55 
+00000088 0d4d 
+0000008a 0b45 
+0000008c 093d 
+0000008e 0735 
+00000090 0515 
+00000092 030d 
+00000094 400e0000*
+00000098 21170100*
+0000009c 0115 
+0000009e 400e0000*
+000000a2 21170100*
+000000a6 621f0100 
+                         153     jarl    _vTaskSwitchContext,lp          -- call the scheduler.
+                         153 <EXPANSION BEGIN>
+                         153 jarl22 _vTaskSwitchContext , lp 
+000000aa 80ff0000*       153 <EXPANSION END>
+                         154     portRESTORE_CONTEXT                     -- Restore the context of whichever task the ...
+                         154 <MACRO BEGIN>
+                         154 MOVHI hi ( _pxCurrentTCB ) , r0 , r1 
+                         154 ld.w lo ( _pxCurrentTCB ) [ r1 ] , sp 
+                         154 MOV sp , r1 
+                         154 ld.w 0 [ r1 ] , sp 
+                         154 MOV sp , ep 
+                         154 sld.w 0 [ ep ] , r1 
+                         154 MOVHI hi ( _usCriticalNesting ) , r0 , r2 
+                         154 st.w r1 , lo ( _usCriticalNesting ) [ r2 ] 
+                         154 sld.w 4 [ ep ] , r1 
+                         154 sld.w 8 [ ep ] , r2 
+                         154 sld.w 12 [ ep ] , r6 
+                         154 sld.w 16 [ ep ] , r7 
+                         154 sld.w 20 [ ep ] , r8 
+                         154 sld.w 24 [ ep ] , r9 
+                         154 sld.w 28 [ ep ] , r10 
+                         154 sld.w 32 [ ep ] , r11 
+                         154 sld.w 36 [ ep ] , r12 
+                         154 sld.w 40 [ ep ] , r13 
+                         154 sld.w 44 [ ep ] , r14 
+                         154 sld.w 48 [ ep ] , r15 
+                         154 sld.w 52 [ ep ] , r16 
+                         154 sld.w 56 [ ep ] , r17 
+                         154 sld.w 60 [ ep ] , r18 
+                         154 sld.w 64 [ ep ] , r19 
+                         154 dispose 0b10001 , { r20 , r21 , r22 , r23 , r24 , r25 , r26 , r27 , r28 , r29 , r30 } 
+000000ae 400e0000*       154 <MACRO END>
+000000b2 211f0100*
+000000b6 0308 
+000000b8 211f0100 
+
+                                                                      Page 6
+                                                              src\RTOS\portable\GHS\portasm.asm
+000000bc 03f0 
+000000be 000d 
+000000c0 40160000*
+000000c4 620f0100*
+000000c8 020d 
+000000ca 0415 
+000000cc 0635 
+000000ce 083d 
+000000d0 0a45 
+000000d2 0c4d 
+000000d4 0e55 
+000000d6 105d 
+000000d8 1265 
+000000da 146d 
+000000dc 1675 
+000000de 187d 
+000000e0 1a85 
+000000e2 1c8d 
+000000e4 1e95 
+000000e6 209d 
+000000e8 6306c0ff 
+                         155                                             -- ... scheduler decided should run.
+000000ec 23ff0100        156     ld.w    0[sp],lp                        -- restore EIPSW from stack
+                         157     ldsr    lp,1
+                         157 <EXPANSION BEGIN>
+                         157 ldsr lp , 1 , 0
+000000f0 ff0f2000        157 <EXPANSION END>
+000000f4 23ff0500        158     ld.w    4[sp],lp                        -- restore EIPC from stack
+                         159     ldsr    lp,0
+                         159 <EXPANSION BEGIN>
+                         159 ldsr lp , 0 , 0
+000000f8 ff072000        159 <EXPANSION END>
+000000fc 23ff0900        160     ld.w    8[sp],lp                        -- restore LP from stack
+00000100 4c1a            161     add     0x0C,sp                         -- set SP to right position
+00000102 e0074801        162     EIRET 
+                         163 
+                         164 ------------------------------------------------------------------------------
+                         165 
+                         166 ------------------------------------------------------------------------------  
+                         167 -- use preemptive kernel mode
+                         168 
+                         169   .text
+                         170   .align 2
+                         171   .globl _OSTMTINT_ISR
+                         172   _OSTMTINT_ISR:
+                         173     
+00000106 541a            174     add     -0x0C,sp                        -- prepare stack to save necessary values
+00000108 63ff0900        175     st.w    lp,8[sp]                        -- store LP to stack
+                         176     stsr    0,r31
+                         176 <EXPANSION BEGIN>
+                         176 stsr 0 , r31 , 0
+0000010c e0ff4000        176 <EXPANSION END>
+00000110 63ff0500        177     st.w    lp,4[sp]                        -- store EIPC to stack (SR2,0)
+                         178     stsr    1,lp
+                         178 <EXPANSION BEGIN>
+                         178 stsr 1 , lp , 0
+00000114 e1ff4000        178 <EXPANSION END>
+00000118 63ff0100        179     st.w    lp,0[sp]                        -- store EIPSW to stack (SR3,0)
+                         180     portSAVE_CONTEXT                        -- save the context of the current task.
+                         180 <MACRO BEGIN>
+                         180 prepare { r20 , r21 , r22 , r23 , r24 , r25 , r26 , r27 , r28 , r29 , r30 } , 0b10001 , sp 
+
+                                                                      Page 7
+                                                              src\RTOS\portable\GHS\portasm.asm
+                         180 sst.w r19 , 64 [ ep ] 
+                         180 sst.w r18 , 60 [ ep ] 
+                         180 sst.w r17 , 56 [ ep ] 
+                         180 sst.w r16 , 52 [ ep ] 
+                         180 sst.w r15 , 48 [ ep ] 
+                         180 sst.w r14 , 44 [ ep ] 
+                         180 sst.w r13 , 40 [ ep ] 
+                         180 sst.w r12 , 36 [ ep ] 
+                         180 sst.w r11 , 32 [ ep ] 
+                         180 sst.w r10 , 28 [ ep ] 
+                         180 sst.w r9 , 24 [ ep ] 
+                         180 sst.w r8 , 20 [ ep ] 
+                         180 sst.w r7 , 16 [ ep ] 
+                         180 sst.w r6 , 12 [ ep ] 
+                         180 sst.w r2 , 8 [ ep ] 
+                         180 sst.w r1 , 4 [ ep ] 
+                         180 MOVHI hi ( _usCriticalNesting ) , r0 , r1 
+                         180 ld.w lo ( _usCriticalNesting ) [ r1 ] , r2 
+                         180 sst.w r2 , 0 [ ep ] 
+                         180 MOVHI hi ( _pxCurrentTCB ) , r0 , r1 
+                         180 ld.w lo ( _pxCurrentTCB ) [ r1 ] , r2 
+                         180 st.w sp , 0 [ r2 ] 
+0000011c a307c3ff        180 <MACRO END>
+00000120 219d 
+00000122 1f95 
+00000124 1d8d 
+00000126 1b85 
+00000128 197d 
+0000012a 1775 
+0000012c 156d 
+0000012e 1365 
+00000130 115d 
+00000132 0f55 
+00000134 0d4d 
+00000136 0b45 
+00000138 093d 
+0000013a 0735 
+0000013c 0515 
+0000013e 030d 
+00000140 400e0000*
+00000144 21170100*
+00000148 0115 
+0000014a 400e0000*
+0000014e 21170100*
+00000152 621f0100 
+                         181     
+                         182     jarl    _xTaskIncrementTick,lp          -- call the timer tick function.
+                         182 <EXPANSION BEGIN>
+                         182 jarl22 _xTaskIncrementTick , lp 
+00000156 80ff0000*       182 <EXPANSION END>
+                         183     jarl    _vTaskSwitchContext,lp          -- call the scheduler.
+                         183 <EXPANSION BEGIN>
+                         183 jarl22 _vTaskSwitchContext , lp 
+0000015a 80ff0000*       183 <EXPANSION END>
+                         184 
+                         185     portRESTORE_CONTEXT                     -- Restore the context of whichever task the ...
+                         185 <MACRO BEGIN>
+                         185 MOVHI hi ( _pxCurrentTCB ) , r0 , r1 
+                         185 ld.w lo ( _pxCurrentTCB ) [ r1 ] , sp 
+                         185 MOV sp , r1 
+                         185 ld.w 0 [ r1 ] , sp 
+
+                                                                      Page 8
+                                                              src\RTOS\portable\GHS\portasm.asm
+                         185 MOV sp , ep 
+                         185 sld.w 0 [ ep ] , r1 
+                         185 MOVHI hi ( _usCriticalNesting ) , r0 , r2 
+                         185 st.w r1 , lo ( _usCriticalNesting ) [ r2 ] 
+                         185 sld.w 4 [ ep ] , r1 
+                         185 sld.w 8 [ ep ] , r2 
+                         185 sld.w 12 [ ep ] , r6 
+                         185 sld.w 16 [ ep ] , r7 
+                         185 sld.w 20 [ ep ] , r8 
+                         185 sld.w 24 [ ep ] , r9 
+                         185 sld.w 28 [ ep ] , r10 
+                         185 sld.w 32 [ ep ] , r11 
+                         185 sld.w 36 [ ep ] , r12 
+                         185 sld.w 40 [ ep ] , r13 
+                         185 sld.w 44 [ ep ] , r14 
+                         185 sld.w 48 [ ep ] , r15 
+                         185 sld.w 52 [ ep ] , r16 
+                         185 sld.w 56 [ ep ] , r17 
+                         185 sld.w 60 [ ep ] , r18 
+                         185 sld.w 64 [ ep ] , r19 
+                         185 dispose 0b10001 , { r20 , r21 , r22 , r23 , r24 , r25 , r26 , r27 , r28 , r29 , r30 } 
+0000015e 400e0000*       185 <MACRO END>
+00000162 211f0100*
+00000166 0308 
+00000168 211f0100 
+0000016c 03f0 
+0000016e 000d 
+00000170 40160000*
+00000174 620f0100*
+00000178 020d 
+0000017a 0415 
+0000017c 0635 
+0000017e 083d 
+00000180 0a45 
+00000182 0c4d 
+00000184 0e55 
+00000186 105d 
+00000188 1265 
+0000018a 146d 
+0000018c 1675 
+0000018e 187d 
+00000190 1a85 
+00000192 1c8d 
+00000194 1e95 
+00000196 209d 
+00000198 6306c0ff 
+                         186                                             -- ... scheduler decided should run.
+0000019c 23ff0100        187     ld.w    0[sp],lp                        -- restore EIPSW from stack(SR3,0)
+                         188     ldsr    lp,1
+                         188 <EXPANSION BEGIN>
+                         188 ldsr lp , 1 , 0
+000001a0 ff0f2000        188 <EXPANSION END>
+000001a4 23ff0500        189     ld.w    4[sp],lp                        -- restore EIPC from stack(SR2,0)
+                         190     ldsr    lp,0
+                         190 <EXPANSION BEGIN>
+                         190 ldsr lp , 0 , 0
+000001a8 ff072000        190 <EXPANSION END>
+000001ac 23ff0900        191     ld.w    8[sp],lp                        -- restore LP from stack
+000001b0 4c1a            192     add     0x0C,sp                         -- set SP to right position
+                         193     
+000001b2 e0074801        194     EIRET
+
+                                                                      Page 9
+                                                              src\RTOS\portable\GHS\portasm.asm
+                         195 
+                         196 ------------------------------------------------------------------------------
