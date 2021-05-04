@@ -32,6 +32,7 @@ This sample Repository is about porting freeRTOS on RL78 & RH850.
 
 
 # Licensing
+MIT license
 This software is released under [MIT](https://opensource.org/licenses/MIT) open source licenses.
 MIT licence is free to use & doesn't require modifications be open sourced.
 
